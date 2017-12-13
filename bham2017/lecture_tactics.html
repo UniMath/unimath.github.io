@@ -29,7 +29,16 @@
  This is material for presentation at the UniMath school
     2017 in Birmingham; an extended version for self-study
     and for exploring the UniMath library is available as
-    <span class="inlinecode"><span class="id" title="var">lecture_tactics_long_version.v</span></span>. 
+    <span class="inlinecode"><span class="id" title="var">lecture_tactics_long_version.v</span></span>.
+
+<div class="paragraph"> </div>
+
+    The material has been slightly enriched on December 13, 2017,
+    which is one day after the presentation.
+
+<div class="paragraph"> </div>
+
+
 <div class="paragraph"> </div>
 
  Compiles with the command
@@ -96,7 +105,15 @@ only the identifier and its type given, not the definiens
 </div>
 
 <div class="doc">
-Now we still have to give the term, but we are in interactive mode.  Find library elements that yield booleans: 
+Now we still have to give the term, but we are in interactive mode.  If you want to see everything that *involves* booleans, then do 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Search</span> <span class="id" title="var">bool</span>.<br/>
+</div>
+
+<div class="doc">
+If you think there are too many hits and you only want to
+      find library elements that *yield* booleans, then try 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Search</span><span class="id" title="var">Pattern</span> <span class="id" title="var">bool</span>.<br/>
@@ -128,7 +145,7 @@ Now we still have to give the term, but we are in interactive mode.  Find librar
     verify it and to associate it with the given identifer, here <span class="inlinecode"><span class="id" title="var">myfirsttruthvalue</span></span>. 
 </div>
 <div class="code">
-<span class="id" title="keyword">Search</span><span class="id" title="var">Pattern</span> <span class="id" title="var">bool</span>.<br/>
+<span class="id" title="keyword">Search</span> <span class="id" title="var">bool</span>.<br/>
 </div>
 
 <div class="doc">
@@ -147,7 +164,7 @@ The new definition appears at the end of the list.
 <div class="code">
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">mysecondtruthvalue</span>: <span class="id" title="var">bool</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">Search</span><span class="id" title="var">Pattern</span> <span class="id" title="var">bool</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Search</span> <span class="id" title="var">bool</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">negb</span>.<br/>
 </div>
 
@@ -192,7 +209,7 @@ applies the function <span class="inlinecode"><span class="id" title="var">negb<
 <div class="code">
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">mythirdtruthvalue</span>: <span class="id" title="var">bool</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">Search</span><span class="id" title="var">Pattern</span> <span class="id" title="var">bool</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Search</span> <span class="id" title="var">bool</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">andb</span>.<br/>
 </div>
 
@@ -558,11 +575,20 @@ the wildcard <span class="inlinecode"><span class="id" title="var">_</span></spa
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Locate</span> "⨿".<br/>
+<span class="id" title="keyword">Locate</span> "⨿". </div>
+
+<div class="doc">
+this symbol is harder to type in with Agda input
+  mode: use backslash union and then choose the right symbol with
+  arrow down key: the symbol might only appear in the menu to
+  choose from after having hit the arrow down key! 
+</div>
+<div class="code">
 <span class="id" title="keyword">Print</span> <span class="id" title="var">coprod</span>. </div>
 
 <div class="doc">
-defined in UniMath preamble as inductive type, can be seen as disjunction 
+defined in UniMath preamble as inductive type,
+  can be seen as disjunction 
 </div>
 <div class="code">
 
@@ -571,8 +597,9 @@ defined in UniMath preamble as inductive type, can be seen as disjunction
 </div>
 
 <div class="doc">
-company-coq shows the result with universal quantifiers, but that is only the "prettified"
-    version of "forall" which is a basic syntactic element of the language of Coq. 
+company-coq shows the result with universal quantifiers,
+    but that is only the "prettified" version of "forall" which
+    is a basic syntactic element of the language of Coq. 
 </div>
 <div class="code">
 
@@ -635,6 +662,11 @@ the identity type of UniMath
 
     <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">B</span></span>: <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">idpath</span></span>, however this only works when the expressions
              are convertible
+
+<div class="paragraph"> </div>
+
+    <span class="inlinecode"><span class="id" title="var">nat</span></span>: <span class="inlinecode"><span class="id" title="tactic">exact</span></span> <span class="inlinecode">2017</span>, for example (a logical reading is not
+           useful for this type)
  
 <div class="paragraph"> </div>
 
@@ -689,6 +721,18 @@ the identity type of UniMath
 <div class="paragraph"> </div>
 
              This is the least intuitive rule for the non-expert in type theory.
+
+<div class="paragraph"> </div>
+
+    <span class="inlinecode"><span class="id" title="var">nat</span></span>: <span class="inlinecode"><span class="id" title="tactic">induction</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode">[</span> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">IH</span>]</span>
+
+<div class="paragraph"> </div>
+
+           Here, we assume that the hypothesis has the name <span class="inlinecode"><span class="id" title="var">n</span></span> which
+           is more idiomatic than <span class="inlinecode"><span class="id" title="var">H</span></span>, and there is no extra name in
+           the base case, while in the step case, the preceding number
+           is now given the name <span class="inlinecode"><span class="id" title="var">n</span></span> and the induction hypothesis is
+           named <span class="inlinecode"><span class="id" title="var">IH</span></span>.
  
 <div class="paragraph"> </div>
 
@@ -755,11 +799,12 @@ We need to help Coq with the argument <span class="inlinecode"><span class="id" 
 is this not just associativity with third argument <span class="inlinecode"><span class="id" title="var">C</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">D</span></span>? 
 </div>
 <div class="code">
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">SearchPattern</span>(<span class="id" title="var">_</span> × <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Search</span> (<span class="id" title="var">_</span> × <span class="id" title="var">_</span>).<br/>
 </div>
 
 <div class="doc">
-No hope at all - we can only hope for weak equivalence. 
+No hope at all for our equation - we can only hope
+        for weak equivalence. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Abort</span>.<br/>
@@ -1160,10 +1205,26 @@ The term features an occurrence of <span class="inlinecode"><span class="id" tit
      <span class="inlinecode"><span class="id" title="var">use</span></span> is not confined to Σ-types. Whenever one would be
      inclined to start trying to apply a lemma <span class="inlinecode"><span class="id" title="var">H</span></span> with a varying
      number of underscores, <span class="inlinecode"><span class="id" title="var">use</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> may be a better option.
+ 
+<div class="paragraph"> </div>
+
+<a name="lab12"></a><h2 class="section">a final word, just on searching the library</h2>
 
 <div class="paragraph"> </div>
 
-<a name="lab12"></a><h2 class="section">List of tactics that were mentioned</h2>
+ <span class="inlinecode"><span class="id" title="keyword">SearchPattern</span></span> searches for the given pattern in what the library
+    gives as *conclusions* of definitions, lemmas, etc., and the current
+    hypotheses.
+
+<div class="paragraph"> </div>
+
+    <span class="inlinecode"><span class="id" title="keyword">Search</span></span> searches in the (full) types of all the library elements (and
+    the current hypotheses). It may provide too many irrelevant result
+    for your question. At least, it will also show all the relevant ones.
+
+<div class="paragraph"> </div>
+
+<a name="lab13"></a><h2 class="section">List of tactics that were mentioned</h2>
 
 <div class="paragraph"> </div>
 
