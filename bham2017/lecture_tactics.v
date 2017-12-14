@@ -4,7 +4,12 @@
 (** This is material for presentation at the UniMath school
     2017 in Birmingham; an extended version for self-study
     and for exploring the UniMath library is available as
-    [lecture_tactics_long_version.v]. *)
+    [lecture_tactics_long_version.v].
+
+    The material has been slightly enriched on December 13, 2017,
+    which is one day after the presentation.
+
+*)
 
 
 (** Compiles with the command
@@ -40,7 +45,10 @@ Definition myfirsttruthvalue: bool.
       In vanilla Coq, this would be optional (it is anyway a "nop"). *)
 Proof.
   (** Now we still have to give the term, but we are in interactive mode. *)
-  (** Find library elements that yield booleans: *)
+  (** If you want to see everything that *involves* booleans, then do *)
+  Search bool.
+  (** If you think there are too many hits and you only want to
+      find library elements that *yield* booleans, then try *)
   SearchPattern bool.
   (** [true] does not take an argument, and it is already a term we can take as definiens. *)
   exact true.
@@ -53,14 +61,14 @@ Defined.
 
 (** [Defined.] instructs Coq to complete the whole interactive construction of a term,
     verify it and to associate it with the given identifer, here [myfirsttruthvalue]. *)
-SearchPattern bool.
+Search bool.
 (** The new definition appears at the end of the list. *)
 Print myfirsttruthvalue.
 
 (** *** a more compelling example *)
 Definition mysecondtruthvalue: bool.
 Proof.
-  SearchPattern bool.
+  Search bool.
   apply negb.
   (** applies the function [negb] to obtain the required boolean,
       thus the system has to ask for its argument *)
@@ -87,7 +95,7 @@ Eval compute in mysecondtruthvalue.
 (** Again, not much has been gained by the interactive mode. *)
 Definition mythirdtruthvalue: bool.
 Proof.
-  SearchPattern bool.
+  Search bool.
   apply andb.
   (** [apply andb.] applies the function [andb] to obtain the required boolean,
       thus the system has to ask for its TWO arguments, one by one *)
@@ -273,12 +281,17 @@ Proof.
 Defined.
 (** the wildcard [_] for [intros] forgets the respective hypothesis *)
 
-Locate "⨿".
-Print coprod. (** defined in UniMath preamble as inductive type, can be seen as disjunction *)
+Locate "⨿". (** this symbol is harder to type in with Agda input
+  mode: use backslash union and then choose the right symbol with
+  arrow down key: the symbol might only appear in the menu to
+  choose from after having hit the arrow down key! *)
+Print coprod. (** defined in UniMath preamble as inductive type,
+  can be seen as disjunction *)
 
 Locate "∏".
-(** company-coq shows the result with universal quantifiers, but that is only the "prettified"
-    version of "forall" which is a basic syntactic element of the language of Coq. *)
+(** company-coq shows the result with universal quantifiers,
+    but that is only the "prettified" version of "forall" which
+    is a basic syntactic element of the language of Coq. *)
 
 Locate "=". (** the identity type of UniMath *)
 Print paths.
@@ -309,6 +322,9 @@ Print paths.
 
     [A = B]: [apply idpath], however this only works when the expressions
              are convertible
+
+    [nat]: [exact 2017], for example (a logical reading is not
+           useful for this type)
  *)
 
 (** **** Decomposition of formula of hypothesis [H]:
@@ -338,6 +354,14 @@ Print paths.
              The supposedly equal [A] and [B] become the same [A] in the goal.
 
              This is the least intuitive rule for the non-expert in type theory.
+
+    [nat]: [induction n as [ | n IH]]
+
+           Here, we assume that the hypothesis has the name [n] which
+           is more idiomatic than [H], and there is no extra name in
+           the base case, while in the step case, the preceding number
+           is now given the name [n] and the induction hypothesis is
+           named [IH].
  *)
 
 
@@ -374,8 +398,9 @@ We need to help Coq with the argument [b] to [pathscomp0].
 *)
   apply (pathscomp0 (b := A × (B × (C × D)))).
   - (** is this not just associativity with third argument [C × D]? *)
-    SearchPattern(_ × _).
-    (** No hope at all - we can only hope for weak equivalence. *)
+    Search (_ × _).
+    (** No hope at all for our equation - we can only hope
+        for weak equivalence. *)
 Abort.
 (** [badex] is not in the symbol table. *)
 
@@ -603,6 +628,17 @@ Print combinatorS_induction_with_abstract.
      [use] is not confined to Σ-types. Whenever one would be
      inclined to start trying to apply a lemma [H] with a varying
      number of underscores, [use H] may be a better option.
+ *)
+
+(** ** a final word, just on searching the library *)
+
+(** [SearchPattern] searches for the given pattern in what the library
+    gives as *conclusions* of definitions, lemmas, etc., and the current
+    hypotheses.
+
+    [Search] searches in the (full) types of all the library elements (and
+    the current hypotheses). It may provide too many irrelevant result
+    for your question. At least, it will also show all the relevant ones.
 *)
 
 (** ** List of tactics that were mentioned *)
