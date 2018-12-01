@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.Bicategories.WkCatEnrichment.Notations</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.Bicategories.WkCatEnrichment.Notations</h1>
+
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.PartD.html#"><span class="id" title="library">UniMath.Foundations.PartD</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#"><span class="id" title="library">UniMath.CategoryTheory.functor_categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.PrecategoryBinProduct.html#"><span class="id" title="library">UniMath.CategoryTheory.PrecategoryBinProduct</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.HorizontalComposition.html#"><span class="id" title="library">UniMath.CategoryTheory.HorizontalComposition</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.equivalences.html#"><span class="id" title="library">UniMath.CategoryTheory.equivalences</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.WkCatEnrichment.prebicategory.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.WkCatEnrichment.prebicategory</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="2201cf191dbc4229aa94a534067e017e"><span class="id" title="notation">&quot;</span></a>a  '-1-&gt;'  b" := (<a class="idref" href="UniMath.CategoryTheory.Bicategories.WkCatEnrichment.prebicategory.html#homprecat"><span class="id" title="definition">homprecat</span></a> <span class="id" title="var">a</span> <span class="id" title="var">b</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>).<br/>
+<span class="id" title="keyword">Notation</span> <a name="4eecaebc6c0ba6c1668951bdac87fabf"><span class="id" title="notation">&quot;</span></a>f  '-2-&gt;'  g" := (@<a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory_morphisms"><span class="id" title="definition">precategory_morphisms</span></a> (<span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.WkCatEnrichment.Notations.html#2201cf191dbc4229aa94a534067e017e"><span class="id" title="notation">-1-&gt;</span></a><span class="id" title="var">_</span>) <span class="id" title="var">f</span> <span class="id" title="var">g</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>).<br/>
+<span class="id" title="keyword">Notation</span> <a name="548adb68bfca5246da09fc8930a12afe"><span class="id" title="notation">&quot;</span></a>alpha  ';v;'  beta" := (@<a class="idref" href="UniMath.CategoryTheory.Categories.html#compose"><span class="id" title="definition">compose</span></a> (<span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.WkCatEnrichment.Notations.html#2201cf191dbc4229aa94a534067e017e"><span class="id" title="notation">-1-&gt;</span></a> <span class="id" title="var">_</span>) <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">alpha</span> <span class="id" title="keyword">beta</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>).<br/>
+<span class="id" title="keyword">Notation</span> <a name="1334d3a47c905b6cb3d38212674e0588"><span class="id" title="notation">&quot;</span></a>f  ';1;'  g" := (<a class="idref" href="UniMath.CategoryTheory.Bicategories.WkCatEnrichment.prebicategory.html#compose1"><span class="id" title="definition">compose1</span></a> <span class="id" title="var">f</span> <span class="id" title="var">g</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>).<br/>
+<span class="id" title="keyword">Notation</span> <a name="9f2aa2035d5b942ee803f4c1ea69bb66"><span class="id" title="notation">&quot;</span></a>alpha  ';h;'  beta" := (<a class="idref" href="UniMath.CategoryTheory.Bicategories.WkCatEnrichment.prebicategory.html#compose2h"><span class="id" title="definition">compose2h</span></a> <span class="id" title="var">alpha</span> <span class="id" title="keyword">beta</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>).<br/>
+<span class="id" title="keyword">Notation</span> <a name="4b6c25c47ee860fa8277b145462fa2b5"><span class="id" title="notation">&quot;</span></a>alpha  ';hi;'  beta" := (<a class="idref" href="UniMath.CategoryTheory.Bicategories.WkCatEnrichment.prebicategory.html#compose2h_iso"><span class="id" title="definition">compose2h_iso</span></a> <span class="id" title="var">alpha</span> <span class="id" title="keyword">beta</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

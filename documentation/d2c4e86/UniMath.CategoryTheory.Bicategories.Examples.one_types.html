@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.Bicategories.Examples.one_types</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.Bicategories.Examples.one_types</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+The bicategory of 1-types.
+
+<div class="paragraph"> </div>
+
+Authors: Dan Frumin, Niels van der Weide
+
+<div class="paragraph"> </div>
+
+Ported from: https://github.com/nmvdw/groupoids
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.MoreFoundations.All.html#"><span class="id" title="library">UniMath.MoreFoundations.All</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicat.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.Bicat</span></a>. <span class="id" title="keyword">Import</span> <span class="id" title="var">Bicat.Notations</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.Univalence</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.equiv_to_adjequiv.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.equiv_to_adjequiv</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.adjoint_unique.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.adjoint_unique</span></a>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">bicategory_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="one_type"><span class="id" title="definition">one_type</span></a><br/>
+&nbsp;&nbsp;:= <a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">(</span></a><span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.PartB.html#isofhlevel"><span class="id" title="definition">isofhlevel</span></a> 3 <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#A"><span class="id" title="variable">A</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="one_type_to_type"><span class="id" title="definition">one_type_to_type</span></a> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_type"><span class="id" title="definition">one_type</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a>.<br/>
+<span class="id" title="keyword">Coercion</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_type_to_type"><span class="id" title="definition">one_type_to_type</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_type_to_type"><span class="id" title="definition">:</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_type_to_type"><span class="id" title="definition">one_type</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_type_to_type"><span class="id" title="definition">&gt;-&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_type_to_type"><span class="id" title="definition">UU</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The bicategory 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="one_type_bicat_data"><span class="id" title="definition">one_type_bicat_data</span></a><br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicat.html#prebicat_data"><span class="id" title="definition">prebicat_data</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicat.html#build_prebicat_data"><span class="id" title="definition">build_prebicat_data</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_type"><span class="id" title="definition">one_type</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">X</span> <span class="id" title="var">Y</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.Foundations.Init.html#513d6cdffacb0252f6c48bf325cd5180"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Y"><span class="id" title="variable">Y</span></a>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#g"><span class="id" title="variable">g</span></a>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">_</span> <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#x"><span class="id" title="variable">x</span></a>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#g"><span class="id" title="variable">g</span></a>(<a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#x"><span class="id" title="variable">x</span></a>)).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="var">cbn</span> ; <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<span class="id" title="var">p</span> <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <span class="id" title="var">q</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="var">cbn</span> ; <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">Z</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">p</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> φ <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#7f48d4a68765673379b41e1b1ee20edf"><span class="id" title="variable">φ</span></a> (<span class="id" title="var">f</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#x"><span class="id" title="variable">x</span></a>)) <span class="id" title="var">p</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="var">cbn</span> ; <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">Z</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">p</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> φ <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <span class="id" title="var">h</span>(<a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#7f48d4a68765673379b41e1b1ee20edf"><span class="id" title="variable">φ</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#x"><span class="id" title="variable">x</span></a>)) <span class="id" title="var">p</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="one_type_bicat_laws"><span class="id" title="definition">one_type_bicat_laws</span></a><br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicat.html#prebicat_laws"><span class="id" title="definition">prebicat_laws</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_type_bicat_data"><span class="id" title="definition">one_type_bicat_data</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> (<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathscomp0rid"><span class="id" title="definition">pathscomp0rid</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">k</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span> <span class="id" title="var">r</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#path_assoc"><span class="id" title="definition">path_assoc</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">Z</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">i</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span>, <span class="id" title="var">q</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">Z</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">i</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span>, <span class="id" title="var">q</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">W</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">Z</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">i</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">W</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">Z</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">i</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">W</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">Z</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">i</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">Z</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">i</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span>, <span class="id" title="var">q</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">V</span> <span class="id" title="var">W</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">Z</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">i</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="one_types"><span class="id" title="definition">one_types</span></a><br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicat.html#bicat"><span class="id" title="definition">bicat</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicat.html#build_bicategory"><span class="id" title="definition">build_bicategory</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_type_bicat_data"><span class="id" title="definition">one_type_bicat_data</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_type_bicat_laws"><span class="id" title="definition">one_type_bicat_laws</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartD.html#impredfun"><span class="id" title="lemma">impredfun</span></a> 3 <span class="id" title="var">X</span> <span class="id" title="var">Y</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">Y</span>) <span class="id" title="var">f</span> <span class="id" title="var">g</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Each 2-cell is an iso 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="one_type_2cell_iso"><span class="id" title="definition">one_type_2cell_iso</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">X</span> <span class="id" title="var">Y</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">f</span> <span class="id" title="var">g</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Y"><span class="id" title="variable">Y</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">α</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicat.html#bf30d145692eabd55e5f9fe20712bfca"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#g"><span class="id" title="variable">g</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicat.html#is_invertible_2cell"><span class="id" title="definition">is_invertible_2cell</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">!</span></a><span class="id" title="var">α</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathsinv0r"><span class="id" title="definition">pathsinv0r</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathsinv0l"><span class="id" title="definition">pathsinv0l</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+It is univalent 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="one_types_is_univalent_2_1"><span class="id" title="definition">one_types_is_univalent_2_1</span></a><br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#is_univalent_2_1"><span class="id" title="definition">is_univalent_2_1</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.PartA.html#isweq_iso"><span class="id" title="lemma">isweq_iso</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">α</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">α</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">p</span> <span class="id" title="var">Hp</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <span class="id" title="var">p</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">p</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">p</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">p</span> <span class="id" title="var">Hp</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality'"><span class="id" title="lemma">subtypeEquality'</span></a> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> (@<a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicat.html#isaprop_is_invertible_2cell"><span class="id" title="lemma">isaprop_is_invertible_2cell</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">f</span> <span class="id" title="var">f</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a> <span class="id" title="var">f</span>)).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="adjoint_equivalence_is_weq"><span class="id" title="definition">adjoint_equivalence_is_weq</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">X</span> <span class="id" title="var">Y</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Y"><span class="id" title="variable">Y</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Hf</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#is_internal_left_adjoint_internal_equivalence"><span class="id" title="definition">is_internal_left_adjoint_internal_equivalence</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#f"><span class="id" title="variable">f</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.Foundations.PartA.html#isweq"><span class="id" title="definition">isweq</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#f"><span class="id" title="variable">f</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.PartA.html#isweq_iso"><span class="id" title="lemma">isweq_iso</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#internal_right_adjoint"><span class="id" title="definition">internal_right_adjoint</span></a> <span class="id" title="var">Hf</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#eqtohomot"><span class="id" title="definition">eqtohomot</span></a> (<a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">!(</span></a><a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#internal_unit"><span class="id" title="definition">internal_unit</span></a> <span class="id" title="var">Hf</span><a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">)</span></a>) <span class="id" title="var">x</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#eqtohomot"><span class="id" title="definition">eqtohomot</span></a> (<a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#internal_counit"><span class="id" title="definition">internal_counit</span></a> <span class="id" title="var">Hf</span>) <span class="id" title="var">x</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="weq_is_adjoint_equivalence_help"><span class="id" title="definition">weq_is_adjoint_equivalence_help</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">X</span> <span class="id" title="var">Y</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Y"><span class="id" title="variable">Y</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Hf</span> : <a class="idref" href="UniMath.Foundations.PartA.html#isweq"><span class="id" title="definition">isweq</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#f"><span class="id" title="variable">f</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#internal_equivalence"><span class="id" title="definition">internal_equivalence</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Y"><span class="id" title="variable">Y</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">refine</span> (<span class="id" title="var">f</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#invmap"><span class="id" title="definition">invmap</span></a> (<span class="id" title="var">f</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <span class="id" title="var">Hf</span>) <a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">!(</span></a><a class="idref" href="UniMath.Foundations.PartA.html#homotinvweqweq"><span class="id" title="definition">homotinvweqweq</span></a> (<span class="id" title="var">f</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <span class="id" title="var">Hf</span>) <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">)</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#homotweqinvweq"><span class="id" title="definition">homotweqinvweq</span></a> (<span class="id" title="var">f</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <span class="id" title="var">Hf</span>) <span class="id" title="var">x</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">split</span> ; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_type_2cell_iso"><span class="id" title="definition">one_type_2cell_iso</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="weq_is_adjoint_equivalence"><span class="id" title="definition">weq_is_adjoint_equivalence</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">X</span> <span class="id" title="var">Y</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Y"><span class="id" title="variable">Y</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Hf</span> : <a class="idref" href="UniMath.Foundations.PartA.html#isweq"><span class="id" title="definition">isweq</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#f"><span class="id" title="variable">f</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#is_internal_left_adjoint_internal_equivalence"><span class="id" title="definition">is_internal_left_adjoint_internal_equivalence</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#f"><span class="id" title="variable">f</span></a><br/>
+&nbsp;&nbsp;:= <a class="idref" href="UniMath.CategoryTheory.Bicategories.equiv_to_adjequiv.html#equiv_to_isadjequiv"><span class="id" title="definition">equiv_to_isadjequiv</span></a> (<a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#weq_is_adjoint_equivalence_help"><span class="id" title="definition">weq_is_adjoint_equivalence_help</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Hf"><span class="id" title="variable">Hf</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="adjoint_equivalence_to_weq"><span class="id" title="definition">adjoint_equivalence_to_weq</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">X</span> <span class="id" title="var">Y</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#internal_adjoint_equivalence"><span class="id" title="definition">internal_adjoint_equivalence</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Y"><span class="id" title="variable">Y</span></a> <a class="idref" href="UniMath.Foundations.Init.html#513d6cdffacb0252f6c48bf325cd5180"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#weq"><span class="id" title="definition">weq</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#X"><span class="id" title="variable">X</span></a>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Y"><span class="id" title="variable">Y</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">Hf</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#internal_left_adjoint"><span class="id" title="definition">internal_left_adjoint</span></a> <span class="id" title="var">Hf</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#adjoint_equivalence_is_weq"><span class="id" title="definition">adjoint_equivalence_is_weq</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Hf</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="weq_to_adjoint_equivalence"><span class="id" title="definition">weq_to_adjoint_equivalence</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">X</span> <span class="id" title="var">Y</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.Foundations.PartA.html#weq"><span class="id" title="definition">weq</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#X"><span class="id" title="variable">X</span></a>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Y"><span class="id" title="variable">Y</span></a>) <a class="idref" href="UniMath.Foundations.Init.html#513d6cdffacb0252f6c48bf325cd5180"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#internal_adjoint_equivalence"><span class="id" title="definition">internal_adjoint_equivalence</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Y"><span class="id" title="variable">Y</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">Hf</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.PartA.html#pr1weq"><span class="id" title="definition">pr1weq</span></a> <span class="id" title="var">Hf</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#weq_is_adjoint_equivalence"><span class="id" title="definition">weq_is_adjoint_equivalence</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Hf</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="weq_to_adjoint_equivalence_is_weq"><span class="id" title="definition">weq_to_adjoint_equivalence_is_weq</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">X</span> <span class="id" title="var">Y</span> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.Foundations.PartA.html#isweq"><span class="id" title="definition">isweq</span></a> (<a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#weq_to_adjoint_equivalence"><span class="id" title="definition">weq_to_adjoint_equivalence</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#Y"><span class="id" title="variable">Y</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.PartA.html#isweq_iso"><span class="id" title="lemma">isweq_iso</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#adjoint_equivalence_to_weq"><span class="id" title="definition">adjoint_equivalence_to_weq</span></a> <span class="id" title="var">X</span> <span class="id" title="var">Y</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">f</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality'"><span class="id" title="lemma">subtypeEquality'</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#isapropisweq"><span class="id" title="lemma">isapropisweq</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">f</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.adjoint_unique.html#path_internal_adjoint_equivalence"><span class="id" title="definition">path_internal_adjoint_equivalence</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types_is_univalent_2_1"><span class="id" title="definition">one_types_is_univalent_2_1</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="one_types_is_univalent_2_0"><span class="id" title="definition">one_types_is_univalent_2_0</span></a><br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#is_univalent_2_0"><span class="id" title="definition">is_univalent_2_0</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#isweqhomot"><span class="id" title="lemma">isweqhomot</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#weq_to_adjoint_equivalence"><span class="id" title="definition">weq_to_adjoint_equivalence</span></a> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <a class="idref" href="UniMath.Foundations.PartA.html#a5338eb8e06f37fa6acd7e4fe82ffe3e"><span class="id" title="notation">∘</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.HLevels.html#UA_for_HLevels"><span class="id" title="lemma">UA_for_HLevels</span></a> 3 <span class="id" title="var">X</span> <span class="id" title="var">Y</span>))%<span class="id" title="var">functions</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#idtoiso_2_0"><span class="id" title="definition">idtoiso_2_0</span></a> <span class="id" title="var">X</span> <span class="id" title="var">Y</span>)).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">p</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.adjoint_unique.html#path_internal_adjoint_equivalence"><span class="id" title="definition">path_internal_adjoint_equivalence</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types_is_univalent_2_1"><span class="id" title="definition">one_types_is_univalent_2_1</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#twooutof3c"><span class="id" title="lemma">twooutof3c</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.HLevels.html#UA_for_HLevels"><span class="id" title="lemma">UA_for_HLevels</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#weq_to_adjoint_equivalence_is_weq"><span class="id" title="definition">weq_to_adjoint_equivalence_is_weq</span></a> <span class="id" title="var">X</span> <span class="id" title="var">Y</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="one_types_is_univalent_2"><span class="id" title="definition">one_types_is_univalent_2</span></a><br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.Univalence.html#is_univalent_2"><span class="id" title="definition">is_univalent_2</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types"><span class="id" title="definition">one_types</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types_is_univalent_2_0"><span class="id" title="definition">one_types_is_univalent_2_0</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Examples.one_types.html#one_types_is_univalent_2_1"><span class="id" title="definition">one_types_is_univalent_2_1</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

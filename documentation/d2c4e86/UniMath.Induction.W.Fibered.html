@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.Induction.W.Fibered</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.Induction.W.Fibered</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab2146"></a><h2 class="section">Fibered algebras</h2>
+
+
+<div class="paragraph"> </div>
+
+  Described in "Homotopy-initial algebras in type theory" by Steve Awodey,
+  Nicola Gambino, Kristina Sojakova (arXiv:1504.05531v1).
+
+<div class="paragraph"> </div>
+
+  Ideas and proofs adapted from original code at
+  https://github.com/kristinas/hinitiality by Langston Barrett (@siddharthist).
+ 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.PartA.html#"><span class="id" title="library">UniMath.Foundations.PartA</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#"><span class="id" title="library">UniMath.Foundations.UnivalenceAxiom</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#"><span class="id" title="library">UniMath.CategoryTheory.functor_categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#"><span class="id" title="library">UniMath.CategoryTheory.FunctorAlgebras</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Induction.PolynomialFunctors.html#"><span class="id" title="library">UniMath.Induction.PolynomialFunctors</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Induction.W.Core.html#"><span class="id" title="library">UniMath.Induction.W.Core</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">Cat</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="Fibered"><span class="id" title="section">Fibered</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<span class="id" title="var">A</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} {<span class="id" title="var">B</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>}.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> "X ⇒ Y" := (<a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_mor"><span class="id" title="definition">algebra_mor</span></a> (<a class="idref" href="UniMath.Induction.PolynomialFunctors.html#polynomial_functor"><span class="id" title="definition">polynomial_functor</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="var">X</span> <span class="id" title="var">Y</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> <a name="F"><span class="id" title="abbreviation">F</span></a> := (<a class="idref" href="UniMath.Induction.PolynomialFunctors.html#polynomial_functor"><span class="id" title="definition">polynomial_functor</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Fibered.A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Fibered.B"><span class="id" title="variable">B</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A fibered P-algebra.
+
+<div class="paragraph"> </div>
+
+      (Definition 4.5 in Awodey, Gambino, and Sojakova)
+  
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="fibered_alg"><span class="id" title="definition">fibered_alg</span></a> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">(</span></a><span class="id" title="var">E</span> : <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#alg_carrier"><span class="id" title="definition">alg_carrier</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">x</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#alg_carrier"><span class="id" title="definition">alg_carrier</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a>)<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">b</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#Fibered.B"><span class="id" title="variable">B</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#x"><span class="id" title="variable">x</span></a>)<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#E"><span class="id" title="variable">E</span></a> ((<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#x"><span class="id" title="variable">x</span></a>) <a class="idref" href="UniMath.Induction.W.Fibered.html#b"><span class="id" title="variable">b</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#E"><span class="id" title="variable">E</span></a> ((<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a>) <a class="idref" href="UniMath.Induction.W.Fibered.html#x"><span class="id" title="variable">x</span></a>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Any P-algebra can be made into a fibered P-algebra. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="alg2fibered_alg"><span class="id" title="definition">alg2fibered_alg</span></a> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>} :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#fibered_alg"><span class="id" title="definition">fibered_alg</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">Alg</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span> <span class="id" title="keyword">with</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">Alg</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">f</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">g</span> ⇒ (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">Alg</span>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">f</span><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#g"><span class="id" title="variable">g</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Any fibered P-algebra can be made into a 'total' P-algebra. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="fibered_alg2alg"><span class="id" title="definition">fibered_alg2alg</span></a> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>} :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Induction.W.Fibered.html#fibered_alg"><span class="id" title="definition">fibered_alg</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> (<span class="id" title="var">supx</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">X</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> (<span class="id" title="var">supe</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">E</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span> <span class="id" title="keyword">with</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <span class="id" title="var">x</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">X</span><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">E</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#x"><span class="id" title="variable">x</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">z</span>; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">z</span>; <span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.Induction.PolynomialFunctors.html#polynomial_functor_obj"><span class="id" title="definition">polynomial_functor_obj</span></a> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> (<span class="id" title="var">z'</span> := (<a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">z</span><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">),,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#a5338eb8e06f37fa6acd7e4fe82ffe3e"><span class="id" title="notation">∘</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#a5338eb8e06f37fa6acd7e4fe82ffe3e"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">z</span><a class="idref" href="UniMath.Foundations.PartA.html#a5338eb8e06f37fa6acd7e4fe82ffe3e"><span class="id" title="notation">)</span></a>) : (<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <span class="id" title="var">a</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#Fibered.A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Fibered.B"><span class="id" title="variable">B</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.Foundations.Init.html#513d6cdffacb0252f6c48bf325cd5180"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">X</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">supx</span> <span class="id" title="var">z'</span><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <span class="id" title="var">supe</span> <span class="id" title="var">z'</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">b</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">z</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#b"><span class="id" title="variable">b</span></a>)<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">)</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A P-algebra section.
+
+<div class="paragraph"> </div>
+
+      (Definition 4.6 in Awodey, Gambino, and Sojakova)
+    
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="algebra_section"><span class="id" title="definition">algebra_section</span></a> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>} : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">Y</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#fibered_alg"><span class="id" title="definition">fibered_alg</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> (<span class="id" title="var">supx</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">X</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> (<span class="id" title="var">supe</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">E</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> ((<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">(</span></a><span class="id" title="var">f</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">x</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">X</span>, <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">E</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">a</span>, <a class="idref" href="UniMath.Induction.W.Fibered.html#f"><span class="id" title="variable">f</span></a> (<span class="id" title="var">supx</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#a"><span class="id" title="variable">a</span></a>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <span class="id" title="var">supe</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#a"><span class="id" title="variable">a</span></a> (<a class="idref" href="UniMath.Induction.W.Fibered.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#a5338eb8e06f37fa6acd7e4fe82ffe3e"><span class="id" title="notation">∘</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#a5338eb8e06f37fa6acd7e4fe82ffe3e"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="UniMath.Foundations.PartA.html#a5338eb8e06f37fa6acd7e4fe82ffe3e"><span class="id" title="notation">)</span></a>))).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A P-algebra section homotopy.
+
+<div class="paragraph"> </div>
+
+      (Definition 4.7 in Awodey, Gambino, and Sojakova)
+  
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="algebra_sec_homot"><span class="id" title="definition">algebra_sec_homot</span></a> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>} :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> {<span class="id" title="var">Y</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#fibered_alg"><span class="id" title="definition">fibered_alg</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a>} (<span class="id" title="var">i</span> <span class="id" title="var">j</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_section"><span class="id" title="definition">algebra_section</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Y"><span class="id" title="variable">Y</span></a>), <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> (<span class="id" title="var">supx</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">X</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> (<span class="id" title="var">supe</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">E</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">(</span></a><span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">f</span> <a class="idref" href="UniMath.Foundations.PartA.html#f0405b094115d6d72d95e62bcc4f5d50"><span class="id" title="notation">¬</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">g</span><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">f</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> (<span class="id" title="var">supe</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#x"><span class="id" title="variable">x</span></a>) <span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#n"><span class="id" title="variable">n</span></a> (<span class="id" title="var">supx</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#x"><span class="id" title="variable">x</span></a>) <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">g</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#x"><span class="id" title="variable">x</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (@<a class="idref" href="UniMath.Foundations.PartA.html#funhomotsec"><span class="id" title="definition">funhomotsec</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">x</span>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">f</span>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">g</span>) <span class="id" title="var">n</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="algebra_mor_to_algsec"><span class="id" title="definition">algebra_mor_to_algsec</span></a> {<span class="id" title="var">X</span> <span class="id" title="var">Y</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">f</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#03d7b0ef8e7b074f1999e3f2163a989a"><span class="id" title="notation">⇒</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Y"><span class="id" title="variable">Y</span></a>) : @<a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_section"><span class="id" title="definition">algebra_section</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a> (<a class="idref" href="UniMath.Induction.W.Fibered.html#alg2fibered_alg"><span class="id" title="definition">alg2fibered_alg</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Y"><span class="id" title="variable">Y</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_section"><span class="id" title="definition">algebra_section</span></a>; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">f</span><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#eqtohomot"><span class="id" title="definition">eqtohomot</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">f</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A P-algebra homotopy.
+
+<div class="paragraph"> </div>
+
+      (Definition 4.7 in Awodey, Gambino, and Sojakova)
+   
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="algebra_mor_homot"><span class="id" title="definition">algebra_mor_homot</span></a> {<span class="id" title="var">X</span> <span class="id" title="var">Y</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>} (<span class="id" title="var">i</span> <span class="id" title="var">j</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#03d7b0ef8e7b074f1999e3f2163a989a"><span class="id" title="notation">⇒</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Y"><span class="id" title="variable">Y</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_sec_homot"><span class="id" title="definition">algebra_sec_homot</span></a> (<a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_mor_to_algsec"><span class="id" title="definition">algebra_mor_to_algsec</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#i"><span class="id" title="variable">i</span></a>) (<a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_mor_to_algsec"><span class="id" title="definition">algebra_mor_to_algsec</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#j"><span class="id" title="variable">j</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+TODO: this should live somewhere else 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="funextsec_toforallpaths"><span class="id" title="lemma">funextsec_toforallpaths</span></a> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">T</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>) (<span class="id" title="var">P</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#T"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>) (<span class="id" title="var">f</span> <span class="id" title="var">g</span> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">t</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#T"><span class="id" title="variable">T</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#t"><span class="id" title="variable">t</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">h</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#g"><span class="id" title="variable">g</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a> <span class="id" title="var">_</span>  <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#h"><span class="id" title="variable">h</span></a>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#h"><span class="id" title="variable">h</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ? ? ? ? <span class="id" title="var">h</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">!</span></a><a class="idref" href="UniMath.Foundations.PartA.html#homotinvweqweq0"><span class="id" title="definition">homotinvweqweq0</span></a> (<a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#weqtoforallpaths"><span class="id" title="definition">weqtoforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="var">h</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The identity homotopy on a P-algebra section. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="algebra_sec_homot_id"><span class="id" title="definition">algebra_sec_homot_id</span></a> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>} {<span class="id" title="var">Y</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#fibered_alg"><span class="id" title="definition">fibered_alg</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">f</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_section"><span class="id" title="definition">algebra_section</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Y"><span class="id" title="variable">Y</span></a>} : <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_sec_homot"><span class="id" title="definition">algebra_sec_homot</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#f"><span class="id" title="variable">f</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> (<span class="id" title="var">supx</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">X</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> (<span class="id" title="var">supy</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">Y</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span> <span class="id" title="keyword">with</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">transitivity</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">f</span> <span class="id" title="var">x</span> <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> (<span class="id" title="var">supy</span> <span class="id" title="var">x</span>) (<a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a> <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">do</span> 2 (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.Foundations.PartA.html#funhomotsec"><span class="id" title="definition">funhomotsec</span></a>; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">x0</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#Fibered.B"><span class="id" title="variable">B</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">x</span>)<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">f</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">x</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#x0"><span class="id" title="variable">x0</span></a>))<a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">f</span> <a class="idref" href="UniMath.Foundations.PartA.html#a5338eb8e06f37fa6acd7e4fe82ffe3e"><span class="id" title="notation">∘</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">x</span>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">f</span> <a class="idref" href="UniMath.Foundations.PartA.html#a5338eb8e06f37fa6acd7e4fe82ffe3e"><span class="id" title="notation">∘</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">x</span>) (<a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a> <span class="id" title="var">_</span>)<a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">H</span><a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#funextsec_toforallpaths"><span class="id" title="lemma">funextsec_toforallpaths</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">cbn</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathscomp0rid"><span class="id" title="definition">pathscomp0rid</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The canonical function from the path space between two P-algebra sections
+      to the type of P-algebra section homotopies. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="algebra_section_path_to_homot"><span class="id" title="definition">algebra_section_path_to_homot</span></a> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <span class="id" title="var">_</span>} {<span class="id" title="var">Y</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#fibered_alg"><span class="id" title="definition">fibered_alg</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">i</span> <span class="id" title="var">j</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_section"><span class="id" title="definition">algebra_section</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Y"><span class="id" title="variable">Y</span></a>) (<span class="id" title="var">p</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#i"><span class="id" title="variable">i</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#j"><span class="id" title="variable">j</span></a>) : <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_sec_homot"><span class="id" title="definition">algebra_sec_homot</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#i"><span class="id" title="variable">i</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#j"><span class="id" title="variable">j</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_sec_homot_id"><span class="id" title="definition">algebra_sec_homot_id</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The identity homotopy on a P-algebra morphism. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="algebra_mor_homot_id"><span class="id" title="definition">algebra_mor_homot_id</span></a> {<span class="id" title="var">X</span> <span class="id" title="var">Y</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">i</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_mor"><span class="id" title="definition">algebra_mor</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Y"><span class="id" title="variable">Y</span></a>} : <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_mor_homot"><span class="id" title="definition">algebra_mor_homot</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#i"><span class="id" title="variable">i</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#i"><span class="id" title="variable">i</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= @<a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_sec_homot_id"><span class="id" title="definition">algebra_sec_homot_id</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Induction.W.Fibered.html#alg2fibered_alg"><span class="id" title="definition">alg2fibered_alg</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Y"><span class="id" title="variable">Y</span></a>) (<a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_mor_to_algsec"><span class="id" title="definition">algebra_mor_to_algsec</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#i"><span class="id" title="variable">i</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A "(homotopy) uniqueness principle" for a P-algebra X: there exists auto
+      homotopy (and hence a path) between any two P-algebra morphisms into any
+      other P-algebra Y.
+
+<div class="paragraph"> </div>
+
+      This is a little different than in Awodey, Gambino, and Sojakova.
+      The main difference is that here we relate arbitrary two morphisms i,j
+      whereas the rules in 5.8 relate an arbitrary morphism i to the canonical
+      morphism given by the first two rules in 5.8. Our formulation has the
+      advantage that it does not require the canonical morphism to exist, i.e.,
+      the type X does not have to satisfy the recursion princple for the
+      uniqueness principle to make sense.
+
+<div class="paragraph"> </div>
+
+      (Loosely corresponds to the last two rules in Proposition 5.8
+       in Awodey, Gambino, and Sojakova)
+   
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="homotopy_uniqueness_principle"><span class="id" title="definition">homotopy_uniqueness_principle</span></a> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<span class="id" title="var">Y</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>) (<span class="id" title="var">i</span> <span class="id" title="var">j</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_mor"><span class="id" title="definition">algebra_mor</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Y"><span class="id" title="variable">Y</span></a>), <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_mor_homot"><span class="id" title="definition">algebra_mor_homot</span></a>  <a class="idref" href="UniMath.Induction.W.Fibered.html#i"><span class="id" title="variable">i</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#j"><span class="id" title="variable">j</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The "induction principle" for a P-algebra X: any fibered P-algebra Y has a
+      section.
+
+<div class="paragraph"> </div>
+
+      (Definition 5.1 in Awodey, Gambino, and Sojakova)
+   
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="is_preinitial_sec"><span class="id" title="definition">is_preinitial_sec</span></a> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">Y</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#fibered_alg"><span class="id" title="definition">fibered_alg</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_section"><span class="id" title="definition">algebra_section</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Y"><span class="id" title="variable">Y</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A "fibered uniqueness principle": there exists a homotopy (and hence a
+      path) between any two P-algebra sections of any fibered algebra.
+
+<div class="paragraph"> </div>
+
+      (Loosely corresponds to the rules in Proposition 5.3 in Awodey, Gambino,
+       and Sojakova)
+   
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="fibered_uniqueness"><span class="id" title="definition">fibered_uniqueness</span></a> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#algebra_ob"><span class="id" title="definition">algebra_ob</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#F"><span class="id" title="abbreviation">F</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">Y</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#fibered_alg"><span class="id" title="definition">fibered_alg</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#X"><span class="id" title="variable">X</span></a>) (<span class="id" title="var">i</span> <span class="id" title="var">j</span> : <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_section"><span class="id" title="definition">algebra_section</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#Y"><span class="id" title="variable">Y</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#algebra_sec_homot"><span class="id" title="definition">algebra_sec_homot</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#i"><span class="id" title="variable">i</span></a> <a class="idref" href="UniMath.Induction.W.Fibered.html#j"><span class="id" title="variable">j</span></a>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.Induction.W.Fibered.html#Fibered"><span class="id" title="section">Fibered</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

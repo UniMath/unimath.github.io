@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.SetValuedFunctors</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.SetValuedFunctors</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+Facts about set valued functors
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> epimorphic natural transformations are pointwise epimorphic
+
+</li>
+<li> epimorphic natural transformations enjoy a universal property similar to
+
+</li>
+</ul>
+surjections <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#univ_surj_nt"><span class="id" title="definition">univ_surj_nt</span></a></span>
+<ul class="doclist">
+<li> Definition of a quotient functor
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+Ambroise LAFONT January 2017
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.PartD.html#"><span class="id" title="library">UniMath.Foundations.PartD</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Propositions.html#"><span class="id" title="library">UniMath.Foundations.Propositions</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Sets.html#"><span class="id" title="library">UniMath.Foundations.Sets</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.MoreFoundations.Tactics.html#"><span class="id" title="library">UniMath.MoreFoundations.Tactics</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#"><span class="id" title="library">UniMath.CategoryTheory.functor_categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.HSET.Core</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.HSET.MonoEpiIso</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Colimits.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.HSET.Colimits</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Structures.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.HSET.Structures</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Epis.html#"><span class="id" title="library">UniMath.CategoryTheory.Epis</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.EpiFacts.html#"><span class="id" title="library">UniMath.CategoryTheory.EpiFacts</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.limits.coequalizers.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.coequalizers</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="is_pointwise_epi_from_set_nat_trans_epi"><span class="id" title="lemma">is_pointwise_epi_from_set_nat_trans_epi</span></a> (<span class="id" title="var">C</span>:<a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">F</span> <span class="id" title="var">G</span> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#hset_precategory"><span class="id" title="definition">hset_precategory</span></a>) (<span class="id" title="var">f</span>:<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans"><span class="id" title="definition">nat_trans</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#G"><span class="id" title="variable">G</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">h</span>:<a class="idref" href="UniMath.CategoryTheory.Epis.html#isEpi"><span class="id" title="definition">isEpi</span></a> (<span class="id" title="var">C</span>:=<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_precategory"><span class="id" title="definition">functor_precategory</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#C"><span class="id" title="variable">C</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>) <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#f"><span class="id" title="variable">f</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">x</span>:<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.CategoryTheory.Epis.html#isEpi"><span class="id" title="definition">isEpi</span></a> (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.EpiFacts.html#Pushouts_pw_epi"><span class="id" title="lemma">Pushouts_pw_epi</span></a> (<span class="id" title="var">D</span>:=<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#hset_category"><span class="id" title="definition">hset_category</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Colimits.html#PushoutsHSET_from_Colims"><span class="id" title="lemma">PushoutsHSET_from_Colims</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">h</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Let p be an epimorphic natural transformation where the target category is HSET
+
+<div class="paragraph"> </div>
+
+Given the following diagram :
+<pre>&lt;
+    f
+ A ---&gt; C
+ |
+ | p
+ |
+ v
+ B
+</pre>
+&gt;
+there exists a unique natural transformation from B to C that makes the diagram
+commute provided that for any set X, any x,y in X, if <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.precomp_ess_surj.html#precomp_w_ess_surj_ff_is_ess_surj.p"><span class="id" title="variable">p</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Inductives.Lists.html#AltList.constcoprod_functor.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode">=</span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.precomp_ess_surj.html#precomp_w_ess_surj_ff_is_ess_surj.p"><span class="id" title="variable">p</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.limits.binproducts.html#BinProducts.y"><span class="id" title="variable">y</span></a></span> then <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_isomorphism.html#folds_iso_def.from_iso_to_folds_iso.f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Inductives.Lists.html#AltList.constcoprod_functor.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode">=</span> <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_isomorphism.html#folds_iso_def.from_iso_to_folds_iso.f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.limits.binproducts.html#BinProducts.y"><span class="id" title="variable">y</span></a></span>
+
+<div class="paragraph"> </div>
+
+This property comes from the fact that p is an effective epimorphism.
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Section</span> <a name="LiftEpiNatTrans"><span class="id" title="section">LiftEpiNatTrans</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> { <span class="id" title="var">CC</span>:<a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>}.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> <a name="C_SET"><span class="id" title="abbreviation">C_SET</span></a> :=  (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_precategory"><span class="id" title="definition">functor_precategory</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.CC"><span class="id" title="variable">CC</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span>:<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.CC"><span class="id" title="variable">CC</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>} (<span class="id" title="var">p</span>:<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans"><span class="id" title="definition">nat_trans</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#B"><span class="id" title="variable">B</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">f</span>:<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans"><span class="id" title="definition">nat_trans</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#C"><span class="id" title="variable">C</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Hypothesis</span> (<a name="LiftEpiNatTrans.comp_epi"><span class="id" title="variable">comp_epi</span></a>: <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">X</span>:<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.CC"><span class="id" title="variable">CC</span></a>)  (<span class="id" title="var">x</span> <span class="id" title="var">y</span>: <a class="idref" href="UniMath.Foundations.Sets.html#pr1hSet"><span class="id" title="definition">pr1hSet</span></a> (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#X"><span class="id" title="variable">X</span></a>)<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.p"><span class="id" title="variable">p</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a>  <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.p"><span class="id" title="variable">p</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#y"><span class="id" title="variable">y</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Hypothesis</span> (<a name="LiftEpiNatTrans.surjectivep"><span class="id" title="variable">surjectivep</span></a> : <a class="idref" href="UniMath.CategoryTheory.Epis.html#isEpi"><span class="id" title="definition">isEpi</span></a> (<span class="id" title="var">C</span>:=<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#C_SET"><span class="id" title="abbreviation">C_SET</span></a>) <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.p"><span class="id" title="variable">p</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="EffectiveEpis_Functor_HSET"><span class="id" title="lemma">EffectiveEpis_Functor_HSET</span></a> : <a class="idref" href="UniMath.CategoryTheory.EpiFacts.html#EpisAreEffective"><span class="id" title="definition">EpisAreEffective</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#C_SET"><span class="id" title="abbreviation">C_SET</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">F</span> <span class="id" title="var">G</span> <span class="id" title="var">m</span> <span class="id" title="var">isepim</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.EpiFacts.html#isEffectivePw"><span class="id" title="lemma">isEffectivePw</span></a> (<span class="id" title="var">D</span>:=<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#hset_category"><span class="id" title="definition">hset_category</span></a>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Structures.html#EffectiveEpis_HSET"><span class="id" title="lemma">EffectiveEpis_HSET</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.EpiFacts.html#Pushouts_pw_epi"><span class="id" title="lemma">Pushouts_pw_epi</span></a> (<span class="id" title="var">D</span>:=<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#hset_category"><span class="id" title="definition">hset_category</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Colimits.html#PushoutsHSET_from_Colims"><span class="id" title="lemma">PushoutsHSET_from_Colims</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="univ_surj_nt"><span class="id" title="definition">univ_surj_nt</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans"><span class="id" title="definition">nat_trans</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.B"><span class="id" title="variable">B</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.C"><span class="id" title="variable">C</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#EffectiveEpis_Functor_HSET"><span class="id" title="lemma">EffectiveEpis_Functor_HSET</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">surjectivep</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">red</span> <span class="id" title="tactic">in</span> <span class="id" title="var">surjectivep</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">coeq</span> := <a class="idref" href="UniMath.CategoryTheory.limits.coequalizers.html#mk_Coequalizer"><span class="id" title="definition">limits.coequalizers.mk_Coequalizer</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.surjectivep"><span class="id" title="variable">surjectivep</span></a>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.limits.coequalizers.html#CoequalizerOut"><span class="id" title="definition">limits.coequalizers.CoequalizerOut</span></a> <span class="id" title="var">coeq</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.f"><span class="id" title="variable">f</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">abstract</span>(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_eq"><span class="id" title="lemma">nat_trans_eq</span></a> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">c</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.comp_epi"><span class="id" title="variable">comp_epi</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">hcommut</span> := <a class="idref" href="UniMath.CategoryTheory.limits.pullbacks.html#PullbackSqrCommutes"><span class="id" title="definition">limits.pullbacks.PullbackSqrCommutes</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.surjectivep"><span class="id" title="variable">surjectivep</span></a>));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_eq_pointwise"><span class="id" title="definition">nat_trans_eq_pointwise</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">hcommut</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">hcommut</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">hcommut</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="univ_surj_nt_ax"><span class="id" title="lemma">univ_surj_nt_ax</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_comp"><span class="id" title="definition">nat_trans_comp</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.p"><span class="id" title="variable">p</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#univ_surj_nt"><span class="id" title="definition">univ_surj_nt</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.f"><span class="id" title="variable">f</span></a> .<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#univ_surj_nt"><span class="id" title="definition">univ_surj_nt</span></a>; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">coeq</span> := <a class="idref" href="UniMath.CategoryTheory.limits.coequalizers.html#mk_Coequalizer"><span class="id" title="definition">mk_Coequalizer</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.limits.coequalizers.html#CoequalizerCommutes"><span class="id" title="lemma">CoequalizerCommutes</span></a> <span class="id" title="var">coeq</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="univ_surj_nt_ax_pw"><span class="id" title="lemma">univ_surj_nt_ax_pw</span></a> <span class="id" title="var">x</span>  : <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.p"><span class="id" title="variable">p</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#univ_surj_nt"><span class="id" title="definition">univ_surj_nt</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a> .<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> &lt;- <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#univ_surj_nt_ax"><span class="id" title="lemma">univ_surj_nt_ax</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="univ_surj_nt_ax_pw_pw"><span class="id" title="lemma">univ_surj_nt_ax_pw_pw</span></a> <span class="id" title="var">x</span> <span class="id" title="var">c</span> : (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.p"><span class="id" title="variable">p</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#univ_surj_nt"><span class="id" title="definition">univ_surj_nt</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a>) <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#c"><span class="id" title="variable">c</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> &lt;- <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#univ_surj_nt_ax"><span class="id" title="lemma">univ_surj_nt_ax</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="univ_surj_nt_unique"><span class="id" title="lemma">univ_surj_nt_unique</span></a> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">g</span>  (<span class="id" title="var">H</span> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_comp"><span class="id" title="definition">nat_trans_comp</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.p"><span class="id" title="variable">p</span></a>  <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans.f"><span class="id" title="variable">f</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">b</span><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#univ_surj_nt"><span class="id" title="definition">univ_surj_nt</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#b"><span class="id" title="variable">b</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">g</span> <span class="id" title="var">hg</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_eq_pointwise"><span class="id" title="definition">nat_trans_eq_pointwise</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#univ_surj_nt"><span class="id" title="definition">univ_surj_nt</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">coeq</span> := <a class="idref" href="UniMath.CategoryTheory.limits.coequalizers.html#mk_Coequalizer"><span class="id" title="definition">mk_Coequalizer</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> (<a class="idref" href="UniMath.CategoryTheory.limits.coequalizers.html#isCoequalizerOutUnique"><span class="id" title="lemma">isCoequalizerOutUnique</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.limits.coequalizers.html#isCoequalizer_Coequalizer"><span class="id" title="definition">isCoequalizer_Coequalizer</span></a> <span class="id" title="var">coeq</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">hg</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#LiftEpiNatTrans"><span class="id" title="section">LiftEpiNatTrans</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+  Quotient functors .
+
+<div class="paragraph"> </div>
+
+Let C be a category
+Let R be a functor from C to Set.
+
+<div class="paragraph"> </div>
+
+Let X be an object of C
+Let tilde a family of equivalence relations on RX satisfying
+if <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Inductives.Lists.html#AltList.constcoprod_functor.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode"><span class="id" title="var">tilde</span></span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.limits.binproducts.html#BinProducts.y"><span class="id" title="variable">y</span></a></span> and <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_isomorphism.html#folds_iso_def.from_iso_to_folds_iso.f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="UniMath.SubstitutionSystems.SignatureCategory.html#SignatureCategory.Signature_category_mor.X"><span class="id" title="variable">X</span></a></span> <span class="inlinecode">→</span> <span class="inlinecode"><a class="idref" href="UniMath.SubstitutionSystems.SignatureCategory.html#SignatureCategory.Signature_category_mor.Y"><span class="id" title="variable">Y</span></a></span>, then <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_isomorphism.html#folds_iso_def.from_iso_to_folds_iso.f"><span class="id" title="variable">f</span></a>(<a class="idref" href="UniMath.CategoryTheory.Inductives.Lists.html#AltList.constcoprod_functor.x"><span class="id" title="variable">x</span></a>)</span> <span class="inlinecode"><span class="id" title="var">tilde</span></span> <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_isomorphism.html#folds_iso_def.from_iso_to_folds_iso.f"><span class="id" title="variable">f</span></a>(<a class="idref" href="UniMath.CategoryTheory.limits.binproducts.html#BinProducts.y"><span class="id" title="variable">y</span></a>)</span>.
+
+<div class="paragraph"> </div>
+
+Then we can define <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Sets.html#R'"><span class="id" title="variable">R'</span></a></span> as a functor which to any X associates <span class="inlinecode"><span class="id" title="var">R'X</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Sets.html#RX"><span class="id" title="variable">RX</span></a></span> <span class="inlinecode"><span class="id" title="var">mod</span></span> <span class="inlinecode"><span class="id" title="var">tilde</span></span>
+Moreover, there is an epimorphism <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#pr_quot_functor"><span class="id" title="definition">pr_quot_functor</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="UniMath.SubstitutionSystems.GenMendlerIteration.html#GenMenIt.the_iteration_principle.R"><span class="id" title="variable">R</span></a></span> <span class="inlinecode">→</span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Sets.html#R'"><span class="id" title="variable">R'</span></a></span>
+
+<div class="paragraph"> </div>
+
+ 
+</div>
+<div class="code">
+<span class="id" title="keyword">Section</span> <a name="QuotientFunctor"><span class="id" title="section">QuotientFunctor</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> { <span class="id" title="var">D</span>:<a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>}.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Variable</span> (<a name="QuotientFunctor.R"><span class="id" title="variable">R</span></a>:<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.D"><span class="id" title="variable">D</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This is <span class="inlinecode"><span class="id" title="var">tilde</span></span> 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Variable</span> (<a name="QuotientFunctor.hequiv"><span class="id" title="variable">hequiv</span></a> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">d</span>:<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.D"><span class="id" title="variable">D</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a><a class="idref" href="UniMath.Foundations.Sets.html#eqrel"><span class="id" title="definition">eqrel</span></a> (<a class="idref" href="UniMath.Foundations.Sets.html#pr1hSet"><span class="id" title="definition">pr1hSet</span></a> (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#d"><span class="id" title="variable">d</span></a>))).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The relations satisfied by <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.hequiv"><span class="id" title="variable">hequiv</span></a></span> <span class="inlinecode">(<span class="id" title="var">tilde</span>)</span> 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Hypothesis</span> (<a name="QuotientFunctor.congru"><span class="id" title="variable">congru</span></a>: <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">x</span> <span class="id" title="var">y</span>:<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.D"><span class="id" title="variable">D</span></a>) (<span class="id" title="var">f</span>:<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.D"><span class="id" title="variable">D</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a>  <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#y"><span class="id" title="variable">y</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.Sets.html#iscomprelrelfun"><span class="id" title="definition">iscomprelrelfun</span></a> (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.hequiv"><span class="id" title="variable">hequiv</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a>) (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.hequiv"><span class="id" title="variable">hequiv</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#y"><span class="id" title="variable">y</span></a>) (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#f9d39e9abcf2172e261db5a53b8f1205"><span class="id" title="notation">#</span></a><a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#f"><span class="id" title="variable">f</span></a>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Definition of the quotient functor 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="quot_functor_ob"><span class="id" title="definition">quot_functor_ob</span></a> (<span class="id" title="var">d</span>:<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.D"><span class="id" title="variable">D</span></a>) :<a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Sets.html#setquot"><span class="id" title="definition">setquot</span></a> (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.hequiv"><span class="id" title="variable">hequiv</span></a> <span class="id" title="var">d</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#isasetsetquot"><span class="id" title="lemma">isasetsetquot</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="quot_functor_mor"><span class="id" title="definition">quot_functor_mor</span></a> (<span class="id" title="var">d</span> <span class="id" title="var">d'</span> : <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.D"><span class="id" title="variable">D</span></a>) (<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.D"><span class="id" title="variable">D</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#d"><span class="id" title="variable">d</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#d'"><span class="id" title="variable">d'</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#quot_functor_ob"><span class="id" title="definition">quot_functor_ob</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#d"><span class="id" title="variable">d</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#quot_functor_ob"><span class="id" title="definition">quot_functor_ob</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#d'"><span class="id" title="variable">d'</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Sets.html#setquotfun"><span class="id" title="definition">setquotfun</span></a> (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.hequiv"><span class="id" title="variable">hequiv</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#d"><span class="id" title="variable">d</span></a>) (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.hequiv"><span class="id" title="variable">hequiv</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#d'"><span class="id" title="variable">d'</span></a>) (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#f9d39e9abcf2172e261db5a53b8f1205"><span class="id" title="notation">#</span></a><a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#f"><span class="id" title="variable">f</span></a>) (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.congru"><span class="id" title="variable">congru</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#d"><span class="id" title="variable">d</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#d'"><span class="id" title="variable">d'</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#f"><span class="id" title="variable">f</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="quot_functor_data"><span class="id" title="definition">quot_functor_data</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_data"><span class="id" title="definition">functor_data</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.D"><span class="id" title="variable">D</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#quot_functor_mor"><span class="id" title="definition">quot_functor_mor</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="is_functor_quot_functor_data"><span class="id" title="lemma">is_functor_quot_functor_data</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#is_functor"><span class="id" title="definition">is_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#quot_functor_data"><span class="id" title="definition">quot_functor_data</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">a</span>; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">c</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Sets.html#surjectionisepitosets"><span class="id" title="lemma">surjectionisepitosets</span></a> (<a class="idref" href="UniMath.Foundations.Sets.html#setquotpr"><span class="id" title="lemma">setquotpr</span></a> <span class="id" title="var">_</span>));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#issurjsetquotpr"><span class="id" title="lemma">issurjsetquotpr</span></a> | <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#isasetsetquot"><span class="id" title="lemma">isasetsetquot</span></a>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_id"><span class="id" title="definition">functor_id</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.R"><span class="id" title="variable">R</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span>; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Sets.html#surjectionisepitosets"><span class="id" title="lemma">surjectionisepitosets</span></a> (<a class="idref" href="UniMath.Foundations.Sets.html#setquotpr"><span class="id" title="lemma">setquotpr</span></a> <span class="id" title="var">_</span>));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#issurjsetquotpr"><span class="id" title="lemma">issurjsetquotpr</span></a> | <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#isasetsetquot"><span class="id" title="lemma">isasetsetquot</span></a>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">y</span>; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_comp"><span class="id" title="definition">functor_comp</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.R"><span class="id" title="variable">R</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="quot_functor"><span class="id" title="definition">quot_functor</span></a>  : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.D"><span class="id" title="variable">D</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#is_functor_quot_functor_data"><span class="id" title="lemma">is_functor_quot_functor_data</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pr_quot_functor_data"><span class="id" title="definition">pr_quot_functor_data</span></a> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">x</span> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#quot_functor"><span class="id" title="definition">quot_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">x</span> <span class="id" title="var">a</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Sets.html#setquotpr"><span class="id" title="lemma">setquotpr</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#a"><span class="id" title="variable">a</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="is_nat_trans_pr_quot_functor"><span class="id" title="lemma">is_nat_trans_pr_quot_functor</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#is_nat_trans"><span class="id" title="definition">is_nat_trans</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#pr_quot_functor_data"><span class="id" title="definition">pr_quot_functor_data</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">red</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pr_quot_functor"><span class="id" title="definition">pr_quot_functor</span></a> : (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans"><span class="id" title="definition">nat_trans</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.R"><span class="id" title="variable">R</span></a>  <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#quot_functor"><span class="id" title="definition">quot_functor</span></a>) := (<span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#is_nat_trans_pr_quot_functor"><span class="id" title="lemma">is_nat_trans_pr_quot_functor</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="isEpi_pw_pr_quot_functor"><span class="id" title="lemma">isEpi_pw_pr_quot_functor</span></a> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Epis.html#isEpi"><span class="id" title="definition">isEpi</span></a>  (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#pr_quot_functor"><span class="id" title="definition">pr_quot_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">z</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">eqfg</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="UniMath.Foundations.Sets.html#surjectionisepitosets"><span class="id" title="lemma">surjectionisepitosets</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span>  <a class="idref" href="UniMath.Foundations.Sets.html#issurjsetquotpr"><span class="id" title="lemma">issurjsetquotpr</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">u</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">eqfg</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">eqfg</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="isEpi_pr_quot_functor"><span class="id" title="lemma">isEpi_pr_quot_functor</span></a> : <a class="idref" href="UniMath.CategoryTheory.Epis.html#isEpi"><span class="id" title="definition">isEpi</span></a> (<span class="id" title="var">C</span>:=<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_precategory"><span class="id" title="definition">functor_precategory</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>) <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#pr_quot_functor"><span class="id" title="definition">pr_quot_functor</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Epis.html#is_nat_trans_epi_from_pointwise_epis"><span class="id" title="lemma">is_nat_trans_epi_from_pointwise_epis</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#isEpi_pw_pr_quot_functor"><span class="id" title="lemma">isEpi_pw_pr_quot_functor</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="weqpathsinpr_quot_functor"><span class="id" title="lemma">weqpathsinpr_quot_functor</span></a> <span class="id" title="var">X</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.hequiv"><span class="id" title="variable">hequiv</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#pr_quot_functor"><span class="id" title="definition">pr_quot_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#pr_quot_functor"><span class="id" title="definition">pr_quot_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#y"><span class="id" title="variable">y</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Sets.html#weqpathsinsetquot"><span class="id" title="lemma">weqpathsinsetquot</span></a> (<a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor.hequiv"><span class="id" title="variable">hequiv</span></a> <span class="id" title="var">X</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.SetValuedFunctors.html#QuotientFunctor"><span class="id" title="section">QuotientFunctor</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

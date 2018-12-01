@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.categories.HSET.MonoEpiIso</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.categories.HSET.MonoEpiIso</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab815"></a><h1 class="section">Characterizations of monos, epis, and isos in <span class="inlinecode"><span class="id" title="var">HSET</span></span></h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab816"></a><h2 class="section">Contents</h2>
+
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Points as global elements
+
+</li>
+<li> Monomorphisms are exactly injective functions <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#MonosAreInjective_HSET"><span class="id" title="lemma">MonosAreInjective_HSET</span></a></span>
+
+</li>
+<li> Epimorphisms are exactly surjective functions <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#EpisAreSurjective_HSET"><span class="id" title="lemma">EpisAreSurjective_HSET</span></a></span>
+
+</li>
+<li> Equivalence between isomorphisms and weak equivalences
+
+</li>
+</ul>
+ 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.PartD.html#"><span class="id" title="library">UniMath.Foundations.PartD</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Propositions.html#"><span class="id" title="library">UniMath.Foundations.Propositions</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Sets.html#"><span class="id" title="library">UniMath.Foundations.Sets</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.MoreFoundations.Tactics.html#"><span class="id" title="library">UniMath.MoreFoundations.Tactics</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#"><span class="id" title="library">UniMath.CategoryTheory.functor_categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Monics.html#"><span class="id" title="library">UniMath.CategoryTheory.Monics</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Epis.html#"><span class="id" title="library">UniMath.CategoryTheory.Epis</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.HSET.Core</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab817"></a><h2 class="section">Points as global elements</h2>
+
+<div class="paragraph"> </div>
+
+ See https://ncatlab.org/nlab/show/global+element 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Definition</span> <a name="global_element_HSET"><span class="id" title="definition">global_element_HSET</span></a> {<span class="id" title="var">A</span> : <a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a>} (<span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.Foundations.Sets.html#unitset"><span class="id" title="definition">unitset</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#invweq"><span class="id" title="definition">invweq</span></a> (<a class="idref" href="UniMath.Foundations.PartD.html#weqfunfromunit"><span class="id" title="definition">weqfunfromunit</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a>) <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#a"><span class="id" title="variable">a</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+TODO: I think there is a name in UniMath for the constant function at <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_isomorphism.html#folds_iso_def.from_folds_iso_to_iso.a"><span class="id" title="variable">a</span></a></span>,
+    what is it? 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Definition</span> <a name="global_element_HSET_paths_weq"><span class="id" title="definition">global_element_HSET_paths_weq</span></a> {<span class="id" title="var">A</span> : <a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a>} (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#y"><span class="id" title="variable">y</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#global_element_HSET"><span class="id" title="definition">global_element_HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#global_element_HSET"><span class="id" title="definition">global_element_HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#y"><span class="id" title="variable">y</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#weqonpaths"><span class="id" title="definition">weqonpaths</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Definition</span> <a name="global_element_HSET_comp"><span class="id" title="definition">global_element_HSET_comp</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a>} (<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>) (<span class="id" title="var">x</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#global_element_HSET"><span class="id" title="definition">global_element_HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#global_element_HSET"><span class="id" title="definition">global_element_HSET</span></a> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#x"><span class="id" title="variable">x</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">z</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">z</span>; <span class="id" title="tactic">reflexivity</span>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Definition</span> <a name="global_element_HSET_fun_weq"><span class="id" title="definition">global_element_HSET_fun_weq</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a>} (<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>) (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#y"><span class="id" title="variable">y</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#global_element_HSET"><span class="id" title="definition">global_element_HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#global_element_HSET"><span class="id" title="definition">global_element_HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">do</span> 2 <span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#global_element_HSET_comp"><span class="id" title="definition">global_element_HSET_comp</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#global_element_HSET_paths_weq"><span class="id" title="definition">global_element_HSET_paths_weq</span></a>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab818"></a><h2 class="section">Monomorphisms are exactly injective functions <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#MonosAreInjective_HSET"><span class="id" title="lemma">MonosAreInjective_HSET</span></a></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="MonosAreInjective_HSET"><span class="id" title="lemma">MonosAreInjective_HSET</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>} (<span class="id" title="var">f</span>: <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Monics.html#isMonic"><span class="id" title="definition">isMonic</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.PartB.html#isInjective"><span class="id" title="definition">isInjective</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#weqimplimpl"><span class="id" title="definition">weqimplimpl</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">isM</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#incl_injectivity"><span class="id" title="lemma">incl_injectivity</span></a>; <span class="id" title="tactic">intros</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#invproofirrelevance"><span class="id" title="lemma">invproofirrelevance</span></a>; <span class="id" title="tactic">intros</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>; [<span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#global_element_HSET_paths_weq"><span class="id" title="definition">global_element_HSET_paths_weq</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">isM</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">t</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">induction</span> <span class="id" title="var">t</span>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">a1</span> <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">!</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">a2</span>)).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">isI</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.Monics.html#isMonic"><span class="id" title="definition">isMonic</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ? ? ? <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#invweq"><span class="id" title="definition">invweq</span></a> (<a class="idref" href="UniMath.Foundations.PartB.html#Injectivity"><span class="id" title="definition">Injectivity</span></a> <span class="id" title="var">_</span> <span class="id" title="var">isI</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Monics.html#isapropisMonic"><span class="id" title="lemma">isapropisMonic</span></a>, <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#isaprop_isInjective"><span class="id" title="lemma">isaprop_isInjective</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab819"></a><h2 class="section">Epimorphisms are exactly surjective functions <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#EpisAreSurjective_HSET"><span class="id" title="lemma">EpisAreSurjective_HSET</span></a></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="EpisAreSurjective_HSET"><span class="id" title="lemma">EpisAreSurjective_HSET</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>} (<span class="id" title="var">f</span>: <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Epis.html#isEpi"><span class="id" title="definition">isEpi</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#issurjective"><span class="id" title="definition">issurjective</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#weqimplimpl"><span class="id" title="definition">weqimplimpl</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">epif</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#epiissurjectiontosets"><span class="id" title="lemma">epiissurjectiontosets</span></a>; [<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ? ? ? ?.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">epif</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">is_surj_f</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">C</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Get the point <span class="inlinecode"><a class="idref" href="UniMath.Combinatorics.Tests.html#Test_fin.Test_isfinite_isdeceq.x'"><span class="id" title="variable">x'</span></a></span> in the fiber above <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Inductives.Lists.html#AltList.constcoprod_functor.x"><span class="id" title="variable">x</span></a></span> 
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">is_surj_f</span> <span class="id" title="var">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Propositions.html#squash_to_prop"><span class="id" title="lemma">squash_to_prop</span></a> <span class="id" title="var">is_surj_f</span>); [<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x'</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Replace <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Inductives.Lists.html#AltList.constcoprod_functor.x"><span class="id" title="variable">x</span></a></span> with <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_isomorphism.html#folds_iso_def.from_iso_to_folds_iso.f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Combinatorics.Tests.html#Test_fin.Test_isfinite_isdeceq.x'"><span class="id" title="variable">x'</span></a></span> 
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">!</span></a><a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Foundations.PartA.html#hfiberpr2"><span class="id" title="definition">hfiberpr2</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">x'</span>) <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Foundations.PartA.html#hfiberpr2"><span class="id" title="definition">hfiberpr2</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">x'</span>)).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Epis.html#isapropisEpi"><span class="id" title="lemma">isapropisEpi</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Propositions.html#isapropissurjective"><span class="id" title="lemma">isapropissurjective</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab820"></a><h2 class="section">Equivalence between isomorphisms and weak equivalences of two <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a></span>s.</h2>
+
+<div class="paragraph"> </div>
+
+ Given an iso, we construct a weak equivalence.
+   This is basically unpacking and packing again. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="hset_iso_is_equiv"><span class="id" title="lemma">hset_iso_is_equiv</span></a> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso"><span class="id" title="definition">iso</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a>) : <a class="idref" href="UniMath.Foundations.PartA.html#isweq"><span class="id" title="definition">isweq</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#isweq_iso"><span class="id" title="lemma">isweq_iso</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#inv_from_iso"><span class="id" title="definition">inv_from_iso</span></a> <span class="id" title="var">f</span>)).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">T</span>:=<a class="idref" href="UniMath.CategoryTheory.Categories.html#iso_inv_after_iso"><span class="id" title="definition">iso_inv_after_iso</span></a> <span class="id" title="var">f</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">T'</span>:=<a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">T</span>). <span class="id" title="tactic">apply</span> <span class="id" title="var">T'</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#iso_after_iso_inv"><span class="id" title="definition">iso_after_iso_inv</span></a> <span class="id" title="var">f</span>)).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="hset_iso_equiv"><span class="id" title="lemma">hset_iso_equiv</span></a> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>) : <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso"><span class="id" title="definition">iso</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">f</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#hset_iso_is_equiv"><span class="id" title="lemma">hset_iso_is_equiv</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Given a weak equivalence, we construct an iso.
+    Again mostly unwrapping and packing.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="hset_equiv_is_iso"><span class="id" title="lemma">hset_equiv_is_iso</span></a> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">f</span> : <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Categories.html#is_iso"><span class="id" title="definition">is_iso</span></a> (<span class="id" title="var">C</span>:=<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#f"><span class="id" title="variable">f</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#is_iso_qinv"><span class="id" title="definition">is_iso_qinv</span></a> (<span class="id" title="var">C</span>:=<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>) <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Foundations.PartA.html#invmap"><span class="id" title="definition">invmap</span></a> <span class="id" title="var">f</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#compose"><span class="id" title="definition">compose</span></a>, <a class="idref" href="UniMath.CategoryTheory.Categories.html#identity"><span class="id" title="definition">identity</span></a>; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#homotinvweqweq"><span class="id" title="definition">homotinvweqweq</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#compose"><span class="id" title="definition">compose</span></a>, <a class="idref" href="UniMath.CategoryTheory.Categories.html#identity"><span class="id" title="definition">identity</span></a>; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#homotweqinvweq"><span class="id" title="definition">homotweqinvweq</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="hset_equiv_iso"><span class="id" title="lemma">hset_equiv_iso</span></a> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>) : <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso"><span class="id" title="definition">iso</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">f</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#hset_equiv_is_iso"><span class="id" title="lemma">hset_equiv_is_iso</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Both maps defined above are weak equivalences. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="hset_iso_equiv_is_equiv"><span class="id" title="lemma">hset_iso_equiv_is_equiv</span></a> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>) : <a class="idref" href="UniMath.Foundations.PartA.html#isweq"><span class="id" title="definition">isweq</span></a> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#hset_iso_equiv"><span class="id" title="lemma">hset_iso_equiv</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#isweq_iso"><span class="id" title="lemma">isweq_iso</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#hset_equiv_iso"><span class="id" title="lemma">hset_equiv_iso</span></a> <span class="id" title="var">A</span> <span class="id" title="var">B</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#eq_iso"><span class="id" title="lemma">eq_iso</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#isapropisweq"><span class="id" title="lemma">isapropisweq</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="hset_iso_equiv_weq"><span class="id" title="definition">hset_iso_equiv_weq</span></a> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>) : <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#iso"><span class="id" title="definition">iso</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">((</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">))</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#hset_iso_equiv"><span class="id" title="lemma">hset_iso_equiv</span></a> <span class="id" title="var">A</span> <span class="id" title="var">B</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#hset_iso_equiv_is_equiv"><span class="id" title="lemma">hset_iso_equiv_is_equiv</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="hset_equiv_iso_is_equiv"><span class="id" title="lemma">hset_equiv_iso_is_equiv</span></a> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>) : <a class="idref" href="UniMath.Foundations.PartA.html#isweq"><span class="id" title="definition">isweq</span></a> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#hset_equiv_iso"><span class="id" title="lemma">hset_equiv_iso</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#isweq_iso"><span class="id" title="lemma">isweq_iso</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#hset_iso_equiv"><span class="id" title="lemma">hset_iso_equiv</span></a> <span class="id" title="var">A</span> <span class="id" title="var">B</span>)).<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#isapropisweq"><span class="id" title="lemma">isapropisweq</span></a>. }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#eq_iso"><span class="id" title="lemma">eq_iso</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="hset_equiv_weq_iso"><span class="id" title="definition">hset_equiv_weq_iso</span></a> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso"><span class="id" title="definition">iso</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#B"><span class="id" title="variable">B</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#hset_equiv_iso"><span class="id" title="lemma">hset_equiv_iso</span></a> <span class="id" title="var">A</span> <span class="id" title="var">B</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.MonoEpiIso.html#hset_equiv_iso_is_equiv"><span class="id" title="lemma">hset_equiv_iso_is_equiv</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
