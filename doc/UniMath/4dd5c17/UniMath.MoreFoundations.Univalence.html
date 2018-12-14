@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.MoreFoundations.Univalence</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.MoreFoundations.Univalence</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab314"></a><h1 class="section">Additional results about univalence</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#"><span class="id" title="library">UniMath.Foundations.UnivalenceAxiom</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Funextsec and toforallpaths are mutually inverses 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="funextsec_toforallpaths"><span class="id" title="lemma">funextsec_toforallpaths</span></a> {<span class="id" title="var">T</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} {<span class="id" title="var">P</span> : <a class="idref" href="UniMath.MoreFoundations.Univalence.html#T"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} {<span class="id" title="var">f</span> <span class="id" title="var">g</span> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">t</span> : <a class="idref" href="UniMath.MoreFoundations.Univalence.html#T"><span class="id" title="variable">T</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#t"><span class="id" title="variable">t</span></a>} :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">h</span> : <a class="idref" href="UniMath.MoreFoundations.Univalence.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#g"><span class="id" title="variable">g</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a> <span class="id" title="var">_</span>  <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#h"><span class="id" title="variable">h</span></a>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#h"><span class="id" title="variable">h</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">h</span>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">!</span></a><a class="idref" href="UniMath.Foundations.PartA.html#homotinvweqweq0"><span class="id" title="definition">homotinvweqweq0</span></a> (<a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#weqtoforallpaths"><span class="id" title="definition">weqtoforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="var">h</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Funextsec and toforallpaths are mutually inverses 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="toforallpaths_funextsec"><span class="id" title="lemma">toforallpaths_funextsec</span></a> {<span class="id" title="var">T</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} {<span class="id" title="var">P</span> : <a class="idref" href="UniMath.MoreFoundations.Univalence.html#T"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} {<span class="id" title="var">f</span> <span class="id" title="var">g</span> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">t</span> : <a class="idref" href="UniMath.MoreFoundations.Univalence.html#T"><span class="id" title="variable">T</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#t"><span class="id" title="variable">t</span></a>} :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">h</span> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">t</span> : <a class="idref" href="UniMath.MoreFoundations.Univalence.html#T"><span class="id" title="variable">T</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#t"><span class="id" title="variable">t</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#t"><span class="id" title="variable">t</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span>  <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#h"><span class="id" title="variable">h</span></a>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.MoreFoundations.Univalence.html#h"><span class="id" title="variable">h</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">h</span>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#homotweqinvweq"><span class="id" title="definition">homotweqinvweq</span></a> (<a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#weqtoforallpaths"><span class="id" title="definition">weqtoforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="var">h</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
