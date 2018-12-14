@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.limits.graphs.initial</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.limits.graphs.initial</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+Definition of initial object as a colimit 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.PartD.html#"><span class="id" title="library">UniMath.Foundations.PartD</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Propositions.html#"><span class="id" title="library">UniMath.Foundations.Propositions</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Sets.html#"><span class="id" title="library">UniMath.Foundations.Sets</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.MoreFoundations.Tactics.html#"><span class="id" title="library">UniMath.MoreFoundations.Tactics</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.total2_paths.html#"><span class="id" title="library">UniMath.CategoryTheory.total2_paths</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.graphs.colimits</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.limits.initial.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.initial</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="def_initial"><span class="id" title="section">def_initial</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Context</span> {<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>}.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="empty_graph"><span class="id" title="definition">empty_graph</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#graph"><span class="id" title="definition">graph</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <a class="idref" href="UniMath.Foundations.Preamble.html#empty"><span class="id" title="inductive">empty</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#empty"><span class="id" title="inductive">empty</span></a>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="initDiagram"><span class="id" title="definition">initDiagram</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#diagram"><span class="id" title="definition">diagram</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#empty_graph"><span class="id" title="definition">empty_graph</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">∃</span> <a class="idref" href="UniMath.Foundations.PartA.html#fromempty"><span class="id" title="definition">fromempty</span></a>.<br/>
+<span class="id" title="tactic">intros</span> <span class="id" title="var">u</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">u</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="initCocone"><span class="id" title="definition">initCocone</span></a> (<span class="id" title="var">c</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>) : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#cocone"><span class="id" title="definition">cocone</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#initDiagram"><span class="id" title="definition">initDiagram</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#c"><span class="id" title="variable">c</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#mk_cocone"><span class="id" title="definition">mk_cocone</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">v</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">v</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="isInitial"><span class="id" title="definition">isInitial</span></a> (<span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#isColimCocone"><span class="id" title="definition">isColimCocone</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#initDiagram"><span class="id" title="definition">initDiagram</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#a"><span class="id" title="variable">a</span></a> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#initCocone"><span class="id" title="definition">initCocone</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#a"><span class="id" title="variable">a</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="mk_isInitial"><span class="id" title="definition">mk_isInitial</span></a> (<span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">H</span> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#iscontr"><span class="id" title="definition">iscontr</span></a> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#b"><span class="id" title="variable">b</span></a>)) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#isInitial"><span class="id" title="definition">isInitial</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#a"><span class="id" title="variable">a</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">intros</span> <span class="id" title="var">b</span> <span class="id" title="var">cb</span>.<br/>
+<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+- <span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<span class="id" title="var">H</span> <span class="id" title="var">b</span>)); <span class="id" title="tactic">intro</span> <span class="id" title="var">v</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">v</span>.<br/>
+- <span class="id" title="tactic">intro</span> <span class="id" title="var">t</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>; <span class="id" title="tactic">simpl</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">v</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">v</span>|].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<span class="id" title="var">H</span> <span class="id" title="var">b</span>)).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="Initial"><span class="id" title="definition">Initial</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> := <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#ColimCocone"><span class="id" title="definition">ColimCocone</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#initDiagram"><span class="id" title="definition">initDiagram</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="mk_Initial"><span class="id" title="definition">mk_Initial</span></a> (<span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">H</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#isInitial"><span class="id" title="definition">isInitial</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#a"><span class="id" title="variable">a</span></a>) : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">use</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#mk_ColimCocone"><span class="id" title="definition">mk_ColimCocone</span></a> <span class="id" title="var">_</span> <span class="id" title="var">a</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#initCocone"><span class="id" title="definition">initCocone</span></a> <span class="id" title="var">a</span>)).<br/>
+<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#mk_isInitial"><span class="id" title="definition">mk_isInitial</span></a>.<br/>
+<span class="id" title="tactic">intro</span> <span class="id" title="var">b</span>.<br/>
+<span class="id" title="tactic">set</span> (<span class="id" title="var">x</span> := <span class="id" title="var">H</span> <span class="id" title="var">b</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#initCocone"><span class="id" title="definition">initCocone</span></a> <span class="id" title="var">b</span>)).<br/>
+<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+- <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">x</span>).<br/>
+- <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#path_to_ctr"><span class="id" title="lemma">path_to_ctr</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">v</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">v</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="InitialObject"><span class="id" title="definition">InitialObject</span></a> (<span class="id" title="var">O</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>) : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a> := <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#colim"><span class="id" title="definition">colim</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O"><span class="id" title="variable">O</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="InitialArrow"><span class="id" title="definition">InitialArrow</span></a> (<span class="id" title="var">O</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>) (<span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>) : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O"><span class="id" title="variable">O</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#b"><span class="id" title="variable">b</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#colimArrow"><span class="id" title="definition">colimArrow</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#initCocone"><span class="id" title="definition">initCocone</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#b"><span class="id" title="variable">b</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="InitialArrowUnique"><span class="id" title="lemma">InitialArrowUnique</span></a> (<span class="id" title="var">I</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>) (<span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>)<br/>
+&nbsp;&nbsp;(<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#I"><span class="id" title="variable">I</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>) : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialArrow"><span class="id" title="definition">InitialArrow</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#I"><span class="id" title="variable">I</span></a> <span class="id" title="var">_</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#colimArrowUnique"><span class="id" title="lemma">colimArrowUnique</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">v</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">v</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="ArrowsFromInitial"><span class="id" title="lemma">ArrowsFromInitial</span></a> (<span class="id" title="var">I</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>) (<span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">f</span> <span class="id" title="var">g</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#I"><span class="id" title="variable">I</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>) : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#g"><span class="id" title="variable">g</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">eapply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathscomp0"><span class="id" title="definition">pathscomp0</span></a>.<br/>
+<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialArrowUnique"><span class="id" title="lemma">InitialArrowUnique</span></a>.<br/>
+<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathsinv0"><span class="id" title="definition">pathsinv0</span></a>, <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialArrowUnique"><span class="id" title="lemma">InitialArrowUnique</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="InitialEndo_is_identity"><span class="id" title="lemma">InitialEndo_is_identity</span></a> (<span class="id" title="var">O</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>) (<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O"><span class="id" title="variable">O</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O"><span class="id" title="variable">O</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Categories.html#identity"><span class="id" title="definition">identity</span></a> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O"><span class="id" title="variable">O</span></a>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#f"><span class="id" title="variable">f</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#colim_endo_is_identity"><span class="id" title="lemma">colim_endo_is_identity</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">u</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">u</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="isiso_from_Initial_to_Initial"><span class="id" title="lemma">isiso_from_Initial_to_Initial</span></a> (<span class="id" title="var">O</span> <span class="id" title="var">O'</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Categories.html#is_iso"><span class="id" title="definition">is_iso</span></a> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialArrow"><span class="id" title="definition">InitialArrow</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O"><span class="id" title="variable">O</span></a> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O'"><span class="id" title="variable">O'</span></a>)).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#is_iso_qinv"><span class="id" title="definition">is_iso_qinv</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialArrow"><span class="id" title="definition">InitialArrow</span></a> <span class="id" title="var">O'</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <span class="id" title="var">O</span>))).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathsinv0"><span class="id" title="definition">pathsinv0</span></a>, <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialEndo_is_identity"><span class="id" title="lemma">InitialEndo_is_identity</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="iso_Initials"><span class="id" title="definition">iso_Initials</span></a> (<span class="id" title="var">O</span> <span class="id" title="var">O'</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>) : <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso"><span class="id" title="definition">iso</span></a> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O"><span class="id" title="variable">O</span></a>) (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O'"><span class="id" title="variable">O'</span></a>) :=<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialArrow"><span class="id" title="definition">InitialArrow</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O"><span class="id" title="variable">O</span></a> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O'"><span class="id" title="variable">O'</span></a>)) (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#isiso_from_Initial_to_Initial"><span class="id" title="lemma">isiso_from_Initial_to_Initial</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O"><span class="id" title="variable">O</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#O'"><span class="id" title="variable">O'</span></a>) .<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="hasInitial"><span class="id" title="definition">hasInitial</span></a> := <a class="idref" href="UniMath.Foundations.Propositions.html#ishinh"><span class="id" title="definition">ishinh</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>.<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="isInitial_Initial"><span class="id" title="lemma">isInitial_Initial</span></a> (<span class="id" title="var">I</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#isInitial"><span class="id" title="definition">isInitial</span></a> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#I"><span class="id" title="variable">I</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#mk_isInitial"><span class="id" title="definition">mk_isInitial</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialArrow"><span class="id" title="definition">InitialArrow</span></a> <span class="id" title="var">I</span> <span class="id" title="var">b</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">t</span>. <span class="id" title="var">use</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialArrowUnique"><span class="id" title="lemma">InitialArrowUnique</span></a> <span class="id" title="var">I</span>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab875"></a><h2 class="section">Maps between initial as special colimit and direct definition</h2>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="equiv_isInitial1"><span class="id" title="lemma">equiv_isInitial1</span></a> (<span class="id" title="var">c</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.limits.initial.html#isInitial"><span class="id" title="definition">limits.initial.isInitial</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#isInitial"><span class="id" title="definition">isInitial</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#c"><span class="id" title="variable">c</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">X</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#mk_isInitial"><span class="id" title="definition">mk_isInitial</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">X</span> <span class="id" title="var">b</span>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="equiv_isInitial2"><span class="id" title="lemma">equiv_isInitial2</span></a> (<span class="id" title="var">c</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.limits.initial.html#isInitial"><span class="id" title="definition">limits.initial.isInitial</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="UniMath.Foundations.Init.html#0ba392b3d9c81bffdabf4c7314fc1ee7"><span class="id" title="notation">&lt;-</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#isInitial"><span class="id" title="definition">isInitial</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#c"><span class="id" title="variable">c</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">X</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">XI</span> := <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#mk_Initial"><span class="id" title="definition">mk_Initial</span></a> <span class="id" title="var">c</span> <span class="id" title="var">X</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialArrow"><span class="id" title="definition">InitialArrow</span></a> <span class="id" title="var">XI</span> <span class="id" title="var">b</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">t</span>. <span class="id" title="var">use</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialArrowUnique"><span class="id" title="lemma">InitialArrowUnique</span></a> <span class="id" title="var">XI</span> <span class="id" title="var">b</span>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="equiv_Initial1"><span class="id" title="definition">equiv_Initial1</span></a> (<span class="id" title="var">c</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.limits.initial.html#Initial"><span class="id" title="definition">limits.initial.Initial</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">I</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#mk_Initial"><span class="id" title="definition">mk_Initial</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <span class="id" title="var">I</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#equiv_isInitial1"><span class="id" title="lemma">equiv_isInitial1</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">I</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="equiv_Initial2"><span class="id" title="definition">equiv_Initial2</span></a> (<span class="id" title="var">c</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.limits.initial.html#Initial"><span class="id" title="definition">limits.initial.Initial</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.Foundations.Init.html#0ba392b3d9c81bffdabf4c7314fc1ee7"><span class="id" title="notation">&lt;-</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">I</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.initial.html#mk_Initial"><span class="id" title="definition">limits.initial.mk_Initial</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#InitialObject"><span class="id" title="definition">InitialObject</span></a> <span class="id" title="var">I</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#equiv_isInitial2"><span class="id" title="lemma">equiv_isInitial2</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#isInitial_Initial"><span class="id" title="lemma">isInitial_Initial</span></a> <span class="id" title="var">I</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#def_initial"><span class="id" title="section">def_initial</span></a>.<br/>
+
+<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a> : <span class="id" title="tactic">clear</span> <span class="id" title="var">implicits</span>.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#isInitial"><span class="id" title="definition">isInitial</span></a> : <span class="id" title="tactic">clear</span> <span class="id" title="var">implicits</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="Initial_from_Colims"><span class="id" title="lemma">Initial_from_Colims</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#Colims_of_shape"><span class="id" title="definition">Colims_of_shape</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#empty_graph"><span class="id" title="definition">empty_graph</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#C"><span class="id" title="variable">C</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#Initial"><span class="id" title="definition">Initial</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.initial.html#C"><span class="id" title="variable">C</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">now</span> <span class="id" title="tactic">intros</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

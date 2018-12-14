@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.MoreFoundations.AxiomOfChoice</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.MoreFoundations.AxiomOfChoice</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab305"></a><h1 class="section">Axiom of choice</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="UniMath.MoreFoundations.DecidablePropositions.html#"><span class="id" title="library">UniMath.MoreFoundations.DecidablePropositions</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab306"></a><h2 class="section">Preliminaries</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="pr1_issurjective"><span class="id" title="lemma">pr1_issurjective</span></a> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} {<span class="id" title="var">P</span> : <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">x</span> : <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#358589ff2ab1a22a86dd456baa1130df"><span class="id" title="notation">∥</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#358589ff2ab1a22a86dd456baa1130df"><span class="id" title="notation">∥</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#issurjective"><span class="id" title="definition">issurjective</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#X"><span class="id" title="variable">X</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">ne</span> <span class="id" title="var">x</span>. <span class="id" title="tactic">simple</span> <span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.Propositions.html#hinhuniv"><span class="id" title="definition">hinhuniv</span></a> <span class="id" title="var">_</span> (<span class="id" title="var">ne</span> <span class="id" title="var">x</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">p</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Propositions.html#hinhpr"><span class="id" title="definition">hinhpr</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">(</span></a><span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a><span class="id" title="var">p</span><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">),,</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a> <span class="id" title="var">_</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab307"></a><h2 class="section">Characterize equivalence relations on <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Preamble.html#bool"><span class="id" title="inductive">bool</span></a></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="eqrel_on_bool"><span class="id" title="definition">eqrel_on_bool</span></a> (<span class="id" title="var">P</span>:<a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a>) : <a class="idref" href="UniMath.Foundations.Sets.html#eqrel"><span class="id" title="definition">eqrel</span></a> <a class="idref" href="UniMath.Foundations.Sets.html#boolset"><span class="id" title="definition">boolset</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">ifb</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#bool_rect"><span class="id" title="definition">bool_rect</span></a> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">_</span>:<a class="idref" href="UniMath.Foundations.Preamble.html#bool"><span class="id" title="inductive">bool</span></a><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <span class="id" title="var">ifb</span> (<span class="id" title="var">ifb</span> <a class="idref" href="UniMath.Foundations.Propositions.html#htrue"><span class="id" title="definition">htrue</span></a> <span class="id" title="var">P</span> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#y"><span class="id" title="variable">y</span></a>) (<span class="id" title="var">ifb</span> <span class="id" title="var">P</span> <a class="idref" href="UniMath.Foundations.Propositions.html#htrue"><span class="id" title="definition">htrue</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#y"><span class="id" title="variable">y</span></a>) <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#x"><span class="id" title="variable">x</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">induction</span> <span class="id" title="var">z</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tt"><span class="id" title="constructor">tt</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">induction</span> <span class="id" title="var">y</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">exact</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">exact</span> <span class="id" title="var">a</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">induction</span> <span class="id" title="var">z</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">induction</span> <span class="id" title="var">y</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">exact</span> <span class="id" title="var">a</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">exact</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tt"><span class="id" title="constructor">tt</span></a>. }<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tt"><span class="id" title="constructor">tt</span></a>. }<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">a</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">y</span>; <span class="id" title="tactic">exact</span> <span class="id" title="var">a</span>. }<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="eqrel_on_bool_iff"><span class="id" title="lemma">eqrel_on_bool_iff</span></a> (<span class="id" title="var">P</span>:<a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a>) (<span class="id" title="var">E</span> := <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#eqrel_on_bool"><span class="id" title="definition">eqrel_on_bool</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#P"><span class="id" title="variable">P</span></a>) (<span class="id" title="var">f</span> := <a class="idref" href="UniMath.Foundations.Sets.html#setquotpr"><span class="id" title="lemma">setquotpr</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#E"><span class="id" title="variable">E</span></a>) : <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#P"><span class="id" title="variable">P</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">intro</span> <span class="id" title="var">q</span>. <span class="id" title="tactic">change</span> (<span class="id" title="var">E</span> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a>). <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#invmap"><span class="id" title="definition">invmap</span></a> (<a class="idref" href="UniMath.Foundations.Sets.html#weqpathsinsetquot"><span class="id" title="lemma">weqpathsinsetquot</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">change</span> (<span class="id" title="var">f</span> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <span class="id" title="var">f</span> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a>). <span class="id" title="tactic">exact</span> <span class="id" title="var">q</span>. }<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">intro</span> <span class="id" title="var">p</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#iscompsetquotpr"><span class="id" title="lemma">iscompsetquotpr</span></a>. <span class="id" title="tactic">exact</span> <span class="id" title="var">p</span>. }<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab308"></a><h2 class="section">Statements of Axiom of Choice</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">logic</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="tactic">set</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We write these axioms as types rather than as axioms, which would assert them to be true, to
+    force them to be mentioned as explicit hypotheses whenever they are used. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="AxiomOfChoice"><span class="id" title="definition">AxiomOfChoice</span></a> : <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a> := <a class="idref" href="UniMath.Foundations.Propositions.html#669c7d28e8f98524b0cbba08d17d0eec"><span class="id" title="notation">∀</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#669c7d28e8f98524b0cbba08d17d0eec"><span class="id" title="notation">(</span></a><span class="id" title="var">X</span>:<a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a><a class="idref" href="UniMath.Foundations.Propositions.html#669c7d28e8f98524b0cbba08d17d0eec"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.Sets.html#ischoicebase"><span class="id" title="definition">ischoicebase</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#X"><span class="id" title="variable">X</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="AxiomOfChoice_surj"><span class="id" title="definition">AxiomOfChoice_surj</span></a> : <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Propositions.html#669c7d28e8f98524b0cbba08d17d0eec"><span class="id" title="notation">∀</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#669c7d28e8f98524b0cbba08d17d0eec"><span class="id" title="notation">(</span></a><span class="id" title="var">X</span>:<a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a>) (<span class="id" title="var">Y</span>:<a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>) (<span class="id" title="var">f</span>:<a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#Y"><span class="id" title="variable">Y</span></a><a class="idref" href="UniMath.Foundations.Init.html#513d6cdffacb0252f6c48bf325cd5180"><span class="id" title="notation">→</span></a><a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="UniMath.Foundations.Propositions.html#669c7d28e8f98524b0cbba08d17d0eec"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#issurjective"><span class="id" title="definition">issurjective</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.MoreFoundations.Notations.html#cb16c6ec4055f075ffee7d0de73067b8"><span class="id" title="notation">⇒</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#ad7a1d6b8b93b9a73a2783f3979de807"><span class="id" title="notation">∃</span></a> <span class="id" title="var">g</span><a class="idref" href="UniMath.Foundations.Propositions.html#ad7a1d6b8b93b9a73a2783f3979de807"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#669c7d28e8f98524b0cbba08d17d0eec"><span class="id" title="notation">∀</span></a> <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Propositions.html#669c7d28e8f98524b0cbba08d17d0eec"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#f"><span class="id" title="variable">f</span></a> (<a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#x"><span class="id" title="variable">x</span></a>) <a class="idref" href="UniMath.Foundations.Sets.html#90b1ceca2b977e8b8652280e47642b9b"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#x"><span class="id" title="variable">x</span></a>.<br/>
+</div>
+
+<div class="doc">
+Notice that the equation above is a proposition only because X is a set, which is not required
+    in the previous formulation.  The notation for "=" currently in effect uses <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Sets.html#eqset"><span class="id" title="definition">eqset</span></a></span> instead of
+    <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Preamble.html#paths"><span class="id" title="inductive">paths</span></a></span>.  
+<div class="paragraph"> </div>
+
+<a name="lab309"></a><h2 class="section">Implications between forms of the Axiom of Choice</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="AC_impl2"><span class="id" title="lemma">AC_impl2</span></a> : <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#AxiomOfChoice"><span class="id" title="definition">AxiomOfChoice</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#AxiomOfChoice_surj"><span class="id" title="definition">AxiomOfChoice_surj</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">AC</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">f</span> <span class="id" title="var">surj</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> (<a class="idref" href="UniMath.Foundations.Propositions.html#squash_to_prop"><span class="id" title="lemma">squash_to_prop</span></a> (<span class="id" title="var">AC</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">surj</span>) (<a class="idref" href="UniMath.Foundations.Propositions.html#propproperty"><span class="id" title="definition">propproperty</span></a> <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">s</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Propositions.html#hinhpr"><span class="id" title="definition">hinhpr</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">y</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#hfiberpr1"><span class="id" title="definition">hfiberpr1</span></a> <span class="id" title="var">f</span> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#y"><span class="id" title="variable">y</span></a> (<span class="id" title="var">s</span> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#y"><span class="id" title="variable">y</span></a>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">y</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#hfiberpr2"><span class="id" title="definition">hfiberpr2</span></a> <span class="id" title="var">f</span> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#y"><span class="id" title="variable">y</span></a> (<span class="id" title="var">s</span> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#y"><span class="id" title="variable">y</span></a>)).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">AC</span> <span class="id" title="var">X</span> <span class="id" title="var">P</span> <span class="id" title="var">ne</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> (<a class="idref" href="UniMath.Foundations.Propositions.html#hinhuniv"><span class="id" title="definition">hinhuniv</span></a> <span class="id" title="var">_</span> (<span class="id" title="var">AC</span> <span class="id" title="var">X</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#pr1_issurjective"><span class="id" title="lemma">pr1_issurjective</span></a> <span class="id" title="var">ne</span>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">sec</span>. <span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Propositions.html#hinhpr"><span class="id" title="definition">hinhpr</span></a>. <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">sec</span> <span class="id" title="var">x</span>). <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">sec</span> <span class="id" title="var">x</span>)).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab310"></a><h2 class="section">The Axiom of Choice implies a type receives a surjective map from a set</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="pi0"><span class="id" title="definition">pi0</span></a> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>) : <a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a> := <a class="idref" href="UniMath.Foundations.Sets.html#setquotinset"><span class="id" title="definition">setquotinset</span></a> (<a class="idref" href="UniMath.Foundations.Sets.html#pathseqrel"><span class="id" title="definition">pathseqrel</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#X"><span class="id" title="variable">X</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="SetCovering"><span class="id" title="lemma">SetCovering</span></a> (<span class="id" title="var">X</span>:<span class="id" title="keyword">Type</span>) : <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#AxiomOfChoice"><span class="id" title="definition">AxiomOfChoice</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#ad7a1d6b8b93b9a73a2783f3979de807"><span class="id" title="notation">∃</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#ad7a1d6b8b93b9a73a2783f3979de807"><span class="id" title="notation">(</span></a><span class="id" title="var">S</span>:<a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a>) (<span class="id" title="var">f</span>:<a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#S"><span class="id" title="variable">S</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="UniMath.Foundations.Propositions.html#ad7a1d6b8b93b9a73a2783f3979de807"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#issurjective"><span class="id" title="definition">issurjective</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#f"><span class="id" title="variable">f</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+We use the axiom of choice to find a splitting f of the projection map g from X
+     onto its set <span class="inlinecode"><a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#pi0"><span class="id" title="definition">pi0</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.SubstitutionSystems.SignatureCategory.html#SignatureCategory.Signature_category_mor.X"><span class="id" title="variable">X</span></a></span> of connected components.  Since the image of f contains one
+     point in every component of X, f is surjective.
+   
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">ac</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">ac'</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#AC_impl2"><span class="id" title="lemma">AC_impl2</span></a> <span class="id" title="var">ac</span>); <span class="id" title="tactic">clear</span> <span class="id" title="var">ac</span>; <span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#AxiomOfChoice_surj"><span class="id" title="definition">AxiomOfChoice_surj</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">ac'</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">S</span> := <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#pi0"><span class="id" title="definition">pi0</span></a> <span class="id" title="var">X</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">g</span> := <a class="idref" href="UniMath.Foundations.Sets.html#pi0pr"><span class="id" title="definition">pi0pr</span></a> <span class="id" title="var">X</span> : <span class="id" title="var">X</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <span class="id" title="var">S</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">f</span> := <span class="id" title="var">ac'</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">g</span> (<a class="idref" href="UniMath.Foundations.Sets.html#issurjsetquotpr"><span class="id" title="lemma">issurjsetquotpr</span></a> <span class="id" title="var">_</span>)); <span class="id" title="tactic">clear</span> <span class="id" title="var">ac'</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Propositions.html#squash_to_prop"><span class="id" title="lemma">squash_to_prop</span></a> <span class="id" title="var">f</span>).<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Propositions.html#propproperty"><span class="id" title="definition">propproperty</span></a>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">clear</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">intros</span> [<span class="id" title="var">f</span> <span class="id" title="var">eqn</span>].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Propositions.html#hinhpr"><span class="id" title="definition">hinhpr</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">S</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">f</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> (@<a class="idref" href="UniMath.Foundations.Propositions.html#squash_to_prop"><span class="id" title="lemma">squash_to_prop</span></a> (<span class="id" title="var">f</span> (<span class="id" title="var">g</span> <span class="id" title="var">x</span>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <span class="id" title="var">x</span>)%<span class="id" title="keyword">type</span>).<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#invmap"><span class="id" title="definition">invmap</span></a> (<a class="idref" href="UniMath.Foundations.Sets.html#weqpathsinsetquot"><span class="id" title="lemma">weqpathsinsetquot</span></a> (<a class="idref" href="UniMath.Foundations.Sets.html#pathseqrel"><span class="id" title="definition">pathseqrel</span></a> <span class="id" title="var">X</span>) <span class="id" title="var">_</span> <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">change</span> (<span class="id" title="var">g</span> (<span class="id" title="var">f</span> (<span class="id" title="var">g</span> <span class="id" title="var">x</span>)) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <span class="id" title="var">g</span> <span class="id" title="var">x</span>)%<span class="id" title="keyword">type</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<span class="id" title="var">eqn</span> (<span class="id" title="var">g</span> <span class="id" title="var">x</span>)). }<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Propositions.html#propproperty"><span class="id" title="definition">propproperty</span></a>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">e</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Propositions.html#hinhpr"><span class="id" title="definition">hinhpr</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<span class="id" title="var">g</span> <span class="id" title="var">x</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <span class="id" title="var">e</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab311"></a><h2 class="section">The Axiom of Choice implies the Law of the Excluded Middle</h2>
+
+<div class="paragraph"> </div>
+
+ This result is covered in the HoTT book, is due to Radu Diaconescu, "Axiom of choice and
+    complementation", Proceedings of the American Mathematical Society, 51 (1975) 176–178, and was
+    first mentioned on page 4 in F. W. Lawvere, "Toposes, algebraic geometry and logic (Conf.,
+    Dalhousie Univ., Halifax, N.S., 1971)", pp. 1–12, Lecture Notes in Math., Vol. 274, Springer,
+    Berlin, 1972.
+
+<div class="paragraph"> </div>
+
+    The idea is to define an equivalence relation E on bool by setting <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_pre_2_cat.html#E"><span class="id" title="definition">E</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a></span> <span class="inlinecode">:=</span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.FullSub.html#FullSubBicat.P"><span class="id" title="variable">P</span></a></span>, to use
+    AC to split the surjection f from bool to its quotient Y by E with a function g, and to observe
+    bool has decidable equality, and thus so does Y, because then Y is a retract of bool, to use
+    that to decide whether <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_isomorphism.html#folds_iso_def.from_iso_to_folds_iso.f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a></span> <span class="inlinecode">=</span> <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_isomorphism.html#folds_iso_def.from_iso_to_folds_iso.f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a></span>, and thus to decide P. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="AC_to_LEM"><span class="id" title="lemma">AC_to_LEM</span></a> : <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#AxiomOfChoice"><span class="id" title="definition">AxiomOfChoice</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.MoreFoundations.DecidablePropositions.html#LEM"><span class="id" title="definition">LEM</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">AC</span> <span class="id" title="var">P</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">f</span> := <a class="idref" href="UniMath.Foundations.Sets.html#setquotpr"><span class="id" title="lemma">setquotpr</span></a> <span class="id" title="var">_</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Sets.html#setquotinset"><span class="id" title="definition">setquotinset</span></a> (<a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#eqrel_on_bool"><span class="id" title="definition">eqrel_on_bool</span></a> <span class="id" title="var">P</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">q</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#AC_impl2"><span class="id" title="lemma">AC_impl2</span></a> <span class="id" title="var">AC</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">f</span> (<a class="idref" href="UniMath.Foundations.Sets.html#issurjsetquotpr"><span class="id" title="lemma">issurjsetquotpr</span></a> <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Propositions.html#squash_to_prop"><span class="id" title="lemma">squash_to_prop</span></a> <span class="id" title="var">q</span>).<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartC.html#isapropdec"><span class="id" title="lemma">isapropdec</span></a>, <a class="idref" href="UniMath.Foundations.Propositions.html#propproperty"><span class="id" title="definition">propproperty</span></a>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">sec</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">sec</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">g</span> <span class="id" title="var">h</span>].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.MoreFoundations.DecidablePropositions.html#logeq_dec"><span class="id" title="lemma">logeq_dec</span></a> (<a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#eqrel_on_bool_iff"><span class="id" title="lemma">eqrel_on_bool_iff</span></a> <span class="id" title="var">P</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.MoreFoundations.DecidablePropositions.html#retract_dec"><span class="id" title="lemma">retract_dec</span></a> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">h</span> <a class="idref" href="UniMath.Foundations.PartB.html#isdeceqbool"><span class="id" title="lemma">isdeceqbool</span></a>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A weaker Axiom of Choice 
+<div class="paragraph"> </div>
+
+ Having proved above that the Axiom of Choice implies the Law of the Excluded Middle, we would
+    like to formulate a weaker axiom of choice that would be usable in formalization, but without
+    implying the Law of the Excluded Middle, thus making it a more acceptable omniscience principle.
+    Our idea here is to add the hypothesis that the base set have decidable equality.  Classically,
+    there is no difference between the two axioms.  Recall from <span class="inlinecode"><a class="idref" href="UniMath.Foundations.PartB.html#isasetifdeceq"><span class="id" title="lemma">isasetifdeceq</span></a></span> that a type with
+    decidable equality is a set, so we don't include being a set explicitly in the statement of the
+    axiom. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="AxiomOfDecidableChoice"><span class="id" title="definition">AxiomOfDecidableChoice</span></a> : <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a> := <a class="idref" href="UniMath.Foundations.Propositions.html#669c7d28e8f98524b0cbba08d17d0eec"><span class="id" title="notation">∀</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#669c7d28e8f98524b0cbba08d17d0eec"><span class="id" title="notation">(</span></a><span class="id" title="var">X</span>:<a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a><a class="idref" href="UniMath.Foundations.Propositions.html#669c7d28e8f98524b0cbba08d17d0eec"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.PartB.html#isdeceq"><span class="id" title="definition">isdeceq</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.MoreFoundations.Notations.html#cb16c6ec4055f075ffee7d0de73067b8"><span class="id" title="notation">⇒</span></a> <a class="idref" href="UniMath.Foundations.Sets.html#ischoicebase"><span class="id" title="definition">ischoicebase</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#X"><span class="id" title="variable">X</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="AC_iff_ADC_and_LEM"><span class="id" title="lemma">AC_iff_ADC_and_LEM</span></a> : <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#AxiomOfChoice"><span class="id" title="definition">AxiomOfChoice</span></a> <a class="idref" href="UniMath.MoreFoundations.Notations.html#291c6bc03a21a2b60682246534621e8b"><span class="id" title="notation">⇔</span></a> <a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#AxiomOfDecidableChoice"><span class="id" title="definition">AxiomOfDecidableChoice</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#71b04d61d6d756540f3712ec7919f1f1"><span class="id" title="notation">∧</span></a> <a class="idref" href="UniMath.MoreFoundations.DecidablePropositions.html#LEM"><span class="id" title="definition">LEM</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">AC</span>. <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">i</span>. <span class="id" title="tactic">exact</span> (<span class="id" title="var">AC</span> (<a class="idref" href="UniMath.Foundations.Sets.html#hSetpair"><span class="id" title="definition">hSetpair</span></a> <span class="id" title="var">X</span> (<a class="idref" href="UniMath.Foundations.PartB.html#isasetifdeceq"><span class="id" title="lemma">isasetifdeceq</span></a> <span class="id" title="var">X</span> <span class="id" title="var">i</span>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.MoreFoundations.AxiomOfChoice.html#AC_to_LEM"><span class="id" title="lemma">AC_to_LEM</span></a> <span class="id" title="var">AC</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> [<span class="id" title="var">adc</span> <span class="id" title="var">lem</span>] <span class="id" title="var">X</span>. <span class="id" title="tactic">refine</span> (<span class="id" title="var">adc</span> <span class="id" title="var">X</span> <span class="id" title="var">_</span>). <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>. <span class="id" title="tactic">exact</span> (<span class="id" title="var">lem</span> (<span class="id" title="var">x</span> <a class="idref" href="UniMath.Foundations.Sets.html#90b1ceca2b977e8b8652280e47642b9b"><span class="id" title="notation">=</span></a> <span class="id" title="var">y</span>)).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

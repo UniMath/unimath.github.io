@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.SubstitutionSystems.Notation</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.SubstitutionSystems.Notation</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+**********************************************************
+
+<div class="paragraph"> </div>
+
+Benedikt Ahrens, Ralph Matthes
+
+<div class="paragraph"> </div>
+
+SubstitutionSystems
+
+<div class="paragraph"> </div>
+
+2015
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+ **********************************************************
+
+<div class="paragraph"> </div>
+
+Contents :
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li>    Definition of heterogeneous substitution systems
+
+</li>
+<li>    Various lemmas about the substitution ("bracket") operation
+
+</li>
+<li>    Definition of precategory of substitution systems
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.PartD.html#"><span class="id" title="library">UniMath.Foundations.PartD</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#"><span class="id" title="library">UniMath.CategoryTheory.functor_categories</span></a>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.whiskering.html#"><span class="id" title="library">UniMath.CategoryTheory.whiskering</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#"><span class="id" title="library">UniMath.CategoryTheory.FunctorAlgebras</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#"><span class="id" title="library">UniMath.CategoryTheory.PointedFunctors</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.PrecategoryBinProduct.html#"><span class="id" title="library">UniMath.CategoryTheory.PrecategoryBinProduct</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.HorizontalComposition.html#"><span class="id" title="library">UniMath.CategoryTheory.HorizontalComposition</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctorsComposition.html#"><span class="id" title="library">UniMath.CategoryTheory.PointedFunctorsComposition</span></a>.<br/>
+
+<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_composite"><span class="id" title="definition">functor_composite</span></a> {<span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>} <span class="id" title="var">_</span> <span class="id" title="var">_</span> .<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_comp"><span class="id" title="definition">nat_trans_comp</span></a> {<span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>} <span class="id" title="var">_</span> <span class="id" title="var">_</span> .<br/>
+
+<br/>
+<span class="id" title="keyword">Delimit</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">subsys</span> <span class="id" title="keyword">with</span> <span class="id" title="var">subsys</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="c673f30d63f1d1149a119f8d13a0cd8e"><span class="id" title="notation">&quot;</span></a>G • F" := (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_composite"><span class="id" title="definition">functor_composite</span></a> <span class="id" title="var">F</span> <span class="id" title="var">G</span> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#ab55e0b1c6ecec43e4d2a6539a476a92"><span class="id" title="notation">[</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#ab55e0b1c6ecec43e4d2a6539a476a92"><span class="id" title="notation">,</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#ab55e0b1c6ecec43e4d2a6539a476a92"><span class="id" title="notation">,</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#ab55e0b1c6ecec43e4d2a6539a476a92"><span class="id" title="notation">]</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 35) : <span class="id" title="var">subsys</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="db4455a162bc4fe9d2350cace9895bc2"><span class="id" title="notation">&quot;</span></a>α ∙∙ β" := (<a class="idref" href="UniMath.CategoryTheory.HorizontalComposition.html#horcomp"><span class="id" title="definition">horcomp</span></a> <span class="id" title="var">β</span> <span class="id" title="var">α</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 20) : <span class="id" title="var">subsys</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="37901a0d63380bfbfe88509a41ba8632"><span class="id" title="notation">&quot;</span></a>α 'ø' Z" := (<a class="idref" href="UniMath.CategoryTheory.whiskering.html#pre_whisker"><span class="id" title="definition">pre_whisker</span></a> <span class="id" title="var">Z</span> <span class="id" title="var">α</span>)  (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 25) : <span class="id" title="var">subsys</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="7377d7b4174fe2dd31a322b73447f62e"><span class="id" title="notation">&quot;</span></a>Z ∘ α" := (<a class="idref" href="UniMath.CategoryTheory.whiskering.html#post_whisker"><span class="id" title="definition">post_whisker</span></a> <span class="id" title="var">α</span> <span class="id" title="var">Z</span>) : <span class="id" title="var">subsys</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="b2e69e10531b5b2061220943386bf6cf"><span class="id" title="notation">&quot;</span></a>` T" := (<a class="idref" href="UniMath.CategoryTheory.FunctorAlgebras.html#alg_carrier"><span class="id" title="definition">alg_carrier</span></a> <span class="id" title="var">_</span> <span class="id" title="var">T</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 3, <span class="id" title="var">format</span> "` T") : <span class="id" title="var">subsys</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="338fee0f22ec67b9646471897b47c670"><span class="id" title="notation">&quot;</span></a>α •• Z" :=  (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#f9d39e9abcf2172e261db5a53b8f1205"><span class="id" title="notation">#</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#f9d39e9abcf2172e261db5a53b8f1205"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.whiskering.html#pre_composition_functor_data"><span class="id" title="definition">pre_composition_functor_data</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">Z</span><a class="idref" href="UniMath.CategoryTheory.functor_categories.html#f9d39e9abcf2172e261db5a53b8f1205"><span class="id" title="notation">)</span></a> <span class="id" title="var">α</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 25) : <span class="id" title="var">subsys</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="15f136183d81b9a50e44d95dc519a221"><span class="id" title="notation">&quot;</span></a>A ⊗ B" := (<a class="idref" href="UniMath.CategoryTheory.PrecategoryBinProduct.html#precatbinprodpair"><span class="id" title="definition">precatbinprodpair</span></a> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) : <span class="id" title="var">subsys</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="61b3e6abdcb6669859c7499e55a02ac6"><span class="id" title="notation">&quot;</span></a>A 'XX' B" := (<a class="idref" href="UniMath.CategoryTheory.PrecategoryBinProduct.html#precategory_binproduct"><span class="id" title="definition">precategory_binproduct</span></a> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 2) : <span class="id" title="var">subsys</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="d68418d464ac400d76574f5ae2258a36"><span class="id" title="notation">&quot;</span></a>'ℓ'" := (<a class="idref" href="UniMath.CategoryTheory.whiskering.html#pre_composition_functor"><span class="id" title="definition">pre_composition_functor</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> ) : <span class="id" title="var">subsys</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="2247cc7cd7dac152f908891e40346055"><span class="id" title="notation">&quot;</span></a>Z 'p•' Z'" := (<a class="idref" href="UniMath.CategoryTheory.PointedFunctorsComposition.html#ptd_composite"><span class="id" title="definition">ptd_composite</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">Z</span> <span class="id" title="var">Z'</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 25) : <span class="id" title="var">subsys</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="570c3086f6aebab709661a8f92f0ccf4"><span class="id" title="notation">&quot;</span></a>'U'" := (<a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#functor_ptd_forget"><span class="id" title="definition">functor_ptd_forget</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> ) : <span class="id" title="var">subsys</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

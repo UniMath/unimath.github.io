@@ -1,0 +1,550 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.Algebra.Matrix</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.Algebra.Matrix</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab585"></a><h1 class="section">Matrices</h1>
+
+
+<div class="paragraph"> </div>
+
+Operations on vectors and matrices.
+
+<div class="paragraph"> </div>
+
+Author: Langston Barrett (@siddharthist) (March 2018)
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.PartA.html#"><span class="id" title="library">UniMath.Foundations.PartA</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.MoreFoundations.PartA.html#"><span class="id" title="library">UniMath.MoreFoundations.PartA</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#"><span class="id" title="library">UniMath.Combinatorics.FiniteSequences</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#"><span class="id" title="library">UniMath.Algebra.BinaryOperations</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Algebra.IteratedBinaryOperations.html#"><span class="id" title="library">UniMath.Algebra.IteratedBinaryOperations</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Algebra.RigsAndRings.html#"><span class="id" title="library">UniMath.Algebra.RigsAndRings</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab586"></a><h2 class="section">Contents</h2>
+
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Vectors
+<ul class="doclist">
+<li> Standard conditions on one binary operation
+
+</li>
+<li> Standard conditions on a pair of binary operations
+
+</li>
+<li> Structures
+
+</li>
+</ul>
+
+</li>
+<li> Matrices
+<ul class="doclist">
+<li> Standard conditions on one binary operation
+
+</li>
+<li> Structures
+
+</li>
+<li> Matrix rig
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a name="lab587"></a><h2 class="section">Vectors</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="pointwise"><span class="id" title="definition">pointwise</span></a> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} (<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>) (<span class="id" title="var">op</span> : <a class="idref" href="UniMath.Foundations.PartA.html#binop"><span class="id" title="definition">binop</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#X"><span class="id" title="variable">X</span></a>) : <a class="idref" href="UniMath.Foundations.PartA.html#binop"><span class="id" title="definition">binop</span></a> (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Vector"><span class="id" title="definition">Vector</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">v1</span> <span class="id" title="var">v2</span> <span class="id" title="var">i</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#op"><span class="id" title="variable">op</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#v1"><span class="id" title="variable">v1</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#i"><span class="id" title="variable">i</span></a>) (<a class="idref" href="UniMath.Algebra.Matrix.html#v2"><span class="id" title="variable">v2</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#i"><span class="id" title="variable">i</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab588"></a><h3 class="section">Standard conditions on one binary operation</h3>
+
+<div class="paragraph"> </div>
+
+ Most features of binary operations (associativity, unity, etc) carry over to
+    pointwise operations. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Section</span> <a name="OneOp"><span class="id" title="section">OneOp</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} {<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} {<span class="id" title="var">op</span> : <a class="idref" href="UniMath.Foundations.PartA.html#binop"><span class="id" title="definition">binop</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#X"><span class="id" title="variable">X</span></a>}.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_assoc"><span class="id" title="definition">pointwise_assoc</span></a> (<span class="id" title="var">assocax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isassoc"><span class="id" title="definition">isassoc</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a>) : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isassoc"><span class="id" title="definition">isassoc</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ? ? ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">assocax</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_lunit"><span class="id" title="definition">pointwise_lunit</span></a> (<span class="id" title="var">lun</span> : <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.X"><span class="id" title="variable">X</span></a>) (<span class="id" title="var">lunax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#islunit"><span class="id" title="definition">islunit</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#lun"><span class="id" title="variable">lun</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#islunit"><span class="id" title="definition">islunit</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a>) (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_vec"><span class="id" title="definition">const_vec</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#lun"><span class="id" title="variable">lun</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">lunax</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_runit"><span class="id" title="definition">pointwise_runit</span></a> (<span class="id" title="var">run</span> : <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.X"><span class="id" title="variable">X</span></a>) (<span class="id" title="var">runax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isrunit"><span class="id" title="definition">isrunit</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#run"><span class="id" title="variable">run</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#isrunit"><span class="id" title="definition">isrunit</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a>) (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_vec"><span class="id" title="definition">const_vec</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#run"><span class="id" title="variable">run</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">runax</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_unit"><span class="id" title="definition">pointwise_unit</span></a> (<span class="id" title="var">un</span> : <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.X"><span class="id" title="variable">X</span></a>) (<span class="id" title="var">unax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isunit"><span class="id" title="definition">isunit</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#un"><span class="id" title="variable">un</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#isunit"><span class="id" title="definition">isunit</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a>) (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_vec"><span class="id" title="definition">const_vec</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#un"><span class="id" title="variable">un</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isunitpair"><span class="id" title="definition">isunitpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_lunit"><span class="id" title="definition">pointwise_lunit</span></a>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">unax</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_runit"><span class="id" title="definition">pointwise_runit</span></a>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">unax</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_comm"><span class="id" title="definition">pointwise_comm</span></a> (<span class="id" title="var">commax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#iscomm"><span class="id" title="definition">iscomm</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a>) : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#iscomm"><span class="id" title="definition">iscomm</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ? ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">commax</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_monoidop"><span class="id" title="definition">pointwise_monoidop</span></a> (<span class="id" title="var">monoidax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#ismonoidop"><span class="id" title="definition">ismonoidop</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#ismonoidop"><span class="id" title="definition">ismonoidop</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#mk_ismonoidop"><span class="id" title="definition">mk_ismonoidop</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_assoc"><span class="id" title="definition">pointwise_assoc</span></a>, <a class="idref" href="UniMath.Algebra.BinaryOperations.html#assocax_is"><span class="id" title="definition">assocax_is</span></a>; <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isunitalpair"><span class="id" title="definition">isunitalpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_vec"><span class="id" title="definition">const_vec</span></a> (<a class="idref" href="UniMath.Algebra.BinaryOperations.html#unel_is"><span class="id" title="definition">unel_is</span></a> <span class="id" title="var">monoidax</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_unit"><span class="id" title="definition">pointwise_unit</span></a>, <a class="idref" href="UniMath.Algebra.BinaryOperations.html#unax_is"><span class="id" title="definition">unax_is</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_abmonoidop"><span class="id" title="definition">pointwise_abmonoidop</span></a> (<span class="id" title="var">abmonoidax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isabmonoidop"><span class="id" title="definition">isabmonoidop</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#isabmonoidop"><span class="id" title="definition">isabmonoidop</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp.op"><span class="id" title="variable">op</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#mk_isabmonoidop"><span class="id" title="definition">mk_isabmonoidop</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_monoidop"><span class="id" title="definition">pointwise_monoidop</span></a>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Algebra.BinaryOperations.html#pr1isabmonoidop"><span class="id" title="definition">pr1isabmonoidop</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">abmonoidax</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_comm"><span class="id" title="definition">pointwise_comm</span></a>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">abmonoidax</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOp"><span class="id" title="section">OneOp</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab589"></a><h3 class="section">Standard conditions on a pair of binary operations</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="TwoOps"><span class="id" title="section">TwoOps</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} {<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} {<span class="id" title="var">op</span> : <a class="idref" href="UniMath.Foundations.PartA.html#binop"><span class="id" title="definition">binop</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#X"><span class="id" title="variable">X</span></a>} {<span class="id" title="var">op'</span> : <a class="idref" href="UniMath.Foundations.PartA.html#binop"><span class="id" title="definition">binop</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#X"><span class="id" title="variable">X</span></a>}.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_ldistr"><span class="id" title="definition">pointwise_ldistr</span></a> (<span class="id" title="var">isldistrax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isldistr"><span class="id" title="definition">isldistr</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op"><span class="id" title="variable">op</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op'"><span class="id" title="variable">op'</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#isldistr"><span class="id" title="definition">isldistr</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op"><span class="id" title="variable">op</span></a>) (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op'"><span class="id" title="variable">op'</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ? ? ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">isldistrax</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_rdistr"><span class="id" title="definition">pointwise_rdistr</span></a> (<span class="id" title="var">isrdistrax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isrdistr"><span class="id" title="definition">isrdistr</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op"><span class="id" title="variable">op</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op'"><span class="id" title="variable">op'</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#isrdistr"><span class="id" title="definition">isrdistr</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op"><span class="id" title="variable">op</span></a>) (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op'"><span class="id" title="variable">op'</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ? ? ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">isrdistrax</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_distr"><span class="id" title="definition">pointwise_distr</span></a> (<span class="id" title="var">isdistrax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isdistr"><span class="id" title="definition">isdistr</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op"><span class="id" title="variable">op</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op'"><span class="id" title="variable">op'</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#isdistr"><span class="id" title="definition">isdistr</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op"><span class="id" title="variable">op</span></a>) (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps.op'"><span class="id" title="variable">op'</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.PartA.html#dirprodpair"><span class="id" title="definition">dirprodpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_ldistr"><span class="id" title="definition">pointwise_ldistr</span></a>; <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#dirprod_pr1"><span class="id" title="definition">dirprod_pr1</span></a> <span class="id" title="var">isdistrax</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_rdistr"><span class="id" title="definition">pointwise_rdistr</span></a>; <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#dirprod_pr2"><span class="id" title="definition">dirprod_pr2</span></a> <span class="id" title="var">isdistrax</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.Algebra.Matrix.html#TwoOps"><span class="id" title="section">TwoOps</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab590"></a><h3 class="section">Structures</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="Structures"><span class="id" title="section">Structures</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_hSet"><span class="id" title="definition">pointwise_hSet</span></a> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a>) (<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Sets.html#hSetpair"><span class="id" title="definition">hSetpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Vector"><span class="id" title="definition">Vector</span></a> <span class="id" title="var">X</span> <span class="id" title="var">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">change</span> <a class="idref" href="UniMath.Foundations.PartB.html#isaset"><span class="id" title="definition">isaset</span></a> <span class="id" title="keyword">with</span> (<a class="idref" href="UniMath.Foundations.PartB.html#isofhlevel"><span class="id" title="definition">isofhlevel</span></a> 2).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#vector_hlevel"><span class="id" title="lemma">vector_hlevel</span></a>, <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_setwithbinop"><span class="id" title="definition">pointwise_setwithbinop</span></a> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#setwithbinop"><span class="id" title="definition">setwithbinop</span></a>) (<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#setwithbinop"><span class="id" title="definition">setwithbinop</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#setwithbinoppair"><span class="id" title="definition">setwithbinoppair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_hSet"><span class="id" title="definition">pointwise_hSet</span></a>; [<span class="id" title="tactic">exact</span> <span class="id" title="var">X</span>|<span class="id" title="tactic">assumption</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <span class="id" title="var">n</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#op"><span class="id" title="definition">op</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_setwith2binop"><span class="id" title="definition">pointwise_setwith2binop</span></a> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#setwith2binop"><span class="id" title="definition">setwith2binop</span></a>) (<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#setwith2binop"><span class="id" title="definition">setwith2binop</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#setwith2binoppair"><span class="id" title="definition">setwith2binoppair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_hSet"><span class="id" title="definition">pointwise_hSet</span></a>; [<span class="id" title="tactic">exact</span> <span class="id" title="var">X</span>|<span class="id" title="tactic">assumption</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <span class="id" title="var">n</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#op1"><span class="id" title="definition">op1</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <span class="id" title="var">n</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#op2"><span class="id" title="definition">op2</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_monoid"><span class="id" title="definition">pointwise_monoid</span></a> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Algebra.Monoids_and_Groups.html#monoid"><span class="id" title="definition">monoid</span></a>) (<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="UniMath.Algebra.Monoids_and_Groups.html#monoid"><span class="id" title="definition">monoid</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.Monoids_and_Groups.html#monoidpair"><span class="id" title="definition">monoidpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_setwithbinop"><span class="id" title="definition">pointwise_setwithbinop</span></a>; [<span class="id" title="tactic">exact</span> <span class="id" title="var">X</span>|<span class="id" title="tactic">assumption</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_monoidop"><span class="id" title="definition">pointwise_monoidop</span></a>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">X</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="pointwise_abmonoid"><span class="id" title="definition">pointwise_abmonoid</span></a> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Algebra.Monoids_and_Groups.html#abmonoid"><span class="id" title="definition">abmonoid</span></a>) (<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="UniMath.Algebra.Monoids_and_Groups.html#abmonoid"><span class="id" title="definition">abmonoid</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.Monoids_and_Groups.html#abmonoidpair"><span class="id" title="definition">abmonoidpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_setwithbinop"><span class="id" title="definition">pointwise_setwithbinop</span></a>; [<span class="id" title="tactic">exact</span> <span class="id" title="var">X</span>|<span class="id" title="tactic">assumption</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_abmonoidop"><span class="id" title="definition">pointwise_abmonoidop</span></a>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">X</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.Algebra.Matrix.html#Structures"><span class="id" title="section">Structures</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab591"></a><h2 class="section">Matrices</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="entrywise"><span class="id" title="definition">entrywise</span></a> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>) (<span class="id" title="var">op</span> : <a class="idref" href="UniMath.Foundations.PartA.html#binop"><span class="id" title="definition">binop</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#X"><span class="id" title="variable">X</span></a>) : <a class="idref" href="UniMath.Foundations.PartA.html#binop"><span class="id" title="definition">binop</span></a> (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#m"><span class="id" title="variable">m</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">mat1</span> <span class="id" title="var">mat2</span> <span class="id" title="var">i</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.Algebra.Matrix.html#op"><span class="id" title="variable">op</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#mat1"><span class="id" title="variable">mat1</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#i"><span class="id" title="variable">i</span></a>) (<a class="idref" href="UniMath.Algebra.Matrix.html#mat2"><span class="id" title="variable">mat2</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#i"><span class="id" title="variable">i</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab592"></a><h3 class="section">Standard conditions on one binary operation</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="OneOpMat"><span class="id" title="section">OneOpMat</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} {<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} {<span class="id" title="var">op</span> : <a class="idref" href="UniMath.Foundations.PartA.html#binop"><span class="id" title="definition">binop</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#X"><span class="id" title="variable">X</span></a>}.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="entrywise_assoc"><span class="id" title="definition">entrywise_assoc</span></a> (<span class="id" title="var">assocax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isassoc"><span class="id" title="definition">isassoc</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a>) : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isassoc"><span class="id" title="definition">isassoc</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#entrywise"><span class="id" title="definition">entrywise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ? ? ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_assoc"><span class="id" title="definition">pointwise_assoc</span></a>, <span class="id" title="var">assocax</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="entrywise_lunit"><span class="id" title="definition">entrywise_lunit</span></a> (<span class="id" title="var">lun</span> : <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.X"><span class="id" title="variable">X</span></a>) (<span class="id" title="var">lunax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#islunit"><span class="id" title="definition">islunit</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#lun"><span class="id" title="variable">lun</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#islunit"><span class="id" title="definition">islunit</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#entrywise"><span class="id" title="definition">entrywise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a>) (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_matrix"><span class="id" title="definition">const_matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#lun"><span class="id" title="variable">lun</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_lunit"><span class="id" title="definition">pointwise_lunit</span></a>, <span class="id" title="var">lunax</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="entrywise_runit"><span class="id" title="definition">entrywise_runit</span></a> (<span class="id" title="var">run</span> : <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.X"><span class="id" title="variable">X</span></a>) (<span class="id" title="var">runax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isrunit"><span class="id" title="definition">isrunit</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#run"><span class="id" title="variable">run</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#isrunit"><span class="id" title="definition">isrunit</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#entrywise"><span class="id" title="definition">entrywise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a>) (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_matrix"><span class="id" title="definition">const_matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#run"><span class="id" title="variable">run</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_runit"><span class="id" title="definition">pointwise_runit</span></a>, <span class="id" title="var">runax</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="entrywise_unit"><span class="id" title="definition">entrywise_unit</span></a> (<span class="id" title="var">un</span> : <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.X"><span class="id" title="variable">X</span></a>) (<span class="id" title="var">unax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isunit"><span class="id" title="definition">isunit</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#un"><span class="id" title="variable">un</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#isunit"><span class="id" title="definition">isunit</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#entrywise"><span class="id" title="definition">entrywise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a>) (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_matrix"><span class="id" title="definition">const_matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#un"><span class="id" title="variable">un</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isunitpair"><span class="id" title="definition">isunitpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#entrywise_lunit"><span class="id" title="definition">entrywise_lunit</span></a>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">unax</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#entrywise_runit"><span class="id" title="definition">entrywise_runit</span></a>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">unax</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="entrywise_comm"><span class="id" title="definition">entrywise_comm</span></a> (<span class="id" title="var">commax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#iscomm"><span class="id" title="definition">iscomm</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a>) : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#iscomm"><span class="id" title="definition">iscomm</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#entrywise"><span class="id" title="definition">entrywise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ? ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_comm"><span class="id" title="definition">pointwise_comm</span></a>, <span class="id" title="var">commax</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="entrywise_monoidop"><span class="id" title="definition">entrywise_monoidop</span></a> (<span class="id" title="var">monoidax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#ismonoidop"><span class="id" title="definition">ismonoidop</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#ismonoidop"><span class="id" title="definition">ismonoidop</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#entrywise"><span class="id" title="definition">entrywise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#mk_ismonoidop"><span class="id" title="definition">mk_ismonoidop</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#entrywise_assoc"><span class="id" title="definition">entrywise_assoc</span></a>, <a class="idref" href="UniMath.Algebra.BinaryOperations.html#assocax_is"><span class="id" title="definition">assocax_is</span></a>; <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isunitalpair"><span class="id" title="definition">isunitalpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_matrix"><span class="id" title="definition">const_matrix</span></a> (<a class="idref" href="UniMath.Algebra.BinaryOperations.html#unel_is"><span class="id" title="definition">unel_is</span></a> <span class="id" title="var">monoidax</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#entrywise_unit"><span class="id" title="definition">entrywise_unit</span></a>, <a class="idref" href="UniMath.Algebra.BinaryOperations.html#unax_is"><span class="id" title="definition">unax_is</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="entrywise_abmonoidop"><span class="id" title="definition">entrywise_abmonoidop</span></a> (<span class="id" title="var">abmonoidax</span> : <a class="idref" href="UniMath.Algebra.BinaryOperations.html#isabmonoidop"><span class="id" title="definition">isabmonoidop</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.BinaryOperations.html#isabmonoidop"><span class="id" title="definition">isabmonoidop</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#entrywise"><span class="id" title="definition">entrywise</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat.op"><span class="id" title="variable">op</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#mk_isabmonoidop"><span class="id" title="definition">mk_isabmonoidop</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#entrywise_monoidop"><span class="id" title="definition">entrywise_monoidop</span></a>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Algebra.BinaryOperations.html#pr1isabmonoidop"><span class="id" title="definition">pr1isabmonoidop</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">abmonoidax</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#entrywise_comm"><span class="id" title="definition">entrywise_comm</span></a>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">abmonoidax</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.Algebra.Matrix.html#OneOpMat"><span class="id" title="section">OneOpMat</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+It is uncommon to consider two entrywise binary operations on matrices,
+    so we don't derive "standard conditions on a pair of binar operations"
+    for matrices. 
+<div class="paragraph"> </div>
+
+<a name="lab593"></a><h3 class="section">Structures</h3>
+
+<div class="paragraph"> </div>
+
+<a name="lab594"></a><h3 class="section">Matrix rig</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="MatrixMult"><span class="id" title="section">MatrixMult</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<span class="id" title="var">R</span> : <a class="idref" href="UniMath.Algebra.RigsAndRings.html#rig"><span class="id" title="definition">rig</span></a>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Summation and pointwise multiplication 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> <a name="e15c0eb40e61adefe95778c26e7840f6"><span class="id" title="abbreviation">Σ</span></a> := (<a class="idref" href="UniMath.Algebra.IteratedBinaryOperations.html#iterop_fun"><span class="id" title="definition">iterop_fun</span></a> <a class="idref" href="UniMath.Algebra.RigsAndRings.html#rigunel1"><span class="id" title="definition">rigunel1</span></a> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#op1"><span class="id" title="definition">op1</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> "R1 ^ R2" := ((<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#op2"><span class="id" title="definition">op2</span></a>) <span class="id" title="var">R1</span> <span class="id" title="var">R2</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+If A is m × n (so B is n × p),
+      <tt>
+        AB(i, j) = A(i, 1) * B(1, j) + A(i, 2) * B(2, j) + ⋯ + A(i, n) * B(n, j)
+      </tt>
+<div class="paragraph"> </div>
+
+      The order of the arguments allows currying the first matrix.
+  
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="matrix_mult"><span class="id" title="definition">matrix_mult</span></a> {<span class="id" title="var">m</span> <span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} (<span class="id" title="var">mat1</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#MatrixMult.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">p</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} (<span class="id" title="var">mat2</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#MatrixMult.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#p"><span class="id" title="variable">p</span></a>) : (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#MatrixMult.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#p"><span class="id" title="variable">p</span></a>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">i</span> <span class="id" title="var">j</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#e15c0eb40e61adefe95778c26e7840f6"><span class="id" title="abbreviation">Σ</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#8876dae30f9b29831a8071414c025e77"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#row"><span class="id" title="definition">row</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#mat1"><span class="id" title="variable">mat1</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#i"><span class="id" title="variable">i</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#8876dae30f9b29831a8071414c025e77"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#8876dae30f9b29831a8071414c025e77"><span class="id" title="notation">^</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#8876dae30f9b29831a8071414c025e77"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#col"><span class="id" title="definition">col</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#mat2"><span class="id" title="variable">mat2</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#j"><span class="id" title="variable">j</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#8876dae30f9b29831a8071414c025e77"><span class="id" title="notation">)</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> "A ** B" := (<a class="idref" href="UniMath.Algebra.Matrix.html#matrix_mult"><span class="id" title="definition">matrix_mult</span></a> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="identity_matrix"><span class="id" title="lemma">identity_matrix</span></a> {<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} : (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#MatrixMult.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">i</span> <span class="id" title="var">j</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> (<a class="idref" href="UniMath.Combinatorics.StandardFiniteSets.html#stn_eq_or_neq"><span class="id" title="lemma">stn_eq_or_neq</span></a> <span class="id" title="var">i</span> <span class="id" title="var">j</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Algebra.RigsAndRings.html#rigunel2"><span class="id" title="definition">rigunel2</span></a>). &nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Algebra.RigsAndRings.html#rigunel1"><span class="id" title="definition">rigunel1</span></a>). &nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.Algebra.Matrix.html#MatrixMult"><span class="id" title="section">MatrixMult</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> <a name="e15c0eb40e61adefe95778c26e7840f6"><span class="id" title="abbreviation">Σ</span></a> := (<a class="idref" href="UniMath.Algebra.IteratedBinaryOperations.html#iterop_fun"><span class="id" title="definition">iterop_fun</span></a> <a class="idref" href="UniMath.Algebra.RigsAndRings.html#rigunel1"><span class="id" title="definition">rigunel1</span></a> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#op1"><span class="id" title="definition">op1</span></a>).<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> "R1 ^ R2" := ((<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise"><span class="id" title="definition">pointwise</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.Algebra.BinaryOperations.html#op2"><span class="id" title="definition">op2</span></a>) <span class="id" title="var">R1</span> <span class="id" title="var">R2</span>).<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> "A ** B" := (<a class="idref" href="UniMath.Algebra.Matrix.html#matrix_mult"><span class="id" title="definition">matrix_mult</span></a> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The following is based on "The magnitude of metric spaces" by Tom Leinster
+    (arXiv:1012.5857v3). 
+</div>
+<div class="code">
+<span class="id" title="keyword">Section</span> <a name="Weighting"><span class="id" title="section">Weighting</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<span class="id" title="var">R</span> : <a class="idref" href="UniMath.Algebra.RigsAndRings.html#rig"><span class="id" title="definition">rig</span></a>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Definition 1.1.1 in arXiv:1012.5857v3 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="weighting"><span class="id" title="definition">weighting</span></a> {<span class="id" title="var">m</span> <span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} (<span class="id" title="var">mat</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <span class="id" title="var">vec</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Vector"><span class="id" title="definition">Vector</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#mat"><span class="id" title="variable">mat</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#col_vec"><span class="id" title="definition">col_vec</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#vec"><span class="id" title="variable">vec</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">)</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#col_vec"><span class="id" title="definition">col_vec</span></a> (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_vec"><span class="id" title="definition">const_vec</span></a> (1%<span class="id" title="var">rig</span>)).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="coweighting"><span class="id" title="definition">coweighting</span></a> {<span class="id" title="var">m</span> <span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} (<span class="id" title="var">mat</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <span class="id" title="var">vec</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Vector"><span class="id" title="definition">Vector</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#m"><span class="id" title="variable">m</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#row_vec"><span class="id" title="definition">row_vec</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#vec"><span class="id" title="variable">vec</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#mat"><span class="id" title="variable">mat</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#row_vec"><span class="id" title="definition">row_vec</span></a> (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_vec"><span class="id" title="definition">const_vec</span></a> (1%<span class="id" title="var">rig</span>)).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="matrix_mult_vectors"><span class="id" title="lemma">matrix_mult_vectors</span></a> {<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} (<span class="id" title="var">vec1</span> <span class="id" title="var">vec2</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Vector"><span class="id" title="definition">Vector</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#row_vec"><span class="id" title="definition">row_vec</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#vec1"><span class="id" title="variable">vec1</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#col_vec"><span class="id" title="definition">col_vec</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#vec2"><span class="id" title="variable">vec2</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">)</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#weq_matrix_1_1"><span class="id" title="lemma">weq_matrix_1_1</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#e15c0eb40e61adefe95778c26e7840f6"><span class="id" title="abbreviation">Σ</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#vec1"><span class="id" title="variable">vec1</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#1acad0ad77adcbcdf68a70ab21aafe4a"><span class="id" title="notation">^</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#vec2"><span class="id" title="variable">vec2</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">i</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">j</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Multiplying a column vector by the identity row vector is the same as
+      taking the sum of its entries. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Lemma</span> <a name="sum_entries1"><span class="id" title="lemma">sum_entries1</span></a> {<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} (<span class="id" title="var">vec</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Vector"><span class="id" title="definition">Vector</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#weq_matrix_1_1"><span class="id" title="lemma">weq_matrix_1_1</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#e15c0eb40e61adefe95778c26e7840f6"><span class="id" title="abbreviation">Σ</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#vec"><span class="id" title="variable">vec</span></a>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#row_vec"><span class="id" title="definition">row_vec</span></a> (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_vec"><span class="id" title="definition">const_vec</span></a> (1%<span class="id" title="var">rig</span>))<a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#col_vec"><span class="id" title="definition">col_vec</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#vec"><span class="id" title="variable">vec</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">)</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">!</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#matrix_mult_vectors"><span class="id" title="lemma">matrix_mult_vectors</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">do</span> 2 <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathsinv0"><span class="id" title="definition">pathsinv0</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_lunit"><span class="id" title="definition">pointwise_lunit</span></a> 1%<span class="id" title="var">rig</span> <span class="id" title="var">_</span> <span class="id" title="var">vec</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.RigsAndRings.html#riglunax2"><span class="id" title="definition">riglunax2</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Lemma</span> <a name="sum_entries2"><span class="id" title="lemma">sum_entries2</span></a> {<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} (<span class="id" title="var">vec</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Vector"><span class="id" title="definition">Vector</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#weq_matrix_1_1"><span class="id" title="lemma">weq_matrix_1_1</span></a> (<a class="idref" href="UniMath.Algebra.Matrix.html#e15c0eb40e61adefe95778c26e7840f6"><span class="id" title="abbreviation">Σ</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#vec"><span class="id" title="variable">vec</span></a>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#row_vec"><span class="id" title="definition">row_vec</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#vec"><span class="id" title="variable">vec</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#col_vec"><span class="id" title="definition">col_vec</span></a> (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_vec"><span class="id" title="definition">const_vec</span></a> 1%<span class="id" title="var">rig</span>)<a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">!</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#matrix_mult_vectors"><span class="id" title="lemma">matrix_mult_vectors</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">do</span> 2 <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathsinv0"><span class="id" title="definition">pathsinv0</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Algebra.Matrix.html#pointwise_runit"><span class="id" title="definition">pointwise_runit</span></a> 1%<span class="id" title="var">rig</span> <span class="id" title="var">_</span> <span class="id" title="var">vec</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.RigsAndRings.html#rigrunax2"><span class="id" title="definition">rigrunax2</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+TODO: prove this so that the below isn't hypothetical 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="matrix_mult_assoc_statement"><span class="id" title="definition">matrix_mult_assoc_statement</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">m</span> <span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>) (<span class="id" title="var">mat1</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">p</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>) (<span class="id" title="var">mat2</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#p"><span class="id" title="variable">p</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">q</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>) (<span class="id" title="var">mat3</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#p"><span class="id" title="variable">p</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#q"><span class="id" title="variable">q</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#mat1"><span class="id" title="variable">mat1</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#mat2"><span class="id" title="variable">mat2</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#mat3"><span class="id" title="variable">mat3</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#mat1"><span class="id" title="variable">mat1</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#mat2"><span class="id" title="variable">mat2</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#mat3"><span class="id" title="variable">mat3</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">)</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Lemma 1.1.2 in arXiv:1012.5857v3 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="weighting_coweighting_sum"><span class="id" title="lemma">weighting_coweighting_sum</span></a> {<span class="id" title="var">m</span> <span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} (<span class="id" title="var">mat</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">wei</span> : <a class="idref" href="UniMath.Algebra.Matrix.html#weighting"><span class="id" title="definition">weighting</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#mat"><span class="id" title="variable">mat</span></a>) (<span class="id" title="var">cowei</span> : <a class="idref" href="UniMath.Algebra.Matrix.html#coweighting"><span class="id" title="definition">coweighting</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#mat"><span class="id" title="variable">mat</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">assocax</span> : <a class="idref" href="UniMath.Algebra.Matrix.html#matrix_mult_assoc_statement"><span class="id" title="definition">matrix_mult_assoc_statement</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.Matrix.html#e15c0eb40e61adefe95778c26e7840f6"><span class="id" title="abbreviation">Σ</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#wei"><span class="id" title="variable">wei</span></a>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#e15c0eb40e61adefe95778c26e7840f6"><span class="id" title="abbreviation">Σ</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#cowei"><span class="id" title="variable">cowei</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#invmaponpathsweq"><span class="id" title="definition">invmaponpathsweq</span></a> <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#weq_matrix_1_1"><span class="id" title="lemma">weq_matrix_1_1</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">intermediate_path</span> (<a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#row_vec"><span class="id" title="definition">row_vec</span></a> (<a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#const_vec"><span class="id" title="definition">const_vec</span></a> (1%<span class="id" title="var">rig</span>))<a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#col_vec"><span class="id" title="definition">col_vec</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">wei</span>)<a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">)</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Matrix.html#sum_entries1"><span class="id" title="lemma">sum_entries1</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.PartA.html#d799ab163947a6149703915b46efaa7d"><span class="id" title="notation">!</span></a><a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">z</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#z"><span class="id" title="variable">z</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <span class="id" title="var">_</span>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">cowei</span>) <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">assocax</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">z</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.Algebra.Matrix.html#6b97e27793a3d22f5c0d1dd63170fd68"><span class="id" title="notation">**</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#z"><span class="id" title="variable">z</span></a>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">wei</span>) <a class="idref" href="UniMath.Foundations.PartA.html#c08910e202733241c0ff38b25be5a0c9"><span class="id" title="notation">@</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathsinv0"><span class="id" title="definition">pathsinv0</span></a>, <a class="idref" href="UniMath.Algebra.Matrix.html#sum_entries2"><span class="id" title="lemma">sum_entries2</span></a> .<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Definition 1.1.3 in arXiv:1012.5857v3 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="has_magnitude"><span class="id" title="definition">has_magnitude</span></a> {<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} (<span class="id" title="var">mat</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#weighting"><span class="id" title="definition">weighting</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#mat"><span class="id" title="variable">mat</span></a><a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">×</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Algebra.Matrix.html#coweighting"><span class="id" title="definition">coweighting</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#mat"><span class="id" title="variable">mat</span></a><a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="magnitude"><span class="id" title="definition">magnitude</span></a> {<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>} (<span class="id" title="var">m</span> : <a class="idref" href="UniMath.Combinatorics.FiniteSequences.html#Matrix"><span class="id" title="definition">Matrix</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#n"><span class="id" title="variable">n</span></a>) (<span class="id" title="var">has</span> : <a class="idref" href="UniMath.Algebra.Matrix.html#has_magnitude"><span class="id" title="definition">has_magnitude</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#m"><span class="id" title="variable">m</span></a>) : <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting.R"><span class="id" title="variable">R</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.Matrix.html#e15c0eb40e61adefe95778c26e7840f6"><span class="id" title="abbreviation">Σ</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.PartA.html#dirprod_pr1"><span class="id" title="definition">dirprod_pr1</span></a> <a class="idref" href="UniMath.Algebra.Matrix.html#has"><span class="id" title="variable">has</span></a>)).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a name="7ca80d0126e944cef50bed03b78f3f58"><span class="id" title="notation">&quot;</span></a>| Mat |" := (<a class="idref" href="UniMath.Algebra.Matrix.html#magnitude"><span class="id" title="definition">magnitude</span></a> <span class="id" title="var">Mat</span> <span class="id" title="var">_</span>) : <span class="id" title="var">magnitude</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.Algebra.Matrix.html#Weighting"><span class="id" title="section">Weighting</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

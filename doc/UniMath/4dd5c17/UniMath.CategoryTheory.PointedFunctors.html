@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.PointedFunctors</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.PointedFunctors</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+**********************************************************
+
+<div class="paragraph"> </div>
+
+Benedikt Ahrens, Ralph Matthes
+
+<div class="paragraph"> </div>
+
+SubstitutionSystems
+
+<div class="paragraph"> </div>
+
+2015
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+ **********************************************************
+
+<div class="paragraph"> </div>
+
+Contents :
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li>    Definition of precategory of pointed endofunctors
+
+</li>
+<li>    Forgetful functor to precategory of endofunctors
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.PartD.html#"><span class="id" title="library">UniMath.Foundations.PartD</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#"><span class="id" title="library">UniMath.CategoryTheory.functor_categories</span></a>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="def_ptd"><span class="id" title="section">def_ptd</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Variable</span> <a name="def_ptd.C"><span class="id" title="variable">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>.<br/>
+<span class="id" title="keyword">Hypothesis</span> <a name="def_ptd.hs"><span class="id" title="variable">hs</span></a> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#has_homsets"><span class="id" title="definition">has_homsets</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="ptd_obj"><span class="id" title="definition">ptd_obj</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <span class="id" title="var">F</span> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_identity"><span class="id" title="definition">functor_identity</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#bd447210939dc5ea73b98445d0cbfde7"><span class="id" title="notation">⟹</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Coercion</span> <span class="id" title="var">functor_from_ptd_obj</span> (<span class="id" title="var">F</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_obj"><span class="id" title="definition">ptd_obj</span></a>) : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="ptd_pt"><span class="id" title="definition">ptd_pt</span></a> (<span class="id" title="var">F</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_obj"><span class="id" title="definition">ptd_obj</span></a>) : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_identity"><span class="id" title="definition">functor_identity</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#bd447210939dc5ea73b98445d0cbfde7"><span class="id" title="notation">⟹</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="is_ptd_mor"><span class="id" title="definition">is_ptd_mor</span></a> {<span class="id" title="var">F</span> <span class="id" title="var">G</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_obj"><span class="id" title="definition">ptd_obj</span></a>}(<span class="id" title="var">α</span>: <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#bd447210939dc5ea73b98445d0cbfde7"><span class="id" title="notation">⟹</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#G"><span class="id" title="variable">G</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> := <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">c</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_pt"><span class="id" title="definition">ptd_pt</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_pt"><span class="id" title="definition">ptd_pt</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#G"><span class="id" title="variable">G</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#c"><span class="id" title="variable">c</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="ptd_mor"><span class="id" title="definition">ptd_mor</span></a> (<span class="id" title="var">F</span> <span class="id" title="var">G</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_obj"><span class="id" title="definition">ptd_obj</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <span class="id" title="var">α</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#bd447210939dc5ea73b98445d0cbfde7"><span class="id" title="notation">⟹</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#G"><span class="id" title="variable">G</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#is_ptd_mor"><span class="id" title="definition">is_ptd_mor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Coercion</span> <span class="id" title="var">nat_trans_from_ptd_mor</span> {<span class="id" title="var">F</span> <span class="id" title="var">G</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_obj"><span class="id" title="definition">ptd_obj</span></a>} (<span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_mor"><span class="id" title="definition">ptd_mor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#G"><span class="id" title="variable">G</span></a>) : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans"><span class="id" title="definition">nat_trans</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#G"><span class="id" title="variable">G</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#a"><span class="id" title="variable">a</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="eq_ptd_mor"><span class="id" title="lemma">eq_ptd_mor</span></a> {<span class="id" title="var">F</span> <span class="id" title="var">G</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_obj"><span class="id" title="definition">ptd_obj</span></a>} (<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_mor"><span class="id" title="definition">ptd_mor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#G"><span class="id" title="variable">G</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#a"><span class="id" title="variable">a</span></a> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#bd447210939dc5ea73b98445d0cbfde7"><span class="id" title="notation">⟹</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#G"><span class="id" title="variable">G</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#b"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeInjectivity"><span class="id" title="lemma">subtypeInjectivity</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intros</span> ?.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.hs"><span class="id" title="variable">hs</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="ptd_mor_commutes"><span class="id" title="definition">ptd_mor_commutes</span></a> {<span class="id" title="var">F</span> <span class="id" title="var">G</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_obj"><span class="id" title="definition">ptd_obj</span></a>} (<span class="id" title="var">α</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_mor"><span class="id" title="definition">ptd_mor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#G"><span class="id" title="variable">G</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">c</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_pt"><span class="id" title="definition">ptd_pt</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_pt"><span class="id" title="definition">ptd_pt</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#G"><span class="id" title="variable">G</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#c"><span class="id" title="variable">c</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">α</span>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="ptd_id"><span class="id" title="definition">ptd_id</span></a> (<span class="id" title="var">F</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_obj"><span class="id" title="definition">ptd_obj</span></a>) : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_mor"><span class="id" title="definition">ptd_mor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_id"><span class="id" title="definition">nat_trans_id</span></a> <span class="id" title="var">_</span> ).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">abstract</span> (<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">c</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#id_right"><span class="id" title="definition">id_right</span></a>) .<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="ptd_comp"><span class="id" title="definition">ptd_comp</span></a> {<span class="id" title="var">F</span> <span class="id" title="var">F'</span> <span class="id" title="var">F''</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_obj"><span class="id" title="definition">ptd_obj</span></a>} (<span class="id" title="var">α</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_mor"><span class="id" title="definition">ptd_mor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F'"><span class="id" title="variable">F'</span></a>) (<span class="id" title="var">α'</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_mor"><span class="id" title="definition">ptd_mor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F'"><span class="id" title="variable">F'</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F''"><span class="id" title="variable">F''</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_mor"><span class="id" title="definition">ptd_mor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F''"><span class="id" title="variable">F''</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_comp"><span class="id" title="definition">nat_trans_comp</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">α</span> <span class="id" title="var">α'</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">abstract</span> (<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">c</span>; <span class="id" title="tactic">simpl</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">H</span>:=<a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_mor_commutes"><span class="id" title="definition">ptd_mor_commutes</span></a> <span class="id" title="var">α</span> <span class="id" title="var">c</span>); <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">clear</span> <span class="id" title="var">H</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">H</span>:=<a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_mor_commutes"><span class="id" title="definition">ptd_mor_commutes</span></a> <span class="id" title="var">α'</span> <span class="id" title="var">c</span>); <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">clear</span> <span class="id" title="var">H</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a> ).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="ptd_ob_mor"><span class="id" title="definition">ptd_ob_mor</span></a> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory_ob_mor"><span class="id" title="definition">precategory_ob_mor</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_obj"><span class="id" title="definition">ptd_obj</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_mor"><span class="id" title="definition">ptd_mor</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="ptd_precategory_data"><span class="id" title="definition">ptd_precategory_data</span></a> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory_data"><span class="id" title="definition">precategory_data</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_ob_mor"><span class="id" title="definition">ptd_ob_mor</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_id"><span class="id" title="definition">ptd_id</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> @<a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_comp"><span class="id" title="definition">ptd_comp</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="is_precategory_ptd"><span class="id" title="lemma">is_precategory_ptd</span></a> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#is_precategory"><span class="id" title="definition">is_precategory</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_precategory_data"><span class="id" title="definition">ptd_precategory_data</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#invmap"><span class="id" title="definition">invmap</span></a> (<a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#eq_ptd_mor"><span class="id" title="lemma">eq_ptd_mor</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> )).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (@<a class="idref" href="UniMath.CategoryTheory.Categories.html#id_left"><span class="id" title="definition">id_left</span></a> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_precategory"><span class="id" title="definition">functor_precategory</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.hs"><span class="id" title="variable">hs</span></a>)).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#invmap"><span class="id" title="definition">invmap</span></a> (<a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#eq_ptd_mor"><span class="id" title="lemma">eq_ptd_mor</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> )).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (@<a class="idref" href="UniMath.CategoryTheory.Categories.html#id_right"><span class="id" title="definition">id_right</span></a> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_precategory"><span class="id" title="definition">functor_precategory</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.hs"><span class="id" title="variable">hs</span></a> )).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#invmap"><span class="id" title="definition">invmap</span></a> (<a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#eq_ptd_mor"><span class="id" title="lemma">eq_ptd_mor</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> )).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (@<a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_precategory"><span class="id" title="definition">functor_precategory</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.hs"><span class="id" title="variable">hs</span></a>)).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#invmap"><span class="id" title="definition">invmap</span></a> (<a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#eq_ptd_mor"><span class="id" title="lemma">eq_ptd_mor</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> )).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (@<a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc'"><span class="id" title="definition">assoc'</span></a> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_precategory"><span class="id" title="definition">functor_precategory</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.hs"><span class="id" title="variable">hs</span></a>)).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="precategory_Ptd"><span class="id" title="definition">precategory_Ptd</span></a> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#is_precategory_ptd"><span class="id" title="lemma">is_precategory_ptd</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="id_Ptd"><span class="id" title="definition">id_Ptd</span></a> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#precategory_Ptd"><span class="id" title="definition">precategory_Ptd</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_identity"><span class="id" title="definition">functor_identity</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_id"><span class="id" title="definition">nat_trans_id</span></a> <span class="id" title="var">_</span> ).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="eq_ptd_mor_precat"><span class="id" title="lemma">eq_ptd_mor_precat</span></a> {<span class="id" title="var">F</span> <span class="id" title="var">G</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#precategory_Ptd"><span class="id" title="definition">precategory_Ptd</span></a>} (<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#G"><span class="id" title="variable">G</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#6d6b9b9970659feb8a4576ab9f4d112c"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#a"><span class="id" title="variable">a</span></a> : <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_mor"><span class="id" title="definition">ptd_mor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#G"><span class="id" title="variable">G</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#b"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#idisweq"><span class="id" title="lemma">idisweq</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Forgetful functor to functor category 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="ptd_forget_data"><span class="id" title="definition">ptd_forget_data</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_data"><span class="id" title="definition">functor_data</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#precategory_Ptd"><span class="id" title="definition">precategory_Ptd</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#ab55e0b1c6ecec43e4d2a6539a476a92"><span class="id" title="notation">[</span></a><a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.functor_categories.html#ab55e0b1c6ecec43e4d2a6539a476a92"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.functor_categories.html#ab55e0b1c6ecec43e4d2a6539a476a92"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd.hs"><span class="id" title="variable">hs</span></a><a class="idref" href="UniMath.CategoryTheory.functor_categories.html#ab55e0b1c6ecec43e4d2a6539a476a92"><span class="id" title="notation">]</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">a</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#a"><span class="id" title="variable">a</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">f</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#f"><span class="id" title="variable">f</span></a>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="is_functor_ptd_forget"><span class="id" title="lemma">is_functor_ptd_forget</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#is_functor"><span class="id" title="definition">is_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#ptd_forget_data"><span class="id" title="definition">ptd_forget_data</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_idax"><span class="id" title="definition">functor_idax</span></a>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_compax"><span class="id" title="definition">functor_compax</span></a>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="functor_ptd_forget"><span class="id" title="definition">functor_ptd_forget</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> := <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#is_functor_ptd_forget"><span class="id" title="lemma">is_functor_ptd_forget</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.PointedFunctors.html#def_ptd"><span class="id" title="section">def_ptd</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

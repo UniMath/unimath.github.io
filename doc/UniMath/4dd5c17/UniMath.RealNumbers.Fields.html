@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.RealNumbers.Fields</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.RealNumbers.Fields</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab1802"></a><h1 class="section">Additional theorems about fields</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="UniMath.Algebra.Domains_and_Fields.html#"><span class="id" title="library">UniMath.Algebra.Domains_and_Fields</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="isapropmultinvpair"><span class="id" title="lemma">isapropmultinvpair</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">X</span> : <a class="idref" href="UniMath.Algebra.RigsAndRings.html#rig"><span class="id" title="definition">rig</span></a>) (<span class="id" title="var">x</span> : <a class="idref" href="UniMath.RealNumbers.Fields.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.Foundations.PartB.html#isaprop"><span class="id" title="definition">isaprop</span></a> (<a class="idref" href="UniMath.Algebra.Domains_and_Fields.html#multinvpair"><span class="id" title="definition">multinvpair</span></a> <a class="idref" href="UniMath.RealNumbers.Fields.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.RealNumbers.Fields.html#x"><span class="id" title="variable">x</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Algebra.Domains_and_Fields.html#isapropinvpair"><span class="id" title="lemma">isapropinvpair</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1803"></a><h2 class="section">Projections for <span class="inlinecode"><a class="idref" href="UniMath.Algebra.Domains_and_Fields.html#fld"><span class="id" title="definition">fld</span></a></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="fld_proj"><span class="id" title="section">fld_proj</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Context</span> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Algebra.Domains_and_Fields.html#fld"><span class="id" title="definition">fld</span></a>}.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="zero_fld"><span class="id" title="definition">zero_fld</span></a> : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a> := 0%<span class="id" title="tactic">ring</span>.<br/>
+<span class="id" title="keyword">Definition</span> <a name="one_fld"><span class="id" title="definition">one_fld</span></a> : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a> := 1%<span class="id" title="tactic">ring</span>.<br/>
+<span class="id" title="keyword">Definition</span> <a name="plus_fld"><span class="id" title="definition">plus_fld</span></a> (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a>) : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a> := (<a class="idref" href="UniMath.RealNumbers.Fields.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Algebra.RigsAndRings.html#ae4d81913e6239182a9ac7467ffde8cd"><span class="id" title="notation">+</span></a> <a class="idref" href="UniMath.RealNumbers.Fields.html#y"><span class="id" title="variable">y</span></a>)%<span class="id" title="tactic">ring</span>.<br/>
+<span class="id" title="keyword">Definition</span> <a name="opp_fld"><span class="id" title="definition">opp_fld</span></a> (<span class="id" title="var">x</span> : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a>) : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a> := (<a class="idref" href="UniMath.Algebra.RigsAndRings.html#941c6d086004545bd62614d0213e75e5"><span class="id" title="notation">-</span></a> <a class="idref" href="UniMath.RealNumbers.Fields.html#x"><span class="id" title="variable">x</span></a>)%<span class="id" title="tactic">ring</span>.<br/>
+<span class="id" title="keyword">Definition</span> <a name="minus_fld"><span class="id" title="definition">minus_fld</span></a> (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a>) : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a> := (<a class="idref" href="UniMath.RealNumbers.Fields.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Algebra.RigsAndRings.html#d70623330b2787db6b196e37db7d8f45"><span class="id" title="notation">-</span></a> <a class="idref" href="UniMath.RealNumbers.Fields.html#y"><span class="id" title="variable">y</span></a>)%<span class="id" title="tactic">ring</span>.<br/>
+<span class="id" title="keyword">Definition</span> <a name="mult_fld"><span class="id" title="definition">mult_fld</span></a> (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a>) : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a> := (<a class="idref" href="UniMath.RealNumbers.Fields.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.Algebra.RigsAndRings.html#22058a36a53dac65c94ca403bc62650a"><span class="id" title="notation">×</span></a> <a class="idref" href="UniMath.RealNumbers.Fields.html#y"><span class="id" title="variable">y</span></a>)%<span class="id" title="tactic">ring</span>.<br/>
+<span class="id" title="keyword">Definition</span> <a name="inv_fld"><span class="id" title="definition">inv_fld</span></a> (<span class="id" title="var">x</span> : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a>) : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#sumofmaps"><span class="id" title="definition">sumofmaps</span></a> <span class="id" title="keyword">with</span> (3 := <a class="idref" href="UniMath.Algebra.Domains_and_Fields.html#fldchoice"><span class="id" title="definition">fldchoice</span></a> <span class="id" title="var">x</span>) ; <span class="id" title="tactic">intro</span> <span class="id" title="var">x'</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">x'</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <span class="id" title="var">x</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+<span class="id" title="keyword">Definition</span> <a name="div_fld"><span class="id" title="definition">div_fld</span></a> (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a>) : <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj.X"><span class="id" title="variable">X</span></a> := <a class="idref" href="UniMath.RealNumbers.Fields.html#mult_fld"><span class="id" title="definition">mult_fld</span></a> <a class="idref" href="UniMath.RealNumbers.Fields.html#x"><span class="id" title="variable">x</span></a> (<a class="idref" href="UniMath.RealNumbers.Fields.html#inv_fld"><span class="id" title="definition">inv_fld</span></a> <a class="idref" href="UniMath.RealNumbers.Fields.html#y"><span class="id" title="variable">y</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_proj"><span class="id" title="section">fld_proj</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1804"></a><h2 class="section"><span class="inlinecode"><a class="idref" href="UniMath.Algebra.Domains_and_Fields.html#fld"><span class="id" title="definition">fld</span></a></span> and the other structures</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="fld_struct"><span class="id" title="section">fld_struct</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Context</span> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Algebra.Domains_and_Fields.html#fld"><span class="id" title="definition">fld</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="fld_to_gr1"><span class="id" title="definition">fld_to_gr1</span></a> : <a class="idref" href="UniMath.Algebra.Monoids_and_Groups.html#gr"><span class="id" title="definition">gr</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.Monoids_and_Groups.html#abgrtogr"><span class="id" title="definition">abgrtogr</span></a> (<a class="idref" href="UniMath.Algebra.Domains_and_Fields.html#pr1fld"><span class="id" title="definition">pr1fld</span></a> <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_struct.X"><span class="id" title="variable">X</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="fld_to_monoid1"><span class="id" title="definition">fld_to_monoid1</span></a> : <a class="idref" href="UniMath.Algebra.Monoids_and_Groups.html#monoid"><span class="id" title="definition">monoid</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.Monoids_and_Groups.html#grtomonoid"><span class="id" title="definition">grtomonoid</span></a> <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_to_gr1"><span class="id" title="definition">fld_to_gr1</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="fld_to_monoid2"><span class="id" title="definition">fld_to_monoid2</span></a> : <a class="idref" href="UniMath.Algebra.Monoids_and_Groups.html#monoid"><span class="id" title="definition">monoid</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Algebra.RigsAndRings.html#ringmultmonoid"><span class="id" title="definition">ringmultmonoid</span></a> (<a class="idref" href="UniMath.Algebra.Domains_and_Fields.html#pr1fld"><span class="id" title="definition">pr1fld</span></a> <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_struct.X"><span class="id" title="variable">X</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.RealNumbers.Fields.html#fld_struct"><span class="id" title="section">fld_struct</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
