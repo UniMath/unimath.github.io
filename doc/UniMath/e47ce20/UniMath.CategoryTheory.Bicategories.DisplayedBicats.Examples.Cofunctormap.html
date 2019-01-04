@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab1680"></a><h1 class="section">Bicategories</h1>
+
+    Benedikt Ahrens, Marco Maggesi
+    February 2018
+ ********************************************************************************* 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.All.html#"><span class="id" title="library">UniMath.Foundations.All</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.MoreFoundations.All.html#"><span class="id" title="library">UniMath.MoreFoundations.All</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.opp_precat.html#"><span class="id" title="library">UniMath.CategoryTheory.opp_precat</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#"><span class="id" title="library">UniMath.CategoryTheory.functor_categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.PrecategoryBinProduct.html#"><span class="id" title="library">UniMath.CategoryTheory.PrecategoryBinProduct</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.whiskering.html#"><span class="id" title="library">UniMath.CategoryTheory.whiskering</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Core.html#"><span class="id" title="library">UniMath.CategoryTheory.DisplayedCats.Core</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Constructions.html#"><span class="id" title="library">UniMath.CategoryTheory.DisplayedCats.Constructions</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicategories.Bicat.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.Bicategories.Bicat</span></a>. <span class="id" title="keyword">Import</span> <span class="id" title="var">Bicat.Notations</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicategories.Examples.BicatOfCats.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.Bicategories.Examples.BicatOfCats</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.ContravariantFunctor.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.ContravariantFunctor</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.DisplayedCatToBicat.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.DisplayedCatToBicat</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Prod.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Prod</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Sigma.html#"><span class="id" title="library">UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Sigma</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">mor_disp_scope</span>.<br/>
+
+<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_comp"><span class="id" title="definition">nat_trans_comp</span></a> {<span class="id" title="var">C</span> <span class="id" title="var">C'</span> <span class="id" title="var">F</span> <span class="id" title="var">G</span> <span class="id" title="var">H</span>} <span class="id" title="var">a</span> <span class="id" title="var">b</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="Cofunctormaps"><span class="id" title="section">Cofunctormaps</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Variable</span> (<a name="Cofunctormaps.K"><span class="id" title="variable">K</span></a> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#category"><span class="id" title="definition">category</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="disp_presheaf"><span class="id" title="definition">disp_presheaf</span></a> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat.html#disp_bicat"><span class="id" title="definition">disp_bicat</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicategories.Examples.BicatOfCats.html#bicat_of_cats"><span class="id" title="definition">bicat_of_cats</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.ContravariantFunctor.html#disp_presheaf_bicat"><span class="id" title="definition">disp_presheaf_bicat</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#Cofunctormaps.K"><span class="id" title="variable">K</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="disp_two_presheaves"><span class="id" title="definition">disp_two_presheaves</span></a> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat.html#disp_bicat"><span class="id" title="definition">disp_bicat</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicategories.Examples.BicatOfCats.html#bicat_of_cats"><span class="id" title="definition">bicat_of_cats</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Prod.html#disp_dirprod_bicat"><span class="id" title="definition">disp_dirprod_bicat</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_presheaf"><span class="id" title="definition">disp_presheaf</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_presheaf"><span class="id" title="definition">disp_presheaf</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="disp_cofunctormaps_cat_ob_mor"><span class="id" title="definition">disp_cofunctormaps_cat_ob_mor</span></a> : <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Core.html#disp_cat_ob_mor"><span class="id" title="definition">disp_cat_ob_mor</span></a> (<a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat.html#total_bicat"><span class="id" title="definition">total_bicat</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_two_presheaves"><span class="id" title="definition">disp_two_presheaves</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">red</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> (<span class="id" title="var">C</span>, (<span class="id" title="var">ty</span>, <span class="id" title="var">tm</span>)). <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<span class="id" title="var">tm</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#bd447210939dc5ea73b98445d0cbfde7"><span class="id" title="notation">⟹</span></a> <span class="id" title="var">ty</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> (<span class="id" title="var">C</span>, (<span class="id" title="var">ty</span>, <span class="id" title="var">tm</span>)) (<span class="id" title="var">C'</span>, (<span class="id" title="var">ty'</span>, <span class="id" title="var">tm'</span>)) <span class="id" title="var">p</span> <span class="id" title="var">p'</span> (<span class="id" title="var">f</span>, (<span class="id" title="var">αty</span>, <span class="id" title="var">αtm</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_comp"><span class="id" title="definition">nat_trans_comp</span></a> <span class="id" title="var">p</span> <span class="id" title="var">αty</span> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_comp"><span class="id" title="definition">nat_trans_comp</span></a> <span class="id" title="var">αtm</span> (<a class="idref" href="UniMath.CategoryTheory.whiskering.html#pre_whisker"><span class="id" title="definition">pre_whisker</span></a> <span class="id" title="var">_</span> <span class="id" title="var">p'</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="disp_cofunctormaps_cat_id_comp"><span class="id" title="definition">disp_cofunctormaps_cat_id_comp</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Core.html#disp_cat_id_comp"><span class="id" title="definition">disp_cat_id_comp</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_cofunctormaps_cat_ob_mor"><span class="id" title="definition">disp_cofunctormaps_cat_ob_mor</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> (<span class="id" title="var">C</span>, (<span class="id" title="var">ty</span>, <span class="id" title="var">tm</span>)) <span class="id" title="var">p</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_eq"><span class="id" title="lemma">nat_trans_eq</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#homset_property"><span class="id" title="definition">homset_property</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">cbn</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="var">etrans</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#id_right"><span class="id" title="definition">id_right</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathsinv0"><span class="id" title="definition">pathsinv0</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#id_left"><span class="id" title="definition">id_left</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> (<span class="id" title="var">C</span>, (<span class="id" title="var">ty</span>, <span class="id" title="var">tm</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> (<span class="id" title="var">C'</span>, (<span class="id" title="var">ty'</span>, <span class="id" title="var">tm'</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> (<span class="id" title="var">C''</span>, (<span class="id" title="var">ty''</span>, <span class="id" title="var">tm''</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> (<span class="id" title="var">f</span>, (<span class="id" title="var">αty</span>,<span class="id" title="var">αtm</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> (<span class="id" title="var">g</span>, (<span class="id" title="var">βty</span>,<span class="id" title="var">βtm</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">p</span> <span class="id" title="var">p'</span> <span class="id" title="var">p''</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">eq1</span> <span class="id" title="var">eq2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_eq"><span class="id" title="lemma">nat_trans_eq</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#homset_property"><span class="id" title="definition">homset_property</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">cbn</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">h1</span> := <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_eq_pointwise"><span class="id" title="definition">nat_trans_eq_pointwise</span></a> <span class="id" title="var">eq1</span> <span class="id" title="var">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">h2</span> := <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_eq_pointwise"><span class="id" title="definition">nat_trans_eq_pointwise</span></a> <span class="id" title="var">eq2</span> (<span class="id" title="var">f</span> <span class="id" title="var">x</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">h1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">h2</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="disp_cofunctormaps_cat_data"><span class="id" title="definition">disp_cofunctormaps_cat_data</span></a> : <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Core.html#disp_cat_data"><span class="id" title="definition">disp_cat_data</span></a> (<a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat.html#total_bicat"><span class="id" title="definition">total_bicat</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_two_presheaves"><span class="id" title="definition">disp_two_presheaves</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= (<span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_cofunctormaps_cat_id_comp"><span class="id" title="definition">disp_cofunctormaps_cat_id_comp</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="disp_cofunctormaps_prebicat"><span class="id" title="definition">disp_cofunctormaps_prebicat</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat.html#disp_prebicat"><span class="id" title="definition">disp_prebicat</span></a> (<a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat.html#total_bicat"><span class="id" title="definition">total_bicat</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_two_presheaves"><span class="id" title="definition">disp_two_presheaves</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.DisplayedCatToBicat.html#disp_cell_unit_prebicat"><span class="id" title="definition">disp_cell_unit_prebicat</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_cofunctormaps_cat_data"><span class="id" title="definition">disp_cofunctormaps_cat_data</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="has_disp_cellset_disp_cofunctormaps_prebicat"><span class="id" title="lemma">has_disp_cellset_disp_cofunctormaps_prebicat</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat.html#has_disp_cellset"><span class="id" title="definition">has_disp_cellset</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_cofunctormaps_prebicat"><span class="id" title="definition">disp_cofunctormaps_prebicat</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">red</span>; <span class="id" title="var">cbn</span>; <span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.Foundations.PartB.html#isasetunit"><span class="id" title="lemma">isasetunit</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="disp_cofunctormaps_bicat"><span class="id" title="definition">disp_cofunctormaps_bicat</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat.html#disp_bicat"><span class="id" title="definition">disp_bicat</span></a> (<a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat.html#total_bicat"><span class="id" title="definition">total_bicat</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_two_presheaves"><span class="id" title="definition">disp_two_presheaves</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_cofunctormaps_prebicat"><span class="id" title="definition">disp_cofunctormaps_prebicat</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#has_disp_cellset_disp_cofunctormaps_prebicat"><span class="id" title="lemma">has_disp_cellset_disp_cofunctormaps_prebicat</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="morphisms_of_preshaves"><span class="id" title="definition">morphisms_of_preshaves</span></a> : <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.DispBicat.html#disp_bicat"><span class="id" title="definition">disp_bicat</span></a> <a class="idref" href="UniMath.CategoryTheory.Bicategories.Bicategories.Examples.BicatOfCats.html#bicat_of_cats"><span class="id" title="definition">bicat_of_cats</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Sigma.html#sigma_bicat"><span class="id" title="definition">sigma_bicat</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_two_presheaves"><span class="id" title="definition">disp_two_presheaves</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#disp_cofunctormaps_bicat"><span class="id" title="definition">disp_cofunctormaps_bicat</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Cofunctormap.html#Cofunctormaps"><span class="id" title="section">Cofunctormaps</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

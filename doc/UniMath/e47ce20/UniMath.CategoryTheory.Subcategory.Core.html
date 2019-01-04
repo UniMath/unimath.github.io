@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.Subcategory.Core</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.Subcategory.Core</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab796"></a><h2 class="section">Sub(pre)categories</h2>
+
+
+<div class="paragraph"> </div>
+
+Authors: Benedikt Ahrens, Chris Kapulkin, Mike Shulman (January 2013)
+Reorganized and expanded: Langston Barrett (@siddharthist) (March 2018)
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+<a name="lab797"></a><h2 class="section">Contents :</h2>
+
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Subprecategories
+<ul class="doclist">
+<li> A sub-precategory forms a precategory (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#carrier_of_sub_precategory"><span class="id" title="definition">carrier_of_sub_precategory</span></a></span>)
+
+</li>
+<li> (Inclusion) functor from a sub-precategory to the ambient precategory
+    (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_inclusion"><span class="id" title="definition">sub_precategory_inclusion</span></a></span>)
+
+</li>
+</ul>
+
+</li>
+<li> Subcategories (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#subcategory"><span class="id" title="definition">subcategory</span></a></span>)
+
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Sets.html#"><span class="id" title="library">UniMath.Foundations.Sets</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.MoreFoundations.PartA.html#"><span class="id" title="library">UniMath.MoreFoundations.PartA</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#"><span class="id" title="library">UniMath.CategoryTheory.functor_categories</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab798"></a><h2 class="section">Definitions</h2>
+
+<div class="paragraph"> </div>
+
+ A sub-precategory is specified through a predicate on objects
+    and a dependent predicate on morphisms
+    which is compatible with identity and composition
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="is_sub_precategory"><span class="id" title="definition">is_sub_precategory</span></a> {<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">C'</span> : <a class="idref" href="UniMath.Foundations.Sets.html#hsubtype"><span class="id" title="definition">hsubtype</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Cmor'</span> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Sets.html#hsubtype"><span class="id" title="definition">hsubtype</span></a> (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>)) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a>  <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#Cmor'"><span class="id" title="variable">Cmor'</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#identity"><span class="id" title="definition">identity</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a>)<a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">×</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">f</span>: <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>) (<span class="id" title="var">g</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#c"><span class="id" title="variable">c</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#Cmor'"><span class="id" title="variable">Cmor'</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#Cmor'"><span class="id" title="variable">Cmor'</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>  <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#Cmor'"><span class="id" title="variable">Cmor'</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>  (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#g"><span class="id" title="variable">g</span></a>)<a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_precategories"><span class="id" title="definition">sub_precategories</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#total2"><span class="id" title="record">total2</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">C'</span> : <a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Sets.html#hsubtype"><span class="id" title="definition">hsubtype</span></a> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>)<a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">×</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">a</span> <span class="id" title="var">b</span>:<a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Sets.html#hsubtype"><span class="id" title="definition">hsubtype</span></a> (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>)<a class="idref" href="UniMath.Foundations.PartA.html#3c95d747e965984bdabf05c6b0e23759"><span class="id" title="notation">)</span></a> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#is_sub_precategory"><span class="id" title="definition">is_sub_precategory</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We have a coercion <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Sets.html#carrier"><span class="id" title="definition">carrier</span></a></span> turning every predicate <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.FullSub.html#FullSubBicat.P"><span class="id" title="variable">P</span></a></span> on a type <span class="inlinecode"><a class="idref" href="UniMath.HomologicalAlgebra.CohomologyComplex.html#def_kernel_cokernel_complex.A"><span class="id" title="variable">A</span></a></span> into the
+     total space <span class="inlinecode"></span> <span class="inlinecode">{</span> <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_isomorphism.html#folds_iso_def.from_folds_iso_to_iso.a"><span class="id" title="variable">a</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="UniMath.HomologicalAlgebra.CohomologyComplex.html#def_kernel_cokernel_complex.A"><span class="id" title="variable">A</span></a></span> <span class="inlinecode">&amp;</span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.FullSub.html#FullSubBicat.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_isomorphism.html#folds_iso_def.from_folds_iso_to_iso.a"><span class="id" title="variable">a</span></a>}</span> <span class="inlinecode"></span>.
+
+<div class="paragraph"> </div>
+
+   For later, we define some projections with the appropriate type, also to
+   avoid confusion with the aforementioned coercion.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_precategory_predicate_objects"><span class="id" title="definition">sub_precategory_predicate_objects</span></a> {<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">C'</span>: <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>):<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Sets.html#hsubtype"><span class="id" title="definition">hsubtype</span></a> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) := <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_ob"><span class="id" title="definition">sub_ob</span></a> {<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>}(<span class="id" title="var">C'</span>: <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>): <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_predicate_objects"><span class="id" title="definition">sub_precategory_predicate_objects</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_precategory_predicate_morphisms"><span class="id" title="definition">sub_precategory_predicate_morphisms</span></a> {<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) : <a class="idref" href="UniMath.Foundations.Sets.html#hsubtype"><span class="id" title="definition">hsubtype</span></a> (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>) := <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>) <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_precategory_morphisms"><span class="id" title="definition">sub_precategory_morphisms</span></a> {<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>}(<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=  <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_predicate_morphisms"><span class="id" title="definition">sub_precategory_predicate_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Projections for compatibility of the predicate with identity and
+    composition.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_precategory_id"><span class="id" title="definition">sub_precategory_id</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>) (<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_predicate_objects"><span class="id" title="definition">sub_precategory_predicate_objects</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_predicate_morphisms"><span class="id" title="definition">sub_precategory_predicate_morphisms</span></a>  <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#identity"><span class="id" title="definition">identity</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#dirprod_pr1"><span class="id" title="definition">dirprod_pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_precategory_comp"><span class="id" title="definition">sub_precategory_comp</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>) (<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>: <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">f</span>: <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>) (<span class="id" title="var">g</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#c"><span class="id" title="variable">c</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_predicate_morphisms"><span class="id" title="definition">sub_precategory_predicate_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_predicate_morphisms"><span class="id" title="definition">sub_precategory_predicate_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_predicate_morphisms"><span class="id" title="definition">sub_precategory_predicate_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>  (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#g"><span class="id" title="variable">g</span></a>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#dirprod_pr2"><span class="id" title="definition">dirprod_pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+An object of a subprecategory is an object of the original precategory. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="precategory_object_from_sub_precategory_object"><span class="id" title="definition">precategory_object_from_sub_precategory_object</span></a> (<span class="id" title="var">C</span>:<a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_ob"><span class="id" title="definition">sub_ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a>.<br/>
+<span class="id" title="keyword">Coercion</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#precategory_object_from_sub_precategory_object"><span class="id" title="definition">precategory_object_from_sub_precategory_object</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#precategory_object_from_sub_precategory_object"><span class="id" title="definition">:</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#precategory_object_from_sub_precategory_object"><span class="id" title="definition">sub_ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#precategory_object_from_sub_precategory_object"><span class="id" title="definition">&gt;-&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#precategory_object_from_sub_precategory_object"><span class="id" title="definition">ob</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A morphism of a subprecategory is also a morphism of the original precategory. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="precategory_morphism_from_sub_precategory_morphism"><span class="id" title="definition">precategory_morphism_from_sub_precategory_morphism</span></a> (<span class="id" title="var">C</span>:<a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_morphisms"><span class="id" title="definition">sub_precategory_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>) : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#f"><span class="id" title="variable">f</span></a> .<br/>
+<span class="id" title="keyword">Coercion</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#precategory_morphism_from_sub_precategory_morphism"><span class="id" title="definition">precategory_morphism_from_sub_precategory_morphism</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#precategory_morphism_from_sub_precategory_morphism"><span class="id" title="definition">:</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#precategory_morphism_from_sub_precategory_morphism"><span class="id" title="definition">sub_precategory_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#precategory_morphism_from_sub_precategory_morphism"><span class="id" title="definition">&gt;-&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#precategory_morphism_from_sub_precategory_morphism"><span class="id" title="definition">precategory_morphisms</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab799"></a><h3 class="section">A sub-precategory forms a precategory.</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_precategory_ob_mor"><span class="id" title="definition">sub_precategory_ob_mor</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>)(<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory_ob_mor"><span class="id" title="definition">precategory_ob_mor</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_ob"><span class="id" title="definition">sub_ob</span></a> <span class="id" title="var">C'</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">a</span> <span class="id" title="var">b</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> @<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_morphisms"><span class="id" title="definition">sub_precategory_morphisms</span></a> <span class="id" title="var">_</span> <span class="id" title="var">C'</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_precategory_data"><span class="id" title="definition">sub_precategory_data</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>)(<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory_data"><span class="id" title="definition">precategory_data</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_ob_mor"><span class="id" title="definition">sub_precategory_ob_mor</span></a> <span class="id" title="var">C</span> <span class="id" title="var">C'</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">c</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#identity"><span class="id" title="definition">identity</span></a> (<span class="id" title="var">C</span>:=<span class="id" title="var">C</span>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">c</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_id"><span class="id" title="definition">sub_precategory_id</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">c</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#compose"><span class="id" title="definition">compose</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">f</span>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">g</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_comp"><span class="id" title="definition">sub_precategory_comp</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">f</span>). <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">g</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A useful lemma for equality in the sub-precategory. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="eq_in_sub_precategory"><span class="id" title="lemma">eq_in_sub_precategory</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>)(<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_ob"><span class="id" title="definition">sub_ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>) (<span class="id" title="var">f</span> <span class="id" title="var">g</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_morphisms"><span class="id" title="definition">sub_precategory_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#g"><span class="id" title="variable">g</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#total2_paths_f"><span class="id" title="lemma">total2_paths_f</span></a> <span class="id" title="var">H</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#proofirrelevance"><span class="id" title="lemma">proofirrelevance</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="is_precategory_sub_precategory"><span class="id" title="definition">is_precategory_sub_precategory</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>)(<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Categories.html#is_precategory"><span class="id" title="definition">is_precategory</span></a> (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_data"><span class="id" title="definition">sub_precategory_data</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span>;<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_comp"><span class="id" title="definition">sub_precategory_comp</span></a>;<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#eq_in_sub_precategory"><span class="id" title="lemma">eq_in_sub_precategory</span></a>; <span class="id" title="tactic">simpl</span>;<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#id_left"><span class="id" title="definition">id_left</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#eq_in_sub_precategory"><span class="id" title="lemma">eq_in_sub_precategory</span></a>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#id_right"><span class="id" title="definition">id_right</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#eq_in_sub_precategory"><span class="id" title="lemma">eq_in_sub_precategory</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#eq_in_sub_precategory"><span class="id" title="lemma">eq_in_sub_precategory</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc'"><span class="id" title="definition">assoc'</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="carrier_of_sub_precategory"><span class="id" title="definition">carrier_of_sub_precategory</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>)(<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#is_precategory_sub_precategory"><span class="id" title="definition">is_precategory_sub_precategory</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Coercion</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#carrier_of_sub_precategory"><span class="id" title="definition">carrier_of_sub_precategory</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#carrier_of_sub_precategory"><span class="id" title="definition">:</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#carrier_of_sub_precategory"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#carrier_of_sub_precategory"><span class="id" title="definition">&gt;-&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#carrier_of_sub_precategory"><span class="id" title="definition">precategory</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+An object satisfying the predicate is an object of the subprecategory 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="precategory_object_in_subcat"><span class="id" title="definition">precategory_object_in_subcat</span></a> {<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>} {<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">p</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_predicate_objects"><span class="id" title="definition">sub_precategory_predicate_objects</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#p"><span class="id" title="variable">p</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A morphism satisfying the predicate is a morphism of the subprecategory 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="precategory_morphisms_in_subcat"><span class="id" title="definition">precategory_morphisms_in_subcat</span></a> {<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>} {<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>}(<span class="id" title="var">f</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="var">p</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_predicate_morphisms"><span class="id" title="definition">sub_precategory_predicate_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>) (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#f"><span class="id" title="variable">f</span></a>)) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory_morphisms"><span class="id" title="definition">precategory_morphisms</span></a> (<span class="id" title="var">C</span>:=<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>) <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#p"><span class="id" title="variable">p</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab800"></a><h3 class="section">(Inclusion) functor from a sub-precategory to the ambient precategory</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_precategory_inclusion_data"><span class="id" title="definition">sub_precategory_inclusion_data</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>) (<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>):<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_data"><span class="id" title="definition">functor_data</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (@<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> ).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (@<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> ).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="is_functor_sub_precategory_inclusion"><span class="id" title="definition">is_functor_sub_precategory_inclusion</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#is_functor"><span class="id" title="definition">is_functor</span></a>  (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_inclusion_data"><span class="id" title="definition">sub_precategory_inclusion_data</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_idax"><span class="id" title="definition">functor_idax</span></a> . <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a> <span class="id" title="var">_</span> ).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_compax"><span class="id" title="definition">functor_compax</span></a> . <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a> <span class="id" title="var">_</span> ).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_precategory_inclusion"><span class="id" title="definition">sub_precategory_inclusion</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>) (<span class="id" title="var">C'</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#is_functor_sub_precategory_inclusion"><span class="id" title="definition">is_functor_sub_precategory_inclusion</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab801"></a><h2 class="section">Subcategories</h2>
+
+<div class="paragraph"> </div>
+
+ The hom-types of a subprecategory are sets if the hom-types of the original
+    category are. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="is_set_sub_precategory_morphisms"><span class="id" title="lemma">is_set_sub_precategory_morphisms</span></a> {<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>} (<span class="id" title="var">hs</span>: <a class="idref" href="UniMath.CategoryTheory.Categories.html#has_homsets"><span class="id" title="definition">has_homsets</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">C'</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartB.html#isaset"><span class="id" title="definition">isaset</span></a> (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_morphisms"><span class="id" title="definition">sub_precategory_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.MoreFoundations.PartA.html#isofhlevel_hsubtype"><span class="id" title="lemma">isofhlevel_hsubtype</span></a>, <span class="id" title="var">hs</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="sub_precategory_morphisms_set"><span class="id" title="definition">sub_precategory_morphisms_set</span></a> {<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>} (<span class="id" title="var">hs</span>: <a class="idref" href="UniMath.CategoryTheory.Categories.html#has_homsets"><span class="id" title="definition">has_homsets</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>)<br/>
+&nbsp;&nbsp;(<span class="id" title="var">C'</span>:<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) : <a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategory_morphisms"><span class="id" title="definition">sub_precategory_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#is_set_sub_precategory_morphisms"><span class="id" title="lemma">is_set_sub_precategory_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#hs"><span class="id" title="variable">hs</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C'"><span class="id" title="variable">C'</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#b"><span class="id" title="variable">b</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="subcategory"><span class="id" title="definition">subcategory</span></a> (<span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#category"><span class="id" title="definition">category</span></a>) (<span class="id" title="var">C'</span> : <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#sub_precategories"><span class="id" title="definition">sub_precategories</span></a> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#C"><span class="id" title="variable">C</span></a>) : <a class="idref" href="UniMath.CategoryTheory.Categories.html#category"><span class="id" title="definition">category</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#category_pair"><span class="id" title="definition">category_pair</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#carrier_of_sub_precategory"><span class="id" title="definition">carrier_of_sub_precategory</span></a> <span class="id" title="var">C</span> <span class="id" title="var">C'</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> ? ?.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Subcategory.Core.html#is_set_sub_precategory_morphisms"><span class="id" title="lemma">is_set_sub_precategory_morphisms</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#homset_property"><span class="id" title="definition">homset_property</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

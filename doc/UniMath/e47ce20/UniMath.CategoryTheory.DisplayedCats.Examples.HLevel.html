@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.DisplayedCats.Examples.HLevel</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.DisplayedCats.Examples.HLevel</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab1593"></a><h1 class="section">The displayed category of types of a given h-level</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab1594"></a><h2 class="section">Contents</h2>
+
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Definitions
+<ul class="doclist">
+<li> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_hlevel"><span class="id" title="definition">disp_hlevel</span></a></span>: The displayed category of types of <span class="inlinecode"><span class="id" title="var">hlevel</span></span> n
+
+</li>
+<li> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_prop"><span class="id" title="definition">disp_prop</span></a></span>: The displayed category of propositions
+
+</li>
+<li> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET"><span class="id" title="definition">disp_HSET</span></a></span>: The displayed category of sets
+
+</li>
+</ul>
+
+</li>
+<li> Equivalence of the total category of <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET"><span class="id" title="definition">disp_HSET</span></a></span> with <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#HSET_univalent_category"><span class="id" title="definition">HSET_univalent_category</span></a></span>
+
+</li>
+</ul>
+ 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Sets.html#"><span class="id" title="library">UniMath.Foundations.Sets</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#"><span class="id" title="library">UniMath.CategoryTheory.functor_categories</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.Types.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.Types</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.HSET.Core</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.HSET.Univalence</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.catiso.html#"><span class="id" title="library">UniMath.CategoryTheory.catiso</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Adjunctions.html#"><span class="id" title="library">UniMath.CategoryTheory.Adjunctions</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Equivalences.Core.html#"><span class="id" title="library">UniMath.CategoryTheory.Equivalences.Core</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Equivalences.FullyFaithful.html#"><span class="id" title="library">UniMath.CategoryTheory.Equivalences.FullyFaithful</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Equivalences.CompositesAndInverses.html#"><span class="id" title="library">UniMath.CategoryTheory.Equivalences.CompositesAndInverses</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Core.html#"><span class="id" title="library">UniMath.CategoryTheory.DisplayedCats.Core</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Constructions.html#"><span class="id" title="library">UniMath.CategoryTheory.DisplayedCats.Constructions</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1595"></a><h2 class="section">Definitions</h2>
+
+<div class="paragraph"> </div>
+
+<a name="lab1596"></a><h3 class="section"><span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_hlevel"><span class="id" title="definition">disp_hlevel</span></a></span>: The displayed category of types of <span class="inlinecode"><span class="id" title="var">hlevel</span></span> n</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="disp_hlevel"><span class="id" title="definition">disp_hlevel</span></a> (<span class="id" title="var">n</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Core.html#disp_precat"><span class="id" title="definition">disp_precat</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.Types.html#type_precat"><span class="id" title="definition">type_precat</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Constructions.html#disp_full_sub"><span class="id" title="definition">disp_full_sub</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.Types.html#type_precat"><span class="id" title="definition">type_precat</span></a> (<a class="idref" href="UniMath.Foundations.PartB.html#isofhlevel"><span class="id" title="definition">isofhlevel</span></a> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#n"><span class="id" title="variable">n</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1597"></a><h3 class="section"><span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_prop"><span class="id" title="definition">disp_prop</span></a></span>: The displayed category of propositions</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="disp_prop"><span class="id" title="definition">disp_prop</span></a> : <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Core.html#disp_precat"><span class="id" title="definition">disp_precat</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.Types.html#type_precat"><span class="id" title="definition">type_precat</span></a> := <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_hlevel"><span class="id" title="definition">disp_hlevel</span></a> 1.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1598"></a><h3 class="section"><span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET"><span class="id" title="definition">disp_HSET</span></a></span>: The displayed category of sets</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="disp_HSET"><span class="id" title="definition">disp_HSET</span></a> : <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Core.html#disp_precat"><span class="id" title="definition">disp_precat</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.Types.html#type_precat"><span class="id" title="definition">type_precat</span></a> := <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_hlevel"><span class="id" title="definition">disp_hlevel</span></a> 2.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1599"></a><h2 class="section">Equivalence of the total category of <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET"><span class="id" title="definition">disp_HSET</span></a></span> with <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#HSET_univalent_category"><span class="id" title="definition">HSET_univalent_category</span></a></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="disp_HSET_equiv_HSET_adjunction_data"><span class="id" title="definition">disp_HSET_equiv_HSET_adjunction_data</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Adjunctions.html#adjunction_data"><span class="id" title="definition">adjunction_data</span></a> (<a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Core.html#total_precategory"><span class="id" title="definition">total_precategory</span></a> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET"><span class="id" title="definition">disp_HSET</span></a>) <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#HSET_univalent_category"><span class="id" title="definition">HSET_univalent_category</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>; [|<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>].<br/>
+&nbsp;&nbsp;- <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#mk_functor"><span class="id" title="definition">mk_functor</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#mk_functor_data"><span class="id" title="definition">mk_functor_data</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#idfun"><span class="id" title="definition">idfun</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intros</span> ? ? <span class="id" title="var">f</span>; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">f</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intros</span> ? ? ?; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#mk_functor"><span class="id" title="definition">mk_functor</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#mk_functor_data"><span class="id" title="definition">mk_functor_data</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#idfun"><span class="id" title="definition">idfun</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intros</span> ? ? <span class="id" title="var">f</span>; <span class="id" title="tactic">exact</span> (<span class="id" title="var">f</span><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#tt"><span class="id" title="constructor">tt</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intros</span> ? ? ?; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#mk_nat_trans"><span class="id" title="definition">mk_nat_trans</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#idfun"><span class="id" title="definition">idfun</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tt"><span class="id" title="constructor">tt</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× </div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.functor_categories.html#is_nat_trans"><span class="id" title="definition">is_nat_trans</span></a></span> 
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ? ? ?.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality'"><span class="id" title="lemma">subtypeEquality'</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- <span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.Foundations.PartA.html#funcomp"><span class="id" title="definition">funcomp</span></a>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#isapropunit"><span class="id" title="definition">isapropunit</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#mk_nat_trans"><span class="id" title="definition">mk_nat_trans</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intros</span> ?; <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.PartA.html#idfun"><span class="id" title="definition">idfun</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intros</span> ? ? ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The displayed category of sets over <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.Types.html#type_precat"><span class="id" title="definition">type_precat</span></a></span> is equivalent to the
+    direct definition of <span class="inlinecode"><span class="id" title="var">HSET</span></span> as a category. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="disp_HSET_equiv_HSET"><span class="id" title="lemma">disp_HSET_equiv_HSET</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Equivalences.Core.html#forms_equivalence"><span class="id" title="definition">forms_equivalence</span></a> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET_equiv_HSET_adjunction_data"><span class="id" title="definition">disp_HSET_equiv_HSET_adjunction_data</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#identity_is_iso"><span class="id" title="lemma">identity_is_iso</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> ?; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#identity_is_iso"><span class="id" title="lemma">identity_is_iso</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="disp_HSET_adj_equivalence_of_precats_left"><span class="id" title="lemma">disp_HSET_adj_equivalence_of_precats_left</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Equivalences.Core.html#adj_equivalence_of_precats"><span class="id" title="definition">adj_equivalence_of_precats</span></a> (<a class="idref" href="UniMath.CategoryTheory.Adjunctions.html#left_functor"><span class="id" title="definition">left_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET_equiv_HSET_adjunction_data"><span class="id" title="definition">disp_HSET_equiv_HSET_adjunction_data</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Equivalences.Core.html#mk_adj_equivalence_of_precats"><span class="id" title="definition">mk_adj_equivalence_of_precats</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.Adjunctions.html#right_functor"><span class="id" title="definition">right_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET_equiv_HSET_adjunction_data"><span class="id" title="definition">disp_HSET_equiv_HSET_adjunction_data</span></a>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.Adjunctions.html#adjunit"><span class="id" title="definition">adjunit</span></a> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET_equiv_HSET_adjunction_data"><span class="id" title="definition">disp_HSET_equiv_HSET_adjunction_data</span></a>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.Adjunctions.html#adjcounit"><span class="id" title="definition">adjcounit</span></a> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET_equiv_HSET_adjunction_data"><span class="id" title="definition">disp_HSET_equiv_HSET_adjunction_data</span></a>).<br/>
+&nbsp;&nbsp;- <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Adjunctions.html#mk_form_adjunction"><span class="id" title="definition">mk_form_adjunction</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET_equiv_HSET"><span class="id" title="lemma">disp_HSET_equiv_HSET</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Definition</span> <a name="isaset'"><span class="id" title="definition">isaset'</span></a> (<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>) : <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a> := (<a class="idref" href="UniMath.Foundations.PartB.html#isaset"><span class="id" title="definition">isaset</span></a> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#X"><span class="id" title="variable">X</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <a class="idref" href="UniMath.Foundations.PartD.html#isapropisaset"><span class="id" title="lemma">isapropisaset</span></a> <span class="id" title="var">_</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="has_homsets_disp_HSET"><span class="id" title="lemma">has_homsets_disp_HSET</span></a> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#has_homsets"><span class="id" title="definition">has_homsets</span></a> (<a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Core.html#total_precategory"><span class="id" title="definition">total_precategory</span></a> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET"><span class="id" title="definition">disp_HSET</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ? ?.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.Equivalences.FullyFaithful.html#equivalence_homtype_property"><span class="id" title="lemma">equivalence_homtype_property</span></a> (<a class="idref" href="UniMath.CategoryTheory.Adjunctions.html#right_functor"><span class="id" title="definition">right_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET_equiv_HSET_adjunction_data"><span class="id" title="definition">disp_HSET_equiv_HSET_adjunction_data</span></a>) (<a class="idref" href="UniMath.CategoryTheory.Equivalences.CompositesAndInverses.html#adj_equivalence_of_precats_inv"><span class="id" title="definition">adj_equivalence_of_precats_inv</span></a> <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#disp_HSET_adj_equivalence_of_precats_left"><span class="id" title="lemma">disp_HSET_adj_equivalence_of_precats_left</span></a>) <a class="idref" href="UniMath.CategoryTheory.DisplayedCats.Examples.HLevel.html#isaset'"><span class="id" title="definition">isaset'</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
