@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.Foundations.Preamble</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.Foundations.Preamble</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Introduction. Vladimir Voevodsky . Feb. 2010 - Sep. 2011</h1>
+
+
+<div class="paragraph"> </div>
+
+This is the first in the group of files which contain the (current state of) the mathematical
+library for the proof assistant Coq based on the Univalent Foundations.  It contains some new
+notations for constructions defined in Coq.Init library as well as the definition of dependent sum.
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+ Initial setup unrelated to Univalent Foundations 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="UniMath.Foundations.Init.html#"><span class="id" title="library">UniMath.Foundations.Init</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Universe structure 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="UU"><span class="id" title="definition">UU</span></a> := <span class="id" title="keyword">Type</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Identity</span> <span class="id" title="keyword">Coercion</span> <span class="id" title="var">fromUUtoType</span> : <span class="id" title="var">UU</span> &gt;-&gt; <span class="id" title="var">Sortclass</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The empty type 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="empty"><span class="id" title="inductive">empty</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> := .<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="1bcfff782645e550303b44d1d50df7a5"><span class="id" title="notation">&quot;</span></a>∅" := <a class="idref" href="UniMath.Foundations.Preamble.html#empty"><span class="id" title="inductive">empty</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The one-element type 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="unit"><span class="id" title="inductive">unit</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="tt"><span class="id" title="constructor">tt</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#unit"><span class="id" title="inductive">unit</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The two-element type 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="bool"><span class="id" title="inductive">bool</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;| <a name="true"><span class="id" title="constructor">true</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#bool"><span class="id" title="inductive">bool</span></a><br/>
+&nbsp;&nbsp;| <a name="false"><span class="id" title="constructor">false</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#bool"><span class="id" title="inductive">bool</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="negb"><span class="id" title="definition">negb</span></a> (<span class="id" title="var">b</span>:<a class="idref" href="UniMath.Foundations.Preamble.html#bool"><span class="id" title="inductive">bool</span></a>) := <span class="id" title="keyword">if</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b"><span class="id" title="variable">b</span></a> <span class="id" title="keyword">then</span> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <span class="id" title="keyword">else</span> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The coproduct of two types 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="coprod"><span class="id" title="inductive">coprod</span></a> (<span class="id" title="var">A</span> <span class="id" title="var">B</span>:<a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+| <a name="ii1"><span class="id" title="constructor">ii1</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#coprod"><span class="id" title="inductive">coprod</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#B"><span class="id" title="variable">B</span></a><br/>
+| <a name="ii2"><span class="id" title="constructor">ii2</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#B"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#coprod"><span class="id" title="inductive">coprod</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#B"><span class="id" title="variable">B</span></a>.<br/>
+
+<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.Foundations.Preamble.html#coprod_rect"><span class="id" title="definition">coprod_rect</span></a> {<span class="id" title="var">_</span> <span class="id" title="var">_</span>} <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.Foundations.Preamble.html#ii1"><span class="id" title="constructor">ii1</span></a> {<span class="id" title="var">_</span> <span class="id" title="var">_</span>} <span class="id" title="var">_</span>.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.Foundations.Preamble.html#ii2"><span class="id" title="constructor">ii2</span></a> {<span class="id" title="var">_</span> <span class="id" title="var">_</span>} <span class="id" title="var">_</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="inl"><span class="id" title="abbreviation">inl</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#ii1"><span class="id" title="constructor">ii1</span></a>. <span class="id" title="keyword">Notation</span> <a name="inr"><span class="id" title="abbreviation">inr</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#ii2"><span class="id" title="constructor">ii2</span></a>. 
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="bf3e48d1a30259d4a8dc7d52ec54e2b5"><span class="id" title="notation">&quot;</span></a>X ⨿ Y" := (<a class="idref" href="UniMath.Foundations.Preamble.html#coprod"><span class="id" title="inductive">coprod</span></a> <span class="id" title="var">X</span> <span class="id" title="var">Y</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The natural numbers 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="nat"><span class="id" title="inductive">nat</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;| <a name="O"><span class="id" title="constructor">O</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a><br/>
+&nbsp;&nbsp;| <a name="S"><span class="id" title="constructor">S</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="succ"><span class="id" title="definition">succ</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Delimit</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">nat_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">nat</span>.<br/>
+<span class="id" title="keyword">Bind</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">nat_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">nat</span>.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">_</span>%<span class="id" title="var">nat</span>.<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">nat_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <a name="add"><span class="id" title="definition">add</span></a> <span class="id" title="var">n</span> <span class="id" title="var">m</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="UniMath.Foundations.Preamble.html#n"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="UniMath.Foundations.Preamble.html#m"><span class="id" title="variable">m</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">p</span> ⇒ <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> (<span class="id" title="var">p</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#m"><span class="id" title="variable">m</span></a>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+<span class="id" title="keyword">where</span> <a name="b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">&quot;</span></a>n + m" := (<a class="idref" href="UniMath.Foundations.Preamble.html#add"><span class="id" title="definition">add</span></a> <span class="id" title="var">n</span> <span class="id" title="var">m</span>) : <span class="id" title="var">nat_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <a name="sub"><span class="id" title="definition">sub</span></a> <span class="id" title="var">n</span> <span class="id" title="var">m</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="UniMath.Foundations.Preamble.html#n"><span class="id" title="variable">n</span></a>, <a class="idref" href="UniMath.Foundations.Preamble.html#m"><span class="id" title="variable">m</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">k</span>, <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">l</span> ⇒ <span class="id" title="var">k</span> <a class="idref" href="UniMath.Foundations.Preamble.html#9482aae3d3b06e249765c1225dbb8cbb"><span class="id" title="notation">-</span></a> <span class="id" title="var">l</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span>, <span class="id" title="var">_</span> ⇒ <a class="idref" href="UniMath.Foundations.Preamble.html#n"><span class="id" title="variable">n</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+<span class="id" title="keyword">where</span> <a name="9482aae3d3b06e249765c1225dbb8cbb"><span class="id" title="notation">&quot;</span></a>n - m" := (<a class="idref" href="UniMath.Foundations.Preamble.html#sub"><span class="id" title="definition">sub</span></a> <span class="id" title="var">n</span> <span class="id" title="var">m</span>) : <span class="id" title="var">nat_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="mul"><span class="id" title="definition">mul</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [|<span class="id" title="var">p</span> <span class="id" title="var">pm</span>].<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<span class="id" title="var">pm</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <span class="id" title="var">m</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">&quot;</span></a>n * m" := (<a class="idref" href="UniMath.Foundations.Preamble.html#mul"><span class="id" title="definition">mul</span></a> <span class="id" title="var">n</span> <span class="id" title="var">m</span>) : <span class="id" title="var">nat_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <a name="max"><span class="id" title="definition">max</span></a> <span class="id" title="var">n</span> <span class="id" title="var">m</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="UniMath.Foundations.Preamble.html#n"><span class="id" title="variable">n</span></a>, <a class="idref" href="UniMath.Foundations.Preamble.html#m"><span class="id" title="variable">m</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a>, <span class="id" title="var">_</span> ⇒ <a class="idref" href="UniMath.Foundations.Preamble.html#m"><span class="id" title="variable">m</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span>, <a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="UniMath.Foundations.Preamble.html#n"><span class="id" title="variable">n</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span>, <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">m'</span> ⇒ <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#max"><span class="id" title="definition">max</span></a> <span class="id" title="var">n'</span> <span class="id" title="var">m'</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <a name="min"><span class="id" title="definition">min</span></a> <span class="id" title="var">n</span> <span class="id" title="var">m</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="UniMath.Foundations.Preamble.html#n"><span class="id" title="variable">n</span></a>, <a class="idref" href="UniMath.Foundations.Preamble.html#m"><span class="id" title="variable">m</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a>, <span class="id" title="var">_</span> ⇒ <a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span>, <a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span>, <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">m'</span> ⇒ <a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#min"><span class="id" title="definition">min</span></a> <span class="id" title="var">n'</span> <span class="id" title="var">m'</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span>  <a name="8ea06af1e157624aedef3bf0c0aa1c21"><span class="id" title="notation">&quot;</span></a>0" := (<a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a>) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span>  <a name="e203449f95803e2cc18916e97245f41a"><span class="id" title="notation">&quot;</span></a>1" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 0) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span>  <a name="06dfc11594af35bce8c754c0e6d17b1f"><span class="id" title="notation">&quot;</span></a>2" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 1) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span>  <a name="e92ae45e6be017f50e474c0859f6bd71"><span class="id" title="notation">&quot;</span></a>3" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 2) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span>  <a name="faa6e31dee40a79e5322b00df31ac7a1"><span class="id" title="notation">&quot;</span></a>4" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 3) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span>  <a name="f1504538b9825fe27173a45d0d04bbdf"><span class="id" title="notation">&quot;</span></a>5" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 4) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span>  <a name="3111dfea20360a7b1213c895684b37b9"><span class="id" title="notation">&quot;</span></a>6" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 5) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span>  <a name="7295b9e4bb3fb8d80da5841e40cb7b65"><span class="id" title="notation">&quot;</span></a>7" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 6) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span>  <a name="e61ce0f1253fbeb980ba6ed7850f9f76"><span class="id" title="notation">&quot;</span></a>8" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 7) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span>  <a name="4c2460feb046c6c65f1df99bccd772b6"><span class="id" title="notation">&quot;</span></a>9" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 8) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="849953b77abc8b9baeec56b30a981640"><span class="id" title="notation">&quot;</span></a>10" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 9) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="9e70ce5435b8dc53dfa02a3bcef3f07b"><span class="id" title="notation">&quot;</span></a>11" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 10) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="d3ea406c5d2bb161b554ac888e0d4b43"><span class="id" title="notation">&quot;</span></a>12" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 11) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="3f55c547cc2c9c146b4de182aee1a702"><span class="id" title="notation">&quot;</span></a>13" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 12) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="8b9e354270b974d9c2e3605d2568bddc"><span class="id" title="notation">&quot;</span></a>14" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 13) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="cc67c767f49e2a65400cfb1c17a717d3"><span class="id" title="notation">&quot;</span></a>15" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 14) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="5fe2cb686231cd2c06e267ce1e1c2ac2"><span class="id" title="notation">&quot;</span></a>16" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 15) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="fa873b3d525f7685b9589726fb98c4be"><span class="id" title="notation">&quot;</span></a>17" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 16) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="438574f0fddde05a715ae4da83129a86"><span class="id" title="notation">&quot;</span></a>18" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 17) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="ae7553e461279de6a177aba8ddf1a89d"><span class="id" title="notation">&quot;</span></a>19" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 18) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="b10f1a1fcf63a6121cda3bc91a609a6b"><span class="id" title="notation">&quot;</span></a>20" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 19) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="c94cfde83744db69a475dcb6c42a2d60"><span class="id" title="notation">&quot;</span></a>21" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 20) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="6378203717b68b06e7ace9ea25297980"><span class="id" title="notation">&quot;</span></a>22" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 21) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="dbb1d4752fc10565c34aa6aade264eaf"><span class="id" title="notation">&quot;</span></a>23" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 22) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="f2aa76cf375d1f5f6a4f4df6d1c14b79"><span class="id" title="notation">&quot;</span></a>24" := (<a class="idref" href="UniMath.Foundations.Preamble.html#S"><span class="id" title="constructor">S</span></a> 23) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="e9dca29c36854d451f92cfd0d1bf58e3"><span class="id" title="notation">&quot;</span></a>100" := (10 <a class="idref" href="UniMath.Foundations.Preamble.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">×</span></a> 10) : <span class="id" title="var">nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="d7e7f0d810e6921f58d8defab82d8485"><span class="id" title="notation">&quot;</span></a>1000" := (10 <a class="idref" href="UniMath.Foundations.Preamble.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">×</span></a> 100) : <span class="id" title="var">nat_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Identity Types 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="paths"><span class="id" title="inductive">paths</span></a> {<span class="id" title="var">A</span>:<a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>} (<span class="id" title="var">a</span>:<a class="idref" href="UniMath.Foundations.Preamble.html#A"><span class="id" title="variable">A</span></a>) : <span class="id" title="var">A</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> := <a name="paths_refl"><span class="id" title="constructor">paths_refl</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#paths"><span class="id" title="inductive">paths</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#a"><span class="id" title="variable">a</span></a>.<br/>
+<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">paths_refl</span> : <span class="id" title="var">core</span> .<br/>
+<span class="id" title="keyword">Notation</span> <a name="1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">&quot;</span></a>a = b" := (<a class="idref" href="UniMath.Foundations.Preamble.html#paths"><span class="id" title="inductive">paths</span></a> <span class="id" title="var">a</span> <span class="id" title="var">b</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 70, <span class="id" title="keyword">no</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">type_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="idpath"><span class="id" title="abbreviation">idpath</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#paths_refl"><span class="id" title="constructor">paths_refl</span></a> .<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Dependent sums.
+
+<div class="paragraph"> </div>
+
+One can not use a new record each time one needs it because the general theorems about this
+construction would not apply to new instances of "Record" due to the "generativity" of inductive
+definitions in Coq.
+
+<div class="paragraph"> </div>
+
+We use "Record", which is equivalent to "Structure", instead of "Inductive" here, so we can take
+advantage of the "primitive projections" feature of Coq, which introduces η-reduction for pairs, by
+adding the option "Set Primitive Projections".  It also speeds up compilation by 56 percent.
+
+<div class="paragraph"> </div>
+
+The terms produced by the "induction" tactic, when we define "total2" as a record, contain the
+"match" construction instead appealing to the eliminator.  However, assuming the eliminator will be
+justified mathematically, the way to justify the the "match" construction is to point out that it
+can be regarded as an abbreviation for the eliminator that omits explicit mention of the first two
+parameters (X:Type) and (Y:X-&gt;Type).
+
+<div class="paragraph"> </div>
+
+I.e., whenever you see
+
+<div class="paragraph"> </div>
+
+       <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode"><a class="idref" href="UniMath.NumberSystems.Tests.html#Test_nat.Test_weqdicompl.w"><span class="id" title="variable">w</span></a></span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.PartD.html#t0"><span class="id" title="variable">t0</span></a></span> <span class="inlinecode"><span class="id" title="keyword">return</span></span> <span class="inlinecode"><span class="id" title="var">TYPE</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> <span class="inlinecode">|</span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Algebras.html#Algebra.DispAdjointEquivalenceToInvertible2cell.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.limits.binproducts.html#BinProducts.y"><span class="id" title="variable">y</span></a></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">BODY</span></span> <span class="inlinecode"><span class="id" title="keyword">end</span></span>
+
+<div class="paragraph"> </div>
+
+in a proof term, just mentally replace it by
+
+<div class="paragraph"> </div>
+
+       <span class="inlinecode">@<span class="id" title="var">total2_rect</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">(<span class="id" title="var">λ</span></span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.PartD.html#t0"><span class="id" title="variable">t0</span></a>,</span> <span class="inlinecode"><span class="id" title="var">TYPE</span>)</span> <span class="inlinecode">(<span class="id" title="var">λ</span></span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Bicategories.DisplayedBicats.Examples.Algebras.html#Algebra.DispAdjointEquivalenceToInvertible2cell.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.limits.binproducts.html#BinProducts.y"><span class="id" title="variable">y</span></a>,</span> <span class="inlinecode"><span class="id" title="var">BODY</span>)</span> <span class="inlinecode"><a class="idref" href="UniMath.NumberSystems.Tests.html#Test_nat.Test_weqdicompl.w"><span class="id" title="variable">w</span></a></span>
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Primitive</span> <span class="id" title="var">Projections</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Nonrecursive</span> <span class="id" title="var">Elimination</span> <span class="id" title="var">Schemes</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Record</span> <a name="total2"><span class="id" title="record">total2</span></a> { <span class="id" title="var">T</span>: <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> } ( <span class="id" title="var">P</span>: <a class="idref" href="UniMath.Foundations.Preamble.html#T"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.8.2/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> ) := <a name="tpair"><span class="id" title="constructor">tpair</span></a> { <a name="pr1"><span class="id" title="projection">pr1</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#T"><span class="id" title="variable">T</span></a>; <a name="pr2"><span class="id" title="projection">pr2</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="method">pr1</span></a> }.<br/>
+
+<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> {<span class="id" title="var">_</span>} <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> {<span class="id" title="var">_</span> <span class="id" title="var">_</span>} <span class="id" title="var">_</span>.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> {<span class="id" title="var">_</span> <span class="id" title="var">_</span>} <span class="id" title="var">_</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">&quot;</span></a>'∑'  x .. y , P" := (<a class="idref" href="UniMath.Foundations.Preamble.html#total2"><span class="id" title="record">total2</span></a> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> .. (<a class="idref" href="UniMath.Foundations.Preamble.html#total2"><span class="id" title="record">total2</span></a> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">y</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <span class="id" title="var">P</span>)) ..))<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200, <span class="id" title="var">x</span> <span class="id" title="var">binder</span>, <span class="id" title="var">y</span> <span class="id" title="var">binder</span>, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">type_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">&quot;</span></a>x ,, y" := (<a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
