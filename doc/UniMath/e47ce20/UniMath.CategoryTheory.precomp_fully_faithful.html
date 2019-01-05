@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.precomp_fully_faithful</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.precomp_fully_faithful</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+**********************************************************
+
+<div class="paragraph"> </div>
+
+Benedikt Ahrens, Chris Kapulkin, Mike Shulman
+
+<div class="paragraph"> </div>
+
+january 2013
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+ **********************************************************
+
+<div class="paragraph"> </div>
+
+Contents :
+
+<div class="paragraph"> </div>
+
+Precomposition with a full and
+           essentially surjective functor yields
+           a full and faithful, i.e. a fully faithful,
+           functor
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.PartD.html#"><span class="id" title="library">UniMath.Foundations.PartD</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Propositions.html#"><span class="id" title="library">UniMath.Foundations.Propositions</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Sets.html#"><span class="id" title="library">UniMath.Foundations.Sets</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#"><span class="id" title="library">UniMath.CategoryTheory.functor_categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.whiskering.html#"><span class="id" title="library">UniMath.CategoryTheory.whiskering</span></a>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">simp_rew</span> <span class="id" title="var">lem</span> := <span class="id" title="keyword">let</span> <span class="id" title="var">H</span>:=<span class="id" title="tactic">fresh</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span>:= <span class="id" title="var">lem</span>); <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> *; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">clear</span> <span class="id" title="var">H</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">simp_rerew</span> <span class="id" title="var">lem</span> := <span class="id" title="keyword">let</span> <span class="id" title="var">H</span>:=<span class="id" title="tactic">fresh</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span>:= <span class="id" title="var">lem</span>); <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> *; <span class="id" title="tactic">rewrite</span> &lt;- <span class="id" title="var">H</span>; <span class="id" title="tactic">clear</span> <span class="id" title="var">H</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> "G 'O' F" := (<a class="idref" href="UniMath.CategoryTheory.whiskering.html#functor_compose"><span class="id" title="definition">functor_compose</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">F</span> <span class="id" title="var">G</span> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> ) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 25).<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="pre_composition"><span class="id" title="section">pre_composition</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Section variables 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Variables</span> <a name="pre_composition.A"><span class="id" title="variable">A</span></a> <a name="pre_composition.B"><span class="id" title="variable">B</span></a> <a name="pre_composition.C"><span class="id" title="variable">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>.<br/>
+<span class="id" title="keyword">Variable</span> <a name="pre_composition.hsB"><span class="id" title="variable">hsB</span></a>: <a class="idref" href="UniMath.CategoryTheory.Categories.html#has_homsets"><span class="id" title="definition">has_homsets</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.B"><span class="id" title="variable">B</span></a>.<br/>
+<span class="id" title="keyword">Variable</span> <a name="pre_composition.hsC"><span class="id" title="variable">hsC</span></a>: <a class="idref" href="UniMath.CategoryTheory.Categories.html#has_homsets"><span class="id" title="definition">has_homsets</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.C"><span class="id" title="variable">C</span></a>.<br/>
+<span class="id" title="keyword">Variable</span> <a name="pre_composition.H"><span class="id" title="variable">H</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.B"><span class="id" title="variable">B</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1056"></a><h1 class="section">Precomposition with an essentially surjective functor is faithful.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="pre_composition_with_ess_surj_is_faithful"><span class="id" title="lemma">pre_composition_with_ess_surj_is_faithful</span></a> (<span class="id" title="var">p</span> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#essentially_surjective"><span class="id" title="definition">essentially_surjective</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#faithful"><span class="id" title="definition">faithful</span></a> (<a class="idref" href="UniMath.CategoryTheory.whiskering.html#pre_composition_functor"><span class="id" title="definition">pre_composition_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.B"><span class="id" title="variable">B</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsB"><span class="id" title="variable">hsB</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">F</span> <span class="id" title="var">G</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#isinclbetweensets"><span class="id" title="lemma">isinclbetweensets</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#isaset_nat_trans"><span class="id" title="lemma">isaset_nat_trans</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#isaset_nat_trans"><span class="id" title="lemma">isaset_nat_trans</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">gamma</span> <span class="id" title="keyword">delta</span> <span class="id" title="var">ex</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_eq"><span class="id" title="lemma">nat_trans_eq</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">intro</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">p</span> <span class="id" title="var">b</span> (<a class="idref" href="UniMath.Foundations.Propositions.html#hProppair"><span class="id" title="definition">hProppair</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">t</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">t</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">a</span> <span class="id" title="var">f</span>]; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#pre_comp_with_iso_is_inj"><span class="id" title="lemma">pre_comp_with_iso_is_inj</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#f9d39e9abcf2172e261db5a53b8f1205"><span class="id" title="notation">#</span></a> <span class="id" title="var">F</span> <span class="id" title="var">f</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_on_iso_is_iso"><span class="id" title="lemma">functor_on_iso_is_iso</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">f</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> 2 <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_ax"><span class="id" title="definition">nat_trans_ax</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#cancel_postcomposition"><span class="id" title="lemma">cancel_postcomposition</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_eq_pointwise"><span class="id" title="definition">nat_trans_eq_pointwise</span></a> <span class="id" title="var">ex</span> <span class="id" title="var">a</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1057"></a><h1 class="section">Precomposition with an essentially surjective and full functor is full</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="pre_composition.precomp_with_ess_surj_full_functor_is_full"><span class="id" title="section">precomp_with_ess_surj_full_functor_is_full</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Hypothesis</span> <a name="pre_composition.precomp_with_ess_surj_full_functor_is_full.p"><span class="id" title="variable">p</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#essentially_surjective"><span class="id" title="definition">essentially_surjective</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a>.<br/>
+<span class="id" title="keyword">Hypothesis</span> <a name="pre_composition.precomp_with_ess_surj_full_functor_is_full.Hf"><span class="id" title="variable">Hf</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#full"><span class="id" title="definition">full</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We prove that <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_pre_2_cat.html#folds_precat_implies_univalent.H"><span class="id" title="variable">H</span></a></span> yields a full functor. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="pre_composition.precomp_with_ess_surj_full_functor_is_full.full"><span class="id" title="section">full</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Variables</span> <a name="pre_composition.precomp_with_ess_surj_full_functor_is_full.full.F"><span class="id" title="variable">F</span></a> <a name="pre_composition.precomp_with_ess_surj_full_functor_is_full.full.G"><span class="id" title="variable">G</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.B"><span class="id" title="variable">B</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.C"><span class="id" title="variable">C</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We have to show that for <span class="inlinecode"><a class="idref" href="UniMath.Induction.W.Uniqueness.html#F"><span class="id" title="abbreviation">F</span></a></span> and <span class="inlinecode"><a class="idref" href="UniMath.SubstitutionSystems.SignatureExamples.html#63cb45ce9f42069f5c561867a9526aac"><span class="id" title="variable">G</span></a></span>, the map
+     <span class="inlinecode">(<span class="id" title="var">_</span></span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_pre_2_cat.html#folds_precat_implies_univalent.H"><span class="id" title="variable">H</span></a>)</span> <span class="inlinecode">(<a class="idref" href="UniMath.Induction.W.Uniqueness.html#F"><span class="id" title="abbreviation">F</span></a>,<a class="idref" href="UniMath.SubstitutionSystems.SignatureExamples.html#63cb45ce9f42069f5c561867a9526aac"><span class="id" title="variable">G</span></a>)</span> <span class="inlinecode">:</span> <span class="inlinecode">(<a class="idref" href="UniMath.Induction.W.Uniqueness.html#F"><span class="id" title="abbreviation">F</span></a></span> <span class="inlinecode">--&gt;</span> <span class="inlinecode"><a class="idref" href="UniMath.SubstitutionSystems.SignatureExamples.html#63cb45ce9f42069f5c561867a9526aac"><span class="id" title="variable">G</span></a>)</span> <span class="inlinecode">→</span> <span class="inlinecode">(<a class="idref" href="UniMath.Induction.W.Uniqueness.html#F"><span class="id" title="abbreviation">F</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_pre_2_cat.html#folds_precat_implies_univalent.H"><span class="id" title="variable">H</span></a></span> <span class="inlinecode">--&gt;</span> <span class="inlinecode"><a class="idref" href="UniMath.SubstitutionSystems.SignatureExamples.html#63cb45ce9f42069f5c561867a9526aac"><span class="id" title="variable">G</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Preamble.html#O"><span class="id" title="constructor">O</span></a></span> <span class="inlinecode"><a class="idref" href="UniMath.Folds.folds_pre_2_cat.html#folds_precat_implies_univalent.H"><span class="id" title="variable">H</span></a>)</span>  is surjective. 
+<div class="paragraph"> </div>
+
+ Fixing a <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.gamma"><span class="id" title="variable">gamma</span></a></span>, we produce its preimage. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Variable</span> <a name="pre_composition.precomp_with_ess_surj_full_functor_is_full.full.gamma"><span class="id" title="variable">gamma</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans"><span class="id" title="definition">nat_trans</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_composite"><span class="id" title="definition">functor_composite</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.F"><span class="id" title="variable">F</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_composite"><span class="id" title="definition">functor_composite</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.G"><span class="id" title="variable">G</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="iscontr_aux_space"><span class="id" title="lemma">iscontr_aux_space</span></a> (<span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.B"><span class="id" title="variable">B</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#iscontr"><span class="id" title="definition">iscontr</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#total2"><span class="id" title="record">total2</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">g</span> : <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.G"><span class="id" title="variable">G</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#b"><span class="id" title="variable">b</span></a> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso"><span class="id" title="definition">iso</span></a> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#a"><span class="id" title="variable">a</span></a>) <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#b"><span class="id" title="variable">b</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_on_iso"><span class="id" title="definition">functor_on_iso</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.F"><span class="id" title="variable">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#iso_inv_from_iso"><span class="id" title="definition">iso_inv_from_iso</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#f"><span class="id" title="variable">f</span></a>) <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.gamma"><span class="id" title="variable">gamma</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#f9d39e9abcf2172e261db5a53b8f1205"><span class="id" title="notation">#</span></a><a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.G"><span class="id" title="variable">G</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#f"><span class="id" title="variable">f</span></a>)).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.p"><span class="id" title="variable">p</span></a> <span class="id" title="var">b</span> (<a class="idref" href="UniMath.Foundations.Propositions.html#hProppair"><span class="id" title="definition">hProppair</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Foundations.PartD.html#isapropiscontr"><span class="id" title="lemma">isapropiscontr</span></a> <span class="id" title="var">_</span>))).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">t</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">t</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">anot</span> <span class="id" title="var">h</span>]; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">g</span> := <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_on_iso"><span class="id" title="definition">functor_on_iso</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.F"><span class="id" title="variable">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#iso_inv_from_iso"><span class="id" title="definition">iso_inv_from_iso</span></a> <span class="id" title="var">h</span>) <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.gamma"><span class="id" title="variable">gamma</span></a> <span class="id" title="var">anot</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#f9d39e9abcf2172e261db5a53b8f1205"><span class="id" title="notation">#</span></a><a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.G"><span class="id" title="variable">G</span></a> <span class="id" title="var">h</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">gp</span> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">(</span></a><span class="id" title="var">a</span> : <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.A"><span class="id" title="variable">A</span></a>) (<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso"><span class="id" title="definition">iso</span></a> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#a"><span class="id" title="variable">a</span></a>) <span class="id" title="var">b</span><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">g</span> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#f9d39e9abcf2172e261db5a53b8f1205"><span class="id" title="notation">#</span></a><a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.F"><span class="id" title="variable">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#inv_from_iso"><span class="id" title="definition">inv_from_iso</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#f"><span class="id" title="variable">f</span></a>) <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.gamma"><span class="id" title="variable">gamma</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#f9d39e9abcf2172e261db5a53b8f1205"><span class="id" title="notation">#</span></a><a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.G"><span class="id" title="variable">G</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#f"><span class="id" title="variable">f</span></a>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">f</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.Hf"><span class="id" title="variable">Hf</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<span class="id" title="var">h</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#inv_from_iso"><span class="id" title="definition">inv_from_iso</span></a> <span class="id" title="var">f</span>) (<a class="idref" href="UniMath.Foundations.Propositions.html#hProppair"><span class="id" title="definition">hProppair</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">sur</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">g</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_on_iso_inv"><span class="id" title="lemma">functor_on_iso_inv</span></a>; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso_inv_on_right"><span class="id" title="lemma">iso_inv_on_right</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> 2 <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_comp"><span class="id" title="definition">functor_comp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">sur</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">simp_rew</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_ax"><span class="id" title="definition">nat_trans_ax</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.gamma"><span class="id" title="variable">gamma</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">sur</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#cancel_precomposition"><span class="id" title="lemma">cancel_precomposition</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_comp"><span class="id" title="definition">functor_comp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso_after_iso_inv"><span class="id" title="definition">iso_after_iso_inv</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathsinv0"><span class="id" title="definition">pathsinv0</span></a>, <a class="idref" href="UniMath.CategoryTheory.Categories.html#id_right"><span class="id" title="definition">id_right</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">∃</span> (<span class="id" title="var">g</span><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <span class="id" title="var">gp</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">t</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">t</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">g'</span> <span class="id" title="var">gp'</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">do</span> 2 (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a>. }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">gp</span> <span class="id" title="var">anot</span> <span class="id" title="var">h</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">gp'</span> <span class="id" title="var">anot</span> <span class="id" title="var">h</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="pdelta"><span class="id" title="definition">pdelta</span></a> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">b</span> : <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.B"><span class="id" title="variable">B</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#05c8c1ce7d2d8559287cc88a3a5efc73"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.G"><span class="id" title="variable">G</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#b"><span class="id" title="variable">b</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">b</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#iscontr_aux_space"><span class="id" title="lemma">iscontr_aux_space</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#b"><span class="id" title="variable">b</span></a>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="is_nat_trans_pdelta"><span class="id" title="lemma">is_nat_trans_pdelta</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#is_nat_trans"><span class="id" title="definition">is_nat_trans</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.G"><span class="id" title="variable">G</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pdelta"><span class="id" title="definition">pdelta</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">b</span> <span class="id" title="var">b'</span> <span class="id" title="var">f</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.p"><span class="id" title="variable">p</span></a> <span class="id" title="var">b</span> (<a class="idref" href="UniMath.Foundations.Propositions.html#hProppair"><span class="id" title="definition">hProppair</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) )).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">t</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">t</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">a</span> <span class="id" title="var">h</span>]; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.p"><span class="id" title="variable">p</span></a> <span class="id" title="var">b'</span> (<a class="idref" href="UniMath.Foundations.Propositions.html#hProppair"><span class="id" title="definition">hProppair</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) )).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">t</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">t</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">a'</span> <span class="id" title="var">h'</span>]; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pdelta"><span class="id" title="definition">pdelta</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> ((<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#iscontr_aux_space"><span class="id" title="lemma">iscontr_aux_space</span></a> <span class="id" title="var">b</span>))) <span class="id" title="var">a</span> <span class="id" title="var">h</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> ((<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#iscontr_aux_space"><span class="id" title="lemma">iscontr_aux_space</span></a> <span class="id" title="var">b'</span>))) <span class="id" title="var">a'</span> <span class="id" title="var">h'</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- 3 <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathsinv0"><span class="id" title="definition">pathsinv0</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_on_iso_inv"><span class="id" title="lemma">functor_on_iso_inv</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso_inv_on_right"><span class="id" title="lemma">iso_inv_on_right</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> 4 <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- 2 <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_comp"><span class="id" title="definition">functor_comp</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.Hf"><span class="id" title="variable">Hf</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<span class="id" title="var">h</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <span class="id" title="var">f</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#inv_from_iso"><span class="id" title="definition">inv_from_iso</span></a> <span class="id" title="var">h'</span><a class="idref" href="UniMath.CategoryTheory.Categories.html#a93007328e3b775adf2fbefc77c43dac"><span class="id" title="notation">)</span></a>) (<a class="idref" href="UniMath.Foundations.Propositions.html#hProppair"><span class="id" title="definition">hProppair</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>))).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">sur</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">sur</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="var">simp_rew</span> (<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_ax"><span class="id" title="definition">nat_trans_ax</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.gamma"><span class="id" title="variable">gamma</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">sur</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- 3 <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- 2 <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_comp"><span class="id" title="definition">functor_comp</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#cancel_precomposition"><span class="id" title="lemma">cancel_precomposition</span></a>, <a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- 2 <a class="idref" href="UniMath.CategoryTheory.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso_after_iso_inv"><span class="id" title="definition">iso_after_iso_inv</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#id_right"><span class="id" title="definition">id_right</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="delta"><span class="id" title="definition">delta</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans"><span class="id" title="definition">nat_trans</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.G"><span class="id" title="variable">G</span></a> :=<br/>
+&nbsp;&nbsp;(<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pdelta"><span class="id" title="definition">pdelta</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#is_nat_trans_pdelta"><span class="id" title="lemma">is_nat_trans_pdelta</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="pdelta_preimage"><span class="id" title="lemma">pdelta_preimage</span></a> : <a class="idref" href="UniMath.CategoryTheory.whiskering.html#pre_whisker"><span class="id" title="definition">pre_whisker</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#delta"><span class="id" title="definition">delta</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full.gamma"><span class="id" title="variable">gamma</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#nat_trans_eq"><span class="id" title="lemma">nat_trans_eq</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">a</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">intermediate_path</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#iscontr_aux_space"><span class="id" title="lemma">iscontr_aux_space</span></a> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a> <span class="id" title="var">a</span>)))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">rewrite</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#iscontr_aux_space"><span class="id" title="lemma">iscontr_aux_space</span></a> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a> <span class="id" title="var">a</span>))) <span class="id" title="var">a</span> (<a class="idref" href="UniMath.CategoryTheory.Categories.html#identity_iso"><span class="id" title="definition">identity_iso</span></a> <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#iso_inv_of_iso_id"><span class="id" title="lemma">iso_inv_of_iso_id</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> 2 <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor_id"><span class="id" title="definition">functor_id</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#id_right"><span class="id" title="definition">id_right</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#id_left"><span class="id" title="definition">id_left</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full.full"><span class="id" title="section">full</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1058"></a><h1 class="section">Precomposition with an essentially surjective and full functor is fully faithful</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="pre_composition_with_ess_surj_and_full_is_full"><span class="id" title="lemma">pre_composition_with_ess_surj_and_full_is_full</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#full"><span class="id" title="definition">full</span></a> (<a class="idref" href="UniMath.CategoryTheory.whiskering.html#pre_composition_functor"><span class="id" title="definition">pre_composition_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.B"><span class="id" title="variable">B</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsB"><span class="id" title="variable">hsB</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">F</span> <span class="id" title="var">G</span> <span class="id" title="var">gamma</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Propositions.html#hinhpr"><span class="id" title="definition">hinhpr</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#delta"><span class="id" title="definition">delta</span></a> <span class="id" title="var">F</span> <span class="id" title="var">G</span> <span class="id" title="var">gamma</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pdelta_preimage"><span class="id" title="lemma">pdelta_preimage</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="pre_composition_with_ess_surj_and_full_is_full_and_faithful"><span class="id" title="lemma">pre_composition_with_ess_surj_and_full_is_full_and_faithful</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#full_and_faithful"><span class="id" title="definition">full_and_faithful</span></a> (<a class="idref" href="UniMath.CategoryTheory.whiskering.html#pre_composition_functor"><span class="id" title="definition">pre_composition_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.B"><span class="id" title="variable">B</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsB"><span class="id" title="variable">hsB</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition_with_ess_surj_and_full_is_full"><span class="id" title="lemma">pre_composition_with_ess_surj_and_full_is_full</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition_with_ess_surj_is_faithful"><span class="id" title="lemma">pre_composition_with_ess_surj_is_faithful</span></a>. <span class="id" title="tactic">assumption</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="pre_composition_with_ess_surj_and_full_is_fully_faithful"><span class="id" title="lemma">pre_composition_with_ess_surj_and_full_is_fully_faithful</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#fully_faithful"><span class="id" title="definition">fully_faithful</span></a> (<a class="idref" href="UniMath.CategoryTheory.whiskering.html#pre_composition_functor"><span class="id" title="definition">pre_composition_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.B"><span class="id" title="variable">B</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsB"><span class="id" title="variable">hsB</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#full_and_faithful_implies_fully_faithful"><span class="id" title="lemma">full_and_faithful_implies_fully_faithful</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition_with_ess_surj_and_full_is_full_and_faithful"><span class="id" title="lemma">pre_composition_with_ess_surj_and_full_is_full_and_faithful</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.precomp_with_ess_surj_full_functor_is_full"><span class="id" title="section">precomp_with_ess_surj_full_functor_is_full</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="pre_composition_with_ess_surj_and_fully_faithful_is_fully_faithful"><span class="id" title="lemma">pre_composition_with_ess_surj_and_fully_faithful_is_fully_faithful</span></a><br/>
+&nbsp;&nbsp;(<span class="id" title="var">p</span> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#essentially_surjective"><span class="id" title="definition">essentially_surjective</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a>) (<span class="id" title="var">Hff</span> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#fully_faithful"><span class="id" title="definition">fully_faithful</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a>):<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.functor_categories.html#fully_faithful"><span class="id" title="definition">fully_faithful</span></a> (<a class="idref" href="UniMath.CategoryTheory.whiskering.html#pre_composition_functor"><span class="id" title="definition">pre_composition_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.A"><span class="id" title="variable">A</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.B"><span class="id" title="variable">B</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsB"><span class="id" title="variable">hsB</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.hsC"><span class="id" title="variable">hsC</span></a> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition.H"><span class="id" title="variable">H</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition_with_ess_surj_and_full_is_fully_faithful"><span class="id" title="lemma">pre_composition_with_ess_surj_and_full_is_fully_faithful</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <span class="id" title="var">p</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#fully_faithful_implies_full_and_faithful"><span class="id" title="lemma">fully_faithful_implies_full_and_faithful</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <span class="id" title="var">Hff</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.precomp_fully_faithful.html#pre_composition"><span class="id" title="section">pre_composition</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

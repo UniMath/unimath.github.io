@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.categories.HSET.Limits</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.categories.HSET.Limits</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab1409"></a><h1 class="section">Limits in <span class="inlinecode"><span class="id" title="var">HSET</span></span></h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab1410"></a><h2 class="section">Contents</h2>
+
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> General limits (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#LimsHSET"><span class="id" title="lemma">LimsHSET</span></a></span>)
+<ul class="doclist">
+<li> Alternate definition using cats/limits
+
+</li>
+</ul>
+
+</li>
+<li> Binary products (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#BinProductsHSET"><span class="id" title="lemma">BinProductsHSET</span></a></span>)
+
+</li>
+<li> General indexed products (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#ProductsHSET"><span class="id" title="lemma">ProductsHSET</span></a></span>)
+
+</li>
+<li> Terminal object (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#TerminalHSET"><span class="id" title="lemma">TerminalHSET</span></a></span>)
+<ul class="doclist">
+<li> Terminal object from general limits (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#TerminalHSET_from_Lims"><span class="id" title="lemma">TerminalHSET_from_Lims</span></a></span>)
+
+</li>
+</ul>
+
+</li>
+<li> Pullbacks (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#PullbacksHSET"><span class="id" title="lemma">PullbacksHSET</span></a></span>)
+<ul class="doclist">
+<li> Pullbacks from general limits (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#PullbacksHSET_from_Lims"><span class="id" title="lemma">PullbacksHSET_from_Lims</span></a></span>)
+
+</li>
+</ul>
+
+</li>
+<li> Equalizers from general limits (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#EqualizersHSET_from_Lims"><span class="id" title="lemma">EqualizersHSET_from_Lims</span></a></span>)
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+Written by: Benedikt Ahrens, Anders Mörtberg
+
+<div class="paragraph"> </div>
+
+October 2015 - January 2016
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.PartD.html#"><span class="id" title="library">UniMath.Foundations.PartD</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Propositions.html#"><span class="id" title="library">UniMath.Foundations.Propositions</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Sets.html#"><span class="id" title="library">UniMath.Foundations.Sets</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.MoreFoundations.PartA.html#"><span class="id" title="library">UniMath.MoreFoundations.PartA</span></a>. <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.MoreFoundations.Tactics.html#"><span class="id" title="library">UniMath.MoreFoundations.Tactics</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#"><span class="id" title="library">UniMath.CategoryTheory.functor_categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.HSET.Core</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.graphs.colimits</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.limits.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.graphs.limits</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.pullbacks.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.graphs.pullbacks</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.equalizers.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.graphs.equalizers</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.limits.binproducts.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.binproducts</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.limits.products.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.products</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.limits.terminal.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.terminal</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.limits.pullbacks.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.pullbacks</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.HSET.Core</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1411"></a><h2 class="section">General limits</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="limits"><span class="id" title="section">limits</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Variable</span> <a name="limits.g"><span class="id" title="variable">g</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#graph"><span class="id" title="definition">graph</span></a>.<br/>
+<span class="id" title="keyword">Variable</span> <a name="limits.D"><span class="id" title="variable">D</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#diagram"><span class="id" title="definition">diagram</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#limits.g"><span class="id" title="variable">g</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="limset_UU"><span class="id" title="definition">limset_UU</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">(</span></a><span class="id" title="var">f</span> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">u</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#vertex"><span class="id" title="definition">vertex</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#limits.g"><span class="id" title="variable">g</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Sets.html#pr1hSet"><span class="id" title="definition">pr1hSet</span></a> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#dob"><span class="id" title="definition">dob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#limits.D"><span class="id" title="variable">D</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#u"><span class="id" title="variable">u</span></a>)<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">u</span> <span class="id" title="var">v</span> (<span class="id" title="var">e</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#edge"><span class="id" title="definition">edge</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#u"><span class="id" title="variable">u</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#v"><span class="id" title="variable">v</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#dmor"><span class="id" title="definition">dmor</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#limits.D"><span class="id" title="variable">D</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#e"><span class="id" title="variable">e</span></a> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#u"><span class="id" title="variable">u</span></a>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#v"><span class="id" title="variable">v</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="limset"><span class="id" title="definition">limset</span></a> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#limset_UU"><span class="id" title="definition">limset_UU</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartB.html#isofhleveltotal2"><span class="id" title="lemma">isofhleveltotal2</span></a> 2);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">repeat</span> (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#isasetaprop"><span class="id" title="lemma">isasetaprop</span></a>, <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a> ].<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="LimConeHSET"><span class="id" title="lemma">LimConeHSET</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.limits.html#LimCone"><span class="id" title="definition">LimCone</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#limits.D"><span class="id" title="variable">D</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.limits.html#mk_LimCone"><span class="id" title="definition">mk_LimCone</span></a>.<br/>
+- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#limset"><span class="id" title="definition">limset</span></a>.<br/>
+- <span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">u</span> <span class="id" title="var">f</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#u"><span class="id" title="variable">u</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">intros</span> <span class="id" title="var">u</span> <span class="id" title="var">v</span> <span class="id" title="var">e</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">f</span>)).<br/>
+- <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">CC</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">u</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.limits.html#coneOut"><span class="id" title="definition">coneOut</span></a> <span class="id" title="var">CC</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#u"><span class="id" title="variable">u</span></a> <span class="id" title="var">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">intros</span> <span class="id" title="var">u</span> <span class="id" title="var">v</span> <span class="id" title="var">e</span>; <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.limits.html#coneOutCommutes"><span class="id" title="lemma">coneOutCommutes</span></a> <span class="id" title="var">CC</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">e</span>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">intro</span> <span class="id" title="var">v</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>).<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">intros</span> [<span class="id" title="var">t</span> <span class="id" title="var">p</span>]; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#isaset_set_fun_space"><span class="id" title="lemma">isaset_set_fun_space</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">repeat</span> (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>); <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">u</span>; <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<span class="id" title="var">p</span> <span class="id" title="var">u</span>))]).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#limits"><span class="id" title="section">limits</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="LimsHSET"><span class="id" title="lemma">LimsHSET</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.limits.html#Lims"><span class="id" title="definition">Lims</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">now</span> <span class="id" title="tactic">intros</span> <span class="id" title="var">g</span> <span class="id" title="var">d</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#LimConeHSET"><span class="id" title="lemma">LimConeHSET</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="LimsHSET_of_shape"><span class="id" title="lemma">LimsHSET_of_shape</span></a> (<span class="id" title="var">g</span> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.colimits.html#graph"><span class="id" title="definition">graph</span></a>) : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.limits.html#Lims_of_shape"><span class="id" title="definition">Lims_of_shape</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">now</span> <span class="id" title="tactic">intros</span> <span class="id" title="var">d</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#LimConeHSET"><span class="id" title="lemma">LimConeHSET</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1412"></a><h3 class="section">Alternate definition using cats/limits</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <a class="idref" href="UniMath.CategoryTheory.limits.cats.limits.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.cats.limits</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="cats_limits"><span class="id" title="section">cats_limits</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Variable</span> <a name="cats_limits.J"><span class="id" title="variable">J</span></a> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>.<br/>
+<span class="id" title="keyword">Variable</span> <a name="cats_limits.D"><span class="id" title="variable">D</span></a> : <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#cats_limits.J"><span class="id" title="variable">J</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="cats_limset_UU"><span class="id" title="definition">cats_limset_UU</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">(</span></a><span class="id" title="var">f</span> : <a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">u</span><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Sets.html#pr1hSet"><span class="id" title="definition">pr1hSet</span></a> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#cats_limits.D"><span class="id" title="variable">D</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#u"><span class="id" title="variable">u</span></a>)<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">u</span> <span class="id" title="var">v</span> (<span class="id" title="var">e</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#cats_limits.J"><span class="id" title="variable">J</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#u"><span class="id" title="variable">u</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#v"><span class="id" title="variable">v</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.CategoryTheory.functor_categories.html#f9d39e9abcf2172e261db5a53b8f1205"><span class="id" title="notation">#</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#cats_limits.D"><span class="id" title="variable">D</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#e"><span class="id" title="variable">e</span></a> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#u"><span class="id" title="variable">u</span></a>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#v"><span class="id" title="variable">v</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="cats_limset"><span class="id" title="definition">cats_limset</span></a> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#cats_limset_UU"><span class="id" title="definition">cats_limset_UU</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartB.html#isofhleveltotal2"><span class="id" title="lemma">isofhleveltotal2</span></a> 2);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">repeat</span> (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#isasetaprop"><span class="id" title="lemma">isasetaprop</span></a>, <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a> ].<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="cats_LimConeHSET"><span class="id" title="lemma">cats_LimConeHSET</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.cats.limits.html#LimCone"><span class="id" title="definition">cats.limits.LimCone</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#cats_limits.D"><span class="id" title="variable">D</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.limits.html#mk_LimCone"><span class="id" title="definition">mk_LimCone</span></a>.<br/>
+- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#cats_limset"><span class="id" title="definition">cats_limset</span></a>.<br/>
+- <span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">u</span> <span class="id" title="var">f</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#u"><span class="id" title="variable">u</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">intros</span> <span class="id" title="var">u</span> <span class="id" title="var">v</span> <span class="id" title="var">e</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">f</span>)).<br/>
+- <span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">CC</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">u</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.limits.html#coneOut"><span class="id" title="definition">coneOut</span></a> <span class="id" title="var">CC</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#u"><span class="id" title="variable">u</span></a> <span class="id" title="var">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">intros</span> <span class="id" title="var">u</span> <span class="id" title="var">v</span> <span class="id" title="var">e</span>; <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.limits.html#coneOutCommutes"><span class="id" title="lemma">coneOutCommutes</span></a> <span class="id" title="var">CC</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">e</span>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">intro</span> <span class="id" title="var">v</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>).<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">intros</span> [<span class="id" title="var">t</span> <span class="id" title="var">p</span>]; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#isaset_set_fun_space"><span class="id" title="lemma">isaset_set_fun_space</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">repeat</span> (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>); <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">u</span>; <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<span class="id" title="var">p</span> <span class="id" title="var">u</span>))]).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#cats_limits"><span class="id" title="section">cats_limits</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="cats_LimsHSET"><span class="id" title="lemma">cats_LimsHSET</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.cats.limits.html#Lims"><span class="id" title="definition">cats.limits.Lims</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">now</span> <span class="id" title="tactic">intros</span> <span class="id" title="var">g</span> <span class="id" title="var">d</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#cats_LimConeHSET"><span class="id" title="lemma">cats_LimConeHSET</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="cats_LimsHSET_of_shape"><span class="id" title="lemma">cats_LimsHSET_of_shape</span></a> (<span class="id" title="var">g</span> : <a class="idref" href="UniMath.CategoryTheory.Categories.html#precategory"><span class="id" title="definition">precategory</span></a>) : <a class="idref" href="UniMath.CategoryTheory.limits.cats.limits.html#Lims_of_shape"><span class="id" title="definition">cats.limits.Lims_of_shape</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">now</span> <span class="id" title="tactic">intros</span> <span class="id" title="var">d</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#cats_LimConeHSET"><span class="id" title="lemma">cats_LimConeHSET</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1413"></a><h2 class="section">Binary products (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#BinProductsHSET"><span class="id" title="lemma">BinProductsHSET</span></a></span>)</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="BinProductsHSET"><span class="id" title="lemma">BinProductsHSET</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.binproducts.html#BinProducts"><span class="id" title="definition">BinProducts</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>.<br/>
+<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.binproducts.html#mk_BinProduct"><span class="id" title="definition">mk_BinProduct</span></a>.<br/>
+- <span class="id" title="tactic">apply</span> (<span class="id" title="var">A</span> <a class="idref" href="UniMath.Foundations.Sets.html#e328b866d9020cf9e8a661c4458861d2"><span class="id" title="notation">×</span></a> <span class="id" title="var">B</span>)%<span class="id" title="tactic">set</span>.<br/>
+- <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> *; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a>.<br/>
+- <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> *; <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">x</span>).<br/>
+- <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.limits.binproducts.html#mk_isBinProduct"><span class="id" title="definition">mk_isBinProduct</span></a> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">C</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span>; <span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;× <span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.PartD.html#prodtofuntoprod"><span class="id" title="definition">prodtofuntoprod</span></a> (<span class="id" title="var">f</span><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a><span class="id" title="var">g</span>)); <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">split</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>).<br/>
+&nbsp;&nbsp;× <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">intros</span> [<span class="id" title="var">t</span> [<span class="id" title="var">ht1</span> <span class="id" title="var">ht2</span>]]; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#isapropdirprod"><span class="id" title="definition">isapropdirprod</span></a>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">rewrite</span> &lt;- <span class="id" title="var">ht2</span>, &lt;- <span class="id" title="var">ht1</span> ]).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.binproducts.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.graphs.binproducts</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1414"></a><h3 class="section">Binary products from limits (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#BinProductsHSET_from_Lims"><span class="id" title="lemma">BinProductsHSET_from_Lims</span></a></span>)</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="BinProductsHSET_from_Lims"><span class="id" title="lemma">BinProductsHSET_from_Lims</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.binproducts.html#BinProducts"><span class="id" title="definition">graphs.binproducts.BinProducts</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.binproducts.html#BinProducts_from_Lims"><span class="id" title="lemma">binproducts.BinProducts_from_Lims</span></a>, <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#LimsHSET_of_shape"><span class="id" title="lemma">LimsHSET_of_shape</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1415"></a><h2 class="section">General indexed products (<span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#ProductsHSET"><span class="id" title="lemma">ProductsHSET</span></a></span>)</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="ProductsHSET"><span class="id" title="lemma">ProductsHSET</span></a> (<span class="id" title="var">I</span> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>) : <a class="idref" href="UniMath.CategoryTheory.limits.products.html#Products"><span class="id" title="definition">Products</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#I"><span class="id" title="variable">I</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">intros</span> <span class="id" title="var">A</span>.<br/>
+<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.products.html#mk_Product"><span class="id" title="definition">mk_Product</span></a>.<br/>
+- <span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">∏</span></a> <span class="id" title="var">i</span><a class="idref" href="UniMath.Foundations.Init.html#a0a086f1dd84e2a3eb74369525d648f8"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<span class="id" title="var">A</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#i"><span class="id" title="variable">i</span></a>)); <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#isaset_forall_hSet"><span class="id" title="lemma">isaset_forall_hSet</span></a>.<br/>
+- <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">i</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">apply</span> (<span class="id" title="var">f</span> <span class="id" title="var">i</span>).<br/>
+- <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.limits.products.html#mk_isProduct"><span class="id" title="definition">mk_isProduct</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">C</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;× <span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">c</span> <span class="id" title="var">i</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <span class="id" title="var">f</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#i"><span class="id" title="variable">i</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#c"><span class="id" title="variable">c</span></a>); <span class="id" title="tactic">intro</span> <span class="id" title="var">i</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">intros</span> <span class="id" title="var">h</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>; <span class="id" title="tactic">simpl</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="tactic">destruct</span> <span class="id" title="var">h</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">t</span> <span class="id" title="var">ht</span>]; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">i</span>; <span class="id" title="tactic">rewrite</span> &lt;- <span class="id" title="var">ht</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a> ]).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1416"></a><h2 class="section">Terminal object <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#TerminalHSET"><span class="id" title="lemma">TerminalHSET</span></a></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="TerminalHSET"><span class="id" title="lemma">TerminalHSET</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.terminal.html#Terminal"><span class="id" title="definition">Terminal</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.limits.terminal.html#mk_Terminal"><span class="id" title="definition">mk_Terminal</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#unitHSET"><span class="id" title="definition">unitHSET</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.limits.terminal.html#mk_isTerminal"><span class="id" title="definition">mk_isTerminal</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">a</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">λ</span></a> <span class="id" title="var">_</span><a class="idref" href="UniMath.Foundations.Init.html#e347aba07034a66189f14f85f0430e87"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#tt"><span class="id" title="constructor">tt</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">case</span> (<span class="id" title="var">f</span> <span class="id" title="var">x</span>); <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1417"></a><h3 class="section">Terminal object from general limits <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#TerminalHSET_from_Lims"><span class="id" title="lemma">TerminalHSET_from_Lims</span></a></span></h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.terminal.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.graphs.terminal</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="TerminalHSET_from_Lims"><span class="id" title="lemma">TerminalHSET_from_Lims</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.terminal.html#Terminal"><span class="id" title="definition">graphs.terminal.Terminal</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.terminal.html#Terminal_from_Lims"><span class="id" title="lemma">terminal.Terminal_from_Lims</span></a>, <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#LimsHSET_of_shape"><span class="id" title="lemma">LimsHSET_of_shape</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1418"></a><h2 class="section">Pullbacks <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#PullbacksHSET"><span class="id" title="lemma">PullbacksHSET</span></a></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="PullbackHSET_ob"><span class="id" title="definition">PullbackHSET_ob</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>} (<span class="id" title="var">f</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>) (<span class="id" title="var">g</span> : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="UniMath.CategoryTheory.Categories.html#3039a08e9caa1a1b9c6c7ec5fbc357ec"><span class="id" title="notation">⟧</span></a>) : <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">∑</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">(</span></a><span class="id" title="var">xy</span> : <a class="idref" href="UniMath.Foundations.Sets.html#setdirprod"><span class="id" title="definition">setdirprod</span></a> <span class="id" title="var">B</span> <span class="id" title="var">C</span><a class="idref" href="UniMath.Foundations.Preamble.html#645c81d8e8c8df0179dbdec41391c773"><span class="id" title="notation">),</span></a> <span class="id" title="var">f</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#xy"><span class="id" title="variable">xy</span></a>) <a class="idref" href="UniMath.Foundations.Preamble.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <span class="id" title="var">g</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#xy"><span class="id" title="variable">xy</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#isaset_total2"><span class="id" title="lemma">isaset_total2</span></a>; [ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#isasetdirprod"><span class="id" title="abbreviation">isasetdirprod</span></a>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="tactic">intros</span> <span class="id" title="var">xy</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#isasetaprop"><span class="id" title="lemma">isasetaprop</span></a>, <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a> ]).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="PullbacksHSET"><span class="id" title="lemma">PullbacksHSET</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.pullbacks.html#Pullbacks"><span class="id" title="definition">Pullbacks</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span>.<br/>
+<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.pullbacks.html#mk_Pullback"><span class="id" title="definition">mk_Pullback</span></a>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#PullbackHSET_ob"><span class="id" title="definition">PullbackHSET_ob</span></a> <span class="id" title="var">f</span> <span class="id" title="var">g</span>).<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">xy</span>; <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">xy</span>)).<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">xy</span>; <span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">xy</span>)).<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a>; <span class="id" title="tactic">intros</span> [[<span class="id" title="var">x</span> <span class="id" title="var">y</span>] <span class="id" title="var">Hxy</span>]; <span class="id" title="tactic">apply</span> <span class="id" title="var">Hxy</span>).<br/>
+&nbsp;&nbsp;+ <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.limits.pullbacks.html#mk_isPullback"><span class="id" title="definition">mk_isPullback</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">f1</span> <span class="id" title="var">f2</span> <span class="id" title="var">Hf12</span>; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.PartB.html#unique_exists"><span class="id" title="lemma">unique_exists</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<span class="id" title="var">f1</span> <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Preamble.html#b3c458fcac779d3a49e028b136e17a32"><span class="id" title="notation">,,</span></a><span class="id" title="var">f2</span> <span class="id" title="var">x</span>); <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">Hf12</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span> (<span class="id" title="var">now</span> <span class="id" title="tactic">split</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span> (<span class="id" title="var">now</span> <span class="id" title="tactic">intros</span> <span class="id" title="var">h</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#isapropdirprod"><span class="id" title="definition">isapropdirprod</span></a>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">intros</span> <span class="id" title="var">h</span> [<span class="id" title="var">H1</span> <span class="id" title="var">H2</span>]; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypeEquality"><span class="id" title="lemma">subtypeEquality</span></a>; [<span class="id" title="tactic">intros</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a>|]; <span class="id" title="tactic">simpl</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> &lt;- (<a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">H1</span> <span class="id" title="var">x</span>), &lt;- (<a class="idref" href="UniMath.Foundations.PartA.html#toforallpaths"><span class="id" title="definition">toforallpaths</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">H2</span> <span class="id" title="var">x</span>)).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1419"></a><h3 class="section">Pullbacks from general limits <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#PullbacksHSET_from_Lims"><span class="id" title="lemma">PullbacksHSET_from_Lims</span></a></span></h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.pullbacks.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.graphs.pullbacks</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="PullbacksHSET_from_Lims"><span class="id" title="lemma">PullbacksHSET_from_Lims</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.pullbacks.html#Pullbacks"><span class="id" title="definition">graphs.pullbacks.Pullbacks</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.pullbacks.html#Pullbacks_from_Lims"><span class="id" title="lemma">graphs.pullbacks.Pullbacks_from_Lims</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#LimsHSET"><span class="id" title="lemma">LimsHSET</span></a>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1420"></a><h2 class="section">Equalizers from general limits <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#EqualizersHSET_from_Lims"><span class="id" title="lemma">EqualizersHSET_from_Lims</span></a></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <a class="idref" href="UniMath.CategoryTheory.limits.graphs.equalizers.html#"><span class="id" title="library">UniMath.CategoryTheory.limits.graphs.equalizers</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="EqualizersHSET_from_Lims"><span class="id" title="lemma">EqualizersHSET_from_Lims</span></a> : <a class="idref" href="UniMath.CategoryTheory.limits.graphs.equalizers.html#Equalizers"><span class="id" title="definition">graphs.equalizers.Equalizers</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.CategoryTheory.limits.graphs.equalizers.html#Equalizers_from_Lims"><span class="id" title="lemma">graphs.equalizers.Equalizers_from_Lims</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#LimsHSET"><span class="id" title="lemma">LimsHSET</span></a>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+HSET Pullbacks and Equalizers from limits to direct definition 
+</div>
+<div class="code">
+<span class="id" title="keyword">Section</span> <a name="HSET_Structures"><span class="id" title="section">HSET_Structures</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="HSET_Pullbacks"><span class="id" title="definition">HSET_Pullbacks</span></a> : @<a class="idref" href="UniMath.CategoryTheory.limits.pullbacks.html#Pullbacks"><span class="id" title="definition">limits.pullbacks.Pullbacks</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.limits.graphs.pullbacks.html#equiv_Pullbacks_2"><span class="id" title="definition">equiv_Pullbacks_2</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#PullbacksHSET_from_Lims"><span class="id" title="lemma">PullbacksHSET_from_Lims</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="HSET_Equalizers"><span class="id" title="definition">HSET_Equalizers</span></a>: @<a class="idref" href="UniMath.CategoryTheory.limits.equalizers.html#Equalizers"><span class="id" title="definition">limits.equalizers.Equalizers</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.limits.graphs.equalizers.html#equiv_Equalizers2"><span class="id" title="definition">equiv_Equalizers2</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#c7c0f42b6a65b8cc13ad3e5d94253eb5"><span class="id" title="notation">HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#EqualizersHSET_from_Lims"><span class="id" title="lemma">EqualizersHSET_from_Lims</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Limits.html#HSET_Structures"><span class="id" title="section">HSET_Structures</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
