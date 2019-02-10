@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.MoreFoundations.Notations</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.MoreFoundations.Notations</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab296"></a><h1 class="section">Notations</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="UniMath.MoreFoundations.Foundations.html#"><span class="id" title="library">UniMath.MoreFoundations.Foundations</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="6f3d27cc4c2606a851800b73071994a9"><span class="id" title="notation">&quot;</span></a>A ⇒ B" := (<a class="idref" href="UniMath.Foundations.Propositions.html#himpl"><span class="id" title="definition">himpl</span></a> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) : <span class="id" title="var">logic</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">logic</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="hequiv"><span class="id" title="definition">hequiv</span></a> (<span class="id" title="var">P</span> <span class="id" title="var">Q</span>:<a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a>) : <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a> := <a class="idref" href="UniMath.Foundations.Propositions.html#3668992ecc3e95973d304a75a28051a2"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.MoreFoundations.Notations.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="UniMath.MoreFoundations.Notations.html#6f3d27cc4c2606a851800b73071994a9"><span class="id" title="notation">⇒</span></a> <a class="idref" href="UniMath.MoreFoundations.Notations.html#Q"><span class="id" title="variable">Q</span></a><a class="idref" href="UniMath.Foundations.Propositions.html#3668992ecc3e95973d304a75a28051a2"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#3668992ecc3e95973d304a75a28051a2"><span class="id" title="notation">∧</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#3668992ecc3e95973d304a75a28051a2"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.MoreFoundations.Notations.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="UniMath.MoreFoundations.Notations.html#6f3d27cc4c2606a851800b73071994a9"><span class="id" title="notation">⇒</span></a> <a class="idref" href="UniMath.MoreFoundations.Notations.html#P"><span class="id" title="variable">P</span></a><a class="idref" href="UniMath.Foundations.Propositions.html#3668992ecc3e95973d304a75a28051a2"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="c3b83056dc45ff40436168fec4fc4de4"><span class="id" title="notation">&quot;</span></a>A ⇔ B" := (<a class="idref" href="UniMath.MoreFoundations.Notations.html#hequiv"><span class="id" title="definition">hequiv</span></a> <span class="id" title="var">A</span> <span class="id" title="var">B</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 95, <span class="id" title="keyword">no</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">logic</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="total2_hProp"><span class="id" title="definition">total2_hProp</span></a> {<span class="id" title="var">X</span> : <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a>} (<span class="id" title="var">Y</span> : <a class="idref" href="UniMath.MoreFoundations.Notations.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a>) : <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a><br/>
+&nbsp;&nbsp;:= <a class="idref" href="UniMath.Foundations.Propositions.html#hProppair"><span class="id" title="definition">hProppair</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Preamble.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.MoreFoundations.Notations.html#Y"><span class="id" title="variable">Y</span></a> <a class="idref" href="UniMath.MoreFoundations.Notations.html#x"><span class="id" title="variable">x</span></a>) (<a class="idref" href="UniMath.Foundations.Propositions.html#isaprop_total2"><span class="id" title="lemma">isaprop_total2</span></a> <a class="idref" href="UniMath.MoreFoundations.Notations.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.MoreFoundations.Notations.html#Y"><span class="id" title="variable">Y</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Delimit</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">prop</span> <span class="id" title="keyword">with</span> <span class="id" title="var">prop</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="c40fa356cf15929ee9ed2e6758afcb99"><span class="id" title="notation">&quot;</span></a>'∑' x .. y , P" := (<a class="idref" href="UniMath.MoreFoundations.Notations.html#total2_hProp"><span class="id" title="definition">total2_hProp</span></a> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <span class="id" title="var">x</span><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a>.. (<a class="idref" href="UniMath.MoreFoundations.Notations.html#total2_hProp"><span class="id" title="definition">total2_hProp</span></a> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <span class="id" title="var">y</span><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <span class="id" title="var">P</span>))..))<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200, <span class="id" title="var">x</span> <span class="id" title="var">binder</span>, <span class="id" title="var">y</span> <span class="id" title="var">binder</span>, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">prop</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="9390c497453b89d8b9b49ce68c8eef3a"><span class="id" title="notation">&quot;</span></a>'pr11' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">x</span>)) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+<span class="id" title="keyword">Notation</span> <a name="821cf42560825f932ef756365e3b5d5a"><span class="id" title="notation">&quot;</span></a>'pr12' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">x</span>)) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+<span class="id" title="keyword">Notation</span> <a name="f83aac69626ddf5f3e718a97baf24946"><span class="id" title="notation">&quot;</span></a>'pr21' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">x</span>)) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+<span class="id" title="keyword">Notation</span> <a name="97ca7253407ad1368a34a6a134a287af"><span class="id" title="notation">&quot;</span></a>'pr22' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">x</span>)) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="7d82515c0b5fffa19862d03e6408b5d1"><span class="id" title="notation">&quot;</span></a>'pr111' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">x</span>))) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+<span class="id" title="keyword">Notation</span> <a name="37bc46c8838a691bf933038ad0b52509"><span class="id" title="notation">&quot;</span></a>'pr112' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">x</span>))) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+<span class="id" title="keyword">Notation</span> <a name="e8919a9d7ebb8fd3723e9229495f47f9"><span class="id" title="notation">&quot;</span></a>'pr121' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">x</span>))) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+<span class="id" title="keyword">Notation</span> <a name="3395818c34d310416e8dc60821af14e0"><span class="id" title="notation">&quot;</span></a>'pr122' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">x</span>))) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+<span class="id" title="keyword">Notation</span> <a name="d822c3118d2ae72fb814c3ca5e71906a"><span class="id" title="notation">&quot;</span></a>'pr211' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">x</span>))) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+<span class="id" title="keyword">Notation</span> <a name="a61628282d41e92c1b544e71952395ca"><span class="id" title="notation">&quot;</span></a>'pr212' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">x</span>))) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+<span class="id" title="keyword">Notation</span> <a name="f9edb9f279f79d0769e5135e8b0f7eb1"><span class="id" title="notation">&quot;</span></a>'pr221' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <span class="id" title="var">x</span>))) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+<span class="id" title="keyword">Notation</span> <a name="297e6ffac99211549fcb5406af117148"><span class="id" title="notation">&quot;</span></a>'pr222' x" := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">x</span>))) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 8).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
