@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.MoreFoundations.Test</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.MoreFoundations.Test</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab293"></a><h1 class="section">Tests</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Init.html#"><span class="id" title="library">UniMath.Foundations.Init</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Sets.html#"><span class="id" title="library">UniMath.Foundations.Sets</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#"><span class="id" title="library">UniMath.MoreFoundations.Bool</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab294"></a><h2 class="section">Bool.v</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#orb"><span class="id" title="definition">orb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#orb"><span class="id" title="definition">orb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#orb"><span class="id" title="definition">orb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#orb"><span class="id" title="definition">orb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#implb"><span class="id" title="definition">implb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#implb"><span class="id" title="definition">implb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#implb"><span class="id" title="definition">implb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="UniMath.MoreFoundations.Bool.html#implb"><span class="id" title="definition">implb</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#true"><span class="id" title="constructor">true</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
