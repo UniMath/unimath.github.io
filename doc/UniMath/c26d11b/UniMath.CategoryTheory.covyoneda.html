@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.covyoneda</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.covyoneda</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+**********************************************************
+
+<div class="paragraph"> </div>
+
+Benedikt Ahrens, Anders Mörtberg (adapted from yoneda.v)
+
+<div class="paragraph"> </div>
+
+2016
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+ **********************************************************
+
+<div class="paragraph"> </div>
+
+Contents : Definition of the covariant Yoneda functor
+           <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda"><span class="id" title="definition">covyoneda</span></a>(<a class="idref" href="UniMath.HomologicalAlgebra.Complexes.html#transport_section'.C"><span class="id" title="variable">C</span></a>)</span> <span class="inlinecode">:</span> <span class="inlinecode">[<a class="idref" href="UniMath.HomologicalAlgebra.Complexes.html#transport_section'.C"><span class="id" title="variable">C</span></a>^<a class="idref" href="UniMath.Algebra.IteratedBinaryOperations.html#Monoids2.op"><span class="id" title="variable">op</span></a>,</span> <span class="inlinecode">[<a class="idref" href="UniMath.HomologicalAlgebra.Complexes.html#transport_section'.C"><span class="id" title="variable">C</span></a>,</span> <span class="inlinecode"><span class="id" title="var">HSET</span>]]</span>
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.PartD.html#"><span class="id" title="library">UniMath.Foundations.PartD</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Propositions.html#"><span class="id" title="library">UniMath.Foundations.Propositions</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Sets.html#"><span class="id" title="library">UniMath.Foundations.Sets</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Functors</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.NaturalTransformations</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="UniMath.CategoryTheory.FunctorCategory.html#"><span class="id" title="library">UniMath.CategoryTheory.FunctorCategory</span></a>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.opp_precat.html#"><span class="id" title="library">UniMath.CategoryTheory.opp_precat</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.HSET.Core</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Functors</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.whiskering.html#"><span class="id" title="library">UniMath.CategoryTheory.whiskering</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">unf</span> := <span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#identity"><span class="id" title="definition">identity</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#compose"><span class="id" title="definition">compose</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#precategory_morphisms"><span class="id" title="definition">precategory_morphisms</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The following lemma is already in precategories.v . It should be transparent? 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1265"></a><h1 class="section">Covariant Yoneda functor</h1>
+
+<div class="paragraph"> </div>
+
+<a id="lab1266"></a><h2 class="section">On objects</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="covyoneda_objects_ob" class="idref" href="#covyoneda_objects_ob"><span class="id" title="definition">covyoneda_objects_ob</span></a> (<a id="C:1" class="idref" href="#C:1"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>) (<a id="c:2" class="idref" href="#c:2"><span class="id" title="binder">c</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:1"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="d:3" class="idref" href="#d:3"><span class="id" title="binder">d</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:1"><span class="id" title="variable">C</span></a>) := <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:1"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c:2"><span class="id" title="variable">c</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#d:3"><span class="id" title="variable">d</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">⟧</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="covyoneda_ob_functor_data" class="idref" href="#covyoneda_ob_functor_data"><span class="id" title="definition">covyoneda_ob_functor_data</span></a> (<a id="C:4" class="idref" href="#C:4"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>) (<a id="c:5" class="idref" href="#c:5"><span class="id" title="binder">c</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:4"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#functor_data"><span class="id" title="definition">functor_data</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:4"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#::cat:'HSET'"><span class="id" title="notation">HSET</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">∃</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="c':7" class="idref" href="#c':7"><span class="id" title="binder">c'</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Sets.html#make_hSet"><span class="id" title="definition">make_hSet</span></a> (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_objects_ob"><span class="id" title="definition">covyoneda_objects_ob</span></a> <span class="id" title="var">C</span> <span class="id" title="var">c</span> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c':6"><span class="id" title="variable">c'</span></a>) (<a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#homset_property"><span class="id" title="definition">homset_property</span></a> <span class="id" title="var">C</span> <span class="id" title="var">c</span> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c':6"><span class="id" title="variable">c'</span></a>)) .<br/>
+<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_objects_ob"><span class="id" title="definition">covyoneda_objects_ob</span></a> <span class="id" title="tactic">in</span> ×. <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="tactic">exact</span> (<span class="id" title="var">g</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <span class="id" title="var">f</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="is_functor_covyoneda_functor_data" class="idref" href="#is_functor_covyoneda_functor_data"><span class="id" title="lemma">is_functor_covyoneda_functor_data</span></a> (<a id="C:8" class="idref" href="#C:8"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>) (<a id="c:9" class="idref" href="#c:9"><span class="id" title="binder">c</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:8"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#is_functor"><span class="id" title="definition">is_functor</span></a> (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_ob_functor_data"><span class="id" title="definition">covyoneda_ob_functor_data</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:8"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c:9"><span class="id" title="variable">c</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">split</span>.<br/>
+- <span class="id" title="tactic">intros</span> <span class="id" title="var">c'</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#id_right"><span class="id" title="definition">id_right</span></a>.<br/>
+- <span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">d</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextfun"><span class="id" title="definition">funextfun</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">h</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="covyoneda_objects" class="idref" href="#covyoneda_objects"><span class="id" title="definition">covyoneda_objects</span></a> (<a id="C:10" class="idref" href="#C:10"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>) (<a id="c:11" class="idref" href="#c:11"><span class="id" title="binder">c</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:10"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:10"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#::cat:'HSET'"><span class="id" title="notation">HSET</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#is_functor_covyoneda_functor_data"><span class="id" title="lemma">is_functor_covyoneda_functor_data</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:10"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c:11"><span class="id" title="variable">c</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1267"></a><h2 class="section">On morphisms</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="covyoneda_morphisms_data" class="idref" href="#covyoneda_morphisms_data"><span class="id" title="definition">covyoneda_morphisms_data</span></a> (<a id="C:12" class="idref" href="#C:12"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>) (<a id="c:13" class="idref" href="#c:13"><span class="id" title="binder">c</span></a> <a id="c':14" class="idref" href="#c':14"><span class="id" title="binder">c'</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:12"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a id="f:15" class="idref" href="#f:15"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:12"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c:13"><span class="id" title="variable">c</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c':14"><span class="id" title="variable">c'</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">⟧</span></a>) : <a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a id="a:16" class="idref" href="#a:16"><span class="id" title="binder">a</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:12"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">,</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#::cat:'HSET'"><span class="id" title="notation">HSET</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_objects"><span class="id" title="definition">covyoneda_objects</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:12"><span class="id" title="variable">C</span></a>  <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c:13"><span class="id" title="variable">c</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#a:16"><span class="id" title="variable">a</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_objects"><span class="id" title="definition">covyoneda_objects</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:12"><span class="id" title="variable">C</span></a>  <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c':14"><span class="id" title="variable">c'</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#a:16"><span class="id" title="variable">a</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">⟧</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">g</span>.<br/>
+<span class="id" title="tactic">apply</span> (<span class="id" title="var">f</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <span class="id" title="var">g</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="is_nat_trans_covyoneda_morphisms_data" class="idref" href="#is_nat_trans_covyoneda_morphisms_data"><span class="id" title="lemma">is_nat_trans_covyoneda_morphisms_data</span></a> (<a id="C:17" class="idref" href="#C:17"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="c:18" class="idref" href="#c:18"><span class="id" title="binder">c</span></a> <a id="c':19" class="idref" href="#c':19"><span class="id" title="binder">c'</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:17"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a>) (<a id="f:20" class="idref" href="#f:20"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:17"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c:18"><span class="id" title="variable">c</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c':19"><span class="id" title="variable">c'</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">⟧</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#is_nat_trans"><span class="id" title="definition">is_nat_trans</span></a> (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_objects"><span class="id" title="definition">covyoneda_objects</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:17"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c:18"><span class="id" title="variable">c</span></a>) (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_objects"><span class="id" title="definition">covyoneda_objects</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:17"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c':19"><span class="id" title="variable">c'</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_morphisms_data"><span class="id" title="definition">covyoneda_morphisms_data</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:17"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c:18"><span class="id" title="variable">c</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c':19"><span class="id" title="variable">c'</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#f:20"><span class="id" title="variable">f</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">intros</span> <span class="id" title="var">d</span> <span class="id" title="var">d'</span> <span class="id" title="var">g</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">h</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="covyoneda_morphisms" class="idref" href="#covyoneda_morphisms"><span class="id" title="definition">covyoneda_morphisms</span></a> (<a id="C:21" class="idref" href="#C:21"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>) (<a id="c:22" class="idref" href="#c:22"><span class="id" title="binder">c</span></a> <a id="c':23" class="idref" href="#c':23"><span class="id" title="binder">c'</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:21"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;(<a id="f:24" class="idref" href="#f:24"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:21"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">⟦</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c:22"><span class="id" title="variable">c</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c':23"><span class="id" title="variable">c'</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#d8ada6469fb541a06c26fd71a9ef7ac3"><span class="id" title="notation">⟧</span></a>) : <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#nat_trans"><span class="id" title="definition">nat_trans</span></a> (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_objects"><span class="id" title="definition">covyoneda_objects</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:21"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c:22"><span class="id" title="variable">c</span></a>) (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_objects"><span class="id" title="definition">covyoneda_objects</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:21"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c':23"><span class="id" title="variable">c'</span></a>) :=<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#is_nat_trans_covyoneda_morphisms_data"><span class="id" title="lemma">is_nat_trans_covyoneda_morphisms_data</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:21"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c:22"><span class="id" title="variable">c</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#c':23"><span class="id" title="variable">c'</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#f:24"><span class="id" title="variable">f</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="covyoneda_functor_data" class="idref" href="#covyoneda_functor_data"><span class="id" title="definition">covyoneda_functor_data</span></a> (<a id="C:25" class="idref" href="#C:25"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#functor_data"><span class="id" title="definition">functor_data</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:25"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a> <a class="idref" href="UniMath.CategoryTheory.FunctorCategory.html#67adf5e9a58293c8431e5eec85ee7201"><span class="id" title="notation">[</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:25"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.FunctorCategory.html#67adf5e9a58293c8431e5eec85ee7201"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#::cat:'HSET'"><span class="id" title="notation">HSET</span></a><a class="idref" href="UniMath.CategoryTheory.FunctorCategory.html#67adf5e9a58293c8431e5eec85ee7201"><span class="id" title="notation">,</span></a><a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a><a class="idref" href="UniMath.CategoryTheory.FunctorCategory.html#67adf5e9a58293c8431e5eec85ee7201"><span class="id" title="notation">]</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_objects"><span class="id" title="definition">covyoneda_objects</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:25"><span class="id" title="variable">C</span></a>) (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_morphisms"><span class="id" title="definition">covyoneda_morphisms</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:25"><span class="id" title="variable">C</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1268"></a><h2 class="section">Functorial properties of the yoneda assignments</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="is_functor_covyoneda" class="idref" href="#is_functor_covyoneda"><span class="id" title="lemma">is_functor_covyoneda</span></a> (<a id="C:26" class="idref" href="#C:26"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#is_functor"><span class="id" title="definition">is_functor</span></a> (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#covyoneda_functor_data"><span class="id" title="definition">covyoneda_functor_data</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:26"><span class="id" title="variable">C</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">split</span>.<br/>
+- <span class="id" title="tactic">intro</span> <span class="id" title="var">a</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (@<a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#nat_trans_eq"><span class="id" title="lemma">nat_trans_eq</span></a> <span class="id" title="var">C</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">c</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#id_left"><span class="id" title="definition">id_left</span></a>.<br/>
+- <span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (@<a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#nat_trans_eq"><span class="id" title="lemma">nat_trans_eq</span></a> <span class="id" title="var">C</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">intro</span> <span class="id" title="var">d</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#funextsec"><span class="id" title="definition">funextsec</span></a>; <span class="id" title="tactic">intro</span> <span class="id" title="var">h</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartA.html#pathsinv0"><span class="id" title="definition">pathsinv0</span></a>, <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="covyoneda" class="idref" href="#covyoneda"><span class="id" title="definition">covyoneda</span></a> (<a id="C:27" class="idref" href="#C:27"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#functor"><span class="id" title="definition">functor</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:27"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">^</span></a><a class="idref" href="UniMath.CategoryTheory.opp_precat.html#3fe3b9c50e890a929497aff54b35977e"><span class="id" title="notation">op</span></a> <a class="idref" href="UniMath.CategoryTheory.FunctorCategory.html#67adf5e9a58293c8431e5eec85ee7201"><span class="id" title="notation">[</span></a><a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:27"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.CategoryTheory.FunctorCategory.html#67adf5e9a58293c8431e5eec85ee7201"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#::cat:'HSET'"><span class="id" title="notation">HSET</span></a><a class="idref" href="UniMath.CategoryTheory.FunctorCategory.html#67adf5e9a58293c8431e5eec85ee7201"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Core.html#has_homsets_HSET"><span class="id" title="lemma">has_homsets_HSET</span></a><a class="idref" href="UniMath.CategoryTheory.FunctorCategory.html#67adf5e9a58293c8431e5eec85ee7201"><span class="id" title="notation">]</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.CategoryTheory.covyoneda.html#is_functor_covyoneda"><span class="id" title="lemma">is_functor_covyoneda</span></a> <a class="idref" href="UniMath.CategoryTheory.covyoneda.html#C:27"><span class="id" title="variable">C</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+TODO: adapt the rest? 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
