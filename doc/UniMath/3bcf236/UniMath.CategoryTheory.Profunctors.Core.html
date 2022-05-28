@@ -1,0 +1,455 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.Profunctors.Core</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.Profunctors.Core</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a id="lab1032"></a><h1 class="section">Profunctors</h1>
+
+<div class="paragraph"> </div>
+
+ Set-valued profunctors 
+<div class="paragraph"> </div>
+
+ References:
+<ul class="doclist">
+<li> https://link.springer.com/content/pdf/10.1007/BFb0060443.pdf
+
+</li>
+<li> https://bartoszmilewski.com/2017/03/29/ends-and-coends/
+
+</li>
+</ul>
+ 
+<div class="paragraph"> </div>
+
+<a id="lab1033"></a><h2 class="section">Contents</h2>
+
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Definition
+
+</li>
+<li> Dinatural transformations
+<ul class="doclist">
+<li> Dinatural transformation from a natural transformation
+
+</li>
+</ul>
+
+</li>
+<li> (Co)ends
+<ul class="doclist">
+<li> Wedges
+
+</li>
+<li> Ends
+<ul class="doclist">
+<li> Accessors/coercions
+
+</li>
+</ul>
+
+</li>
+<li> Cowedges
+
+</li>
+<li> Coends
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Preamble.html#"><span class="id" title="library">UniMath.Foundations.Preamble</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Propositions.html#"><span class="id" title="library">UniMath.Foundations.Propositions</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.Sets.html#"><span class="id" title="library">UniMath.Foundations.Sets</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Univalence.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Univalence</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Functors</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.NaturalTransformations</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.PrecategoryBinProduct.html#"><span class="id" title="library">UniMath.CategoryTheory.PrecategoryBinProduct</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.opp_precat.html#"><span class="id" title="library">UniMath.CategoryTheory.opp_precat</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.HSET.Univalence</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1034"></a><h2 class="section">Definition</h2>
+
+<div class="paragraph"> </div>
+
+ A profunctor (or distributor) <span class="inlinecode"><a class="idref" href="UniMath.HomologicalAlgebra.Complexes.html#transport_section'.C"><span class="id" title="variable">C</span></a></span> <span class="inlinecode">↛</span> <span class="inlinecode"><a class="idref" href="UniMath.SubstitutionSystems.SignatureCategory.html#Coproducts.D"><span class="id" title="variable">D</span></a></span> is a functor <span class="inlinecode"><a class="idref" href="UniMath.SubstitutionSystems.SignatureCategory.html#Coproducts.D"><span class="id" title="variable">D</span></a>^<a class="idref" href="UniMath.Algebra.IteratedBinaryOperations.html#Monoids2.op"><span class="id" title="variable">op</span></a></span> <span class="inlinecode">×</span> <span class="inlinecode"><a class="idref" href="UniMath.HomologicalAlgebra.Complexes.html#transport_section'.C"><span class="id" title="variable">C</span></a></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">HSET</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="profunctor" class="idref" href="#profunctor"><span class="id" title="definition">profunctor</span></a> (<a id="C:1" class="idref" href="#C:1"><span class="id" title="binder">C</span></a> <a id="D:2" class="idref" href="#D:2"><span class="id" title="binder">D</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#functor"><span class="id" title="definition">functor</span></a> (<a class="idref" href="UniMath.CategoryTheory.PrecategoryBinProduct.html#category_binproduct"><span class="id" title="definition">category_binproduct</span></a> (<a class="idref" href="UniMath.CategoryTheory.opp_precat.html#op_category"><span class="id" title="definition">op_category</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#D:2"><span class="id" title="variable">D</span></a>) <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#C:1"><span class="id" title="variable">C</span></a>) <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#HSET_univalent_category"><span class="id" title="definition">HSET_univalent_category</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Identity</span> <span class="id" title="keyword">Coercion</span> <span class="id" title="var">profunctor_coercion</span> : <span class="id" title="var">profunctor</span> &gt;-&gt; <span class="id" title="var">functor</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Infix</span> <a id="14ce14d24d6ab4bfc883d565ccdbace2" class="idref" href="#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">&quot;</span></a>↛" := <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#profunctor"><span class="id" title="definition">profunctor</span></a> (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 99, <span class="id" title="var">only</span> <span class="id" title="var">parsing</span>) : <span class="id" title="var">cat</span>. 
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> "A ⊗ B" := (<a class="idref" href="UniMath.CategoryTheory.PrecategoryBinProduct.html#make_catbinprod"><span class="id" title="definition">make_catbinprod</span></a> <span class="id" title="var">A</span> <span class="id" title="var">B</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Map over the first argument contravariantly.
+    Inspired by Data.Profunctor in Haskell. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="lmap" class="idref" href="#lmap"><span class="id" title="definition">lmap</span></a> {<a id="C:3" class="idref" href="#C:3"><span class="id" title="binder">C</span></a> <a id="D:4" class="idref" href="#D:4"><span class="id" title="binder">D</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>} (<a id="F:5" class="idref" href="#F:5"><span class="id" title="binder">F</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#C:3"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#D:4"><span class="id" title="variable">D</span></a>) {<a id="a:6" class="idref" href="#a:6"><span class="id" title="binder">a</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#C:3"><span class="id" title="variable">C</span></a>} {<a id="b:7" class="idref" href="#b:7"><span class="id" title="binder">b</span></a> <a id="b':8" class="idref" href="#b':8"><span class="id" title="binder">b'</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#D:4"><span class="id" title="variable">D</span></a>} (<a id="g:9" class="idref" href="#g:9"><span class="id" title="binder">g</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b':8"><span class="id" title="variable">b'</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b:7"><span class="id" title="variable">b</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#F:5"><span class="id" title="variable">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.opp_precat.html#op_ob"><span class="id" title="definition">op_ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b:7"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:6"><span class="id" title="variable">a</span></a>)  <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#F:5"><span class="id" title="variable">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.opp_precat.html#op_ob"><span class="id" title="definition">op_ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b':8"><span class="id" title="variable">b'</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:6"><span class="id" title="variable">a</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#06fc8e26a36d85b523bb900bd57199b0"><span class="id" title="notation">#</span></a> <span class="id" title="var">F</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#06fc8e26a36d85b523bb900bd57199b0"><span class="id" title="notation">_</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.PrecategoryBinProduct.html#catbinprodmor"><span class="id" title="definition">catbinprodmor</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.opp_precat.html#op_ob"><span class="id" title="definition">op_ob</span></a> <span class="id" title="var">b'</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> <span class="id" title="var">a</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> <span class="id" title="var">g</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#identity"><span class="id" title="definition">identity</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#identity"><span class="id" title="definition">identity</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Map over the second argument covariantly.
+    Inspired by Data.Profunctor in Haskell. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="rmap" class="idref" href="#rmap"><span class="id" title="definition">rmap</span></a> {<a id="C:10" class="idref" href="#C:10"><span class="id" title="binder">C</span></a> <a id="D:11" class="idref" href="#D:11"><span class="id" title="binder">D</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>} (<a id="F:12" class="idref" href="#F:12"><span class="id" title="binder">F</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#C:10"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#D:11"><span class="id" title="variable">D</span></a>) {<a id="a:13" class="idref" href="#a:13"><span class="id" title="binder">a</span></a> <a id="a':14" class="idref" href="#a':14"><span class="id" title="binder">a'</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#C:10"><span class="id" title="variable">C</span></a>} {<a id="b:15" class="idref" href="#b:15"><span class="id" title="binder">b</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#D:11"><span class="id" title="variable">D</span></a>} (<a id="f:16" class="idref" href="#f:16"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:13"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a':14"><span class="id" title="variable">a'</span></a>) :<br/>
+&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#F:12"><span class="id" title="variable">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.opp_precat.html#op_ob"><span class="id" title="definition">op_ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b:15"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:13"><span class="id" title="variable">a</span></a>)  <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#F:12"><span class="id" title="variable">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.opp_precat.html#op_ob"><span class="id" title="definition">op_ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b:15"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a':14"><span class="id" title="variable">a'</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#06fc8e26a36d85b523bb900bd57199b0"><span class="id" title="notation">#</span></a> <span class="id" title="var">F</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#06fc8e26a36d85b523bb900bd57199b0"><span class="id" title="notation">_</span></a>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#identity"><span class="id" title="definition">identity</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.PrecategoryBinProduct.html#catbinprodmor"><span class="id" title="definition">catbinprodmor</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#identity"><span class="id" title="definition">identity</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">exact</span> <span class="id" title="var">f</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1035"></a><h2 class="section">Dinatural transformations</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="Dinatural" class="idref" href="#Dinatural"><span class="id" title="section">Dinatural</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="C:17" class="idref" href="#C:17"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>}.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="dinatural_transformation_data" class="idref" href="#dinatural_transformation_data"><span class="id" title="definition">dinatural_transformation_data</span></a> (<a id="f:18" class="idref" href="#f:18"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>) (<a id="g:19" class="idref" href="#g:19"><span class="id" title="binder">g</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a id="a:20" class="idref" href="#a:20"><span class="id" title="binder">a</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:18"><span class="id" title="variable">f</span></a> (<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:20"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:20"><span class="id" title="variable">a</span></a>) <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#g:19"><span class="id" title="variable">g</span></a> (<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:20"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:20"><span class="id" title="variable">a</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="is_dinatural" class="idref" href="#is_dinatural"><span class="id" title="definition">is_dinatural</span></a> {<a id="F:21" class="idref" href="#F:21"><span class="id" title="binder">F</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>} {<a id="G:22" class="idref" href="#G:22"><span class="id" title="binder">G</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="data:23" class="idref" href="#data:23"><span class="id" title="binder">data</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation_data"><span class="id" title="definition">dinatural_transformation_data</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#F:21"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#G:22"><span class="id" title="variable">G</span></a>) : <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Propositions.html#make_hProp"><span class="id" title="definition">make_hProp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">(</span></a><a id="a:27" class="idref" href="#a:27"><span class="id" title="binder">a</span></a> <a id="b:28" class="idref" href="#b:28"><span class="id" title="binder">b</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>) (<a id="f:29" class="idref" href="#f:29"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:24"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b:25"><span class="id" title="variable">b</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#lmap"><span class="id" title="definition">lmap</span></a> <span class="id" title="var">F</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:26"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <span class="id" title="var">data</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:24"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#rmap"><span class="id" title="definition">rmap</span></a> <span class="id" title="var">G</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:26"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#rmap"><span class="id" title="definition">rmap</span></a> <span class="id" title="var">F</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:26"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <span class="id" title="var">data</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b:25"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#lmap"><span class="id" title="definition">lmap</span></a> <span class="id" title="var">G</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:26"><span class="id" title="variable">f</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">do</span> 3 (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>); <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="dinatural_transformation" class="idref" href="#dinatural_transformation"><span class="id" title="definition">dinatural_transformation</span></a> (<a id="f:30" class="idref" href="#f:30"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>) (<a id="g:31" class="idref" href="#g:31"><span class="id" title="binder">g</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <a id="d:32" class="idref" href="#d:32"><span class="id" title="binder">d</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation_data"><span class="id" title="definition">dinatural_transformation_data</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:30"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#g:31"><span class="id" title="variable">g</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#is_dinatural"><span class="id" title="definition">is_dinatural</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#d:32"><span class="id" title="variable">d</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The second projection is made opaque for efficiency.
+      Nothing is lost because it's an <span class="inlinecode"><a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a></span>. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="make_dinatural_transformation" class="idref" href="#make_dinatural_transformation"><span class="id" title="definition">make_dinatural_transformation</span></a> {<a id="F:33" class="idref" href="#F:33"><span class="id" title="binder">F</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>} {<a id="G:34" class="idref" href="#G:34"><span class="id" title="binder">G</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="data:35" class="idref" href="#data:35"><span class="id" title="binder">data</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation_data"><span class="id" title="definition">dinatural_transformation_data</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#F:33"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#G:34"><span class="id" title="variable">G</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="is_dinat:36" class="idref" href="#is_dinat:36"><span class="id" title="binder">is_dinat</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#is_dinatural"><span class="id" title="definition">is_dinatural</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#data:35"><span class="id" title="variable">data</span></a>) : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation"><span class="id" title="definition">dinatural_transformation</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#F:33"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#G:34"><span class="id" title="variable">G</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span> <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Section</span> <a id="Dinatural.Accessors" class="idref" href="#Dinatural.Accessors"><span class="id" title="section">Accessors</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="f:37" class="idref" href="#f:37"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>} {<a id="g:38" class="idref" href="#g:38"><span class="id" title="binder">g</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>} (<a id="d:39" class="idref" href="#d:39"><span class="id" title="binder">d</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation"><span class="id" title="definition">dinatural_transformation</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:37"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#g:38"><span class="id" title="variable">g</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="dinatural_transformation_get_data" class="idref" href="#dinatural_transformation_get_data"><span class="id" title="definition">dinatural_transformation_get_data</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a id="a:40" class="idref" href="#a:40"><span class="id" title="binder">a</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.Accessors.f"><span class="id" title="variable">f</span></a> (<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:40"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:40"><span class="id" title="variable">a</span></a>) <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.Accessors.g"><span class="id" title="variable">g</span></a> (<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:40"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:40"><span class="id" title="variable">a</span></a>) := <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.Accessors.d"><span class="id" title="variable">d</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="dinatural_transformation_is_dinatural" class="idref" href="#dinatural_transformation_is_dinatural"><span class="id" title="definition">dinatural_transformation_is_dinatural</span></a> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#is_dinatural"><span class="id" title="definition">is_dinatural</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation_get_data"><span class="id" title="definition">dinatural_transformation_get_data</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.Accessors.d"><span class="id" title="variable">d</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.Accessors"><span class="id" title="section">Accessors</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Coercion</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation_get_data"><span class="id" title="definition">dinatural_transformation_get_data</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation_get_data"><span class="id" title="definition">:</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation_get_data"><span class="id" title="definition">dinatural_transformation</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation_get_data"><span class="id" title="definition">&gt;-&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation_get_data"><span class="id" title="definition">Funclass</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+See below for the non-local notation 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> "F ⇏ G" := (<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation"><span class="id" title="definition">dinatural_transformation</span></a> <span class="id" title="var">F</span> <span class="id" title="var">G</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 39) : <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1036"></a><h3 class="section">Dinatural transformation from a natural transformation</h3>
+
+</div>
+<div class="code">
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="nat_trans_to_dinatural_transformation" class="idref" href="#nat_trans_to_dinatural_transformation"><span class="id" title="lemma">nat_trans_to_dinatural_transformation</span></a> {<a id="f:41" class="idref" href="#f:41"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>} {<a id="g:42" class="idref" href="#g:42"><span class="id" title="binder">g</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural.C"><span class="id" title="variable">C</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="alpha:43" class="idref" href="#alpha:43"><span class="id" title="binder">alpha</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#nat_trans"><span class="id" title="definition">nat_trans</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:41"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#g:42"><span class="id" title="variable">g</span></a>) : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:41"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#e6a010d223105176201041459cdcb56f"><span class="id" title="notation">⇏</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#g:42"><span class="id" title="variable">g</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#make_dinatural_transformation"><span class="id" title="definition">make_dinatural_transformation</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intro</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">alpha</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">h</span>.<br/>
+</div>
+
+<div class="doc">
+       Have:
+       <tt>
+                  F (i, j)
+         F(a, b) --------&gt; F(c, d)
+            |                 |
+            | alpha a b       | alpha c d
+            V                 V
+         G(a, b) --------&gt; G(c, d)
+                  G (i, j)
+       </tt>
+<div class="paragraph"> </div>
+
+       Want:
+       <tt>
+                  F(a, a) -- alpha --&gt; G(a, a)
+          lmap /                        \ rmap
+          F(b, a)                    G(a, b)
+          rmap \                        / lmap
+                  F(b, b) -- alpha --&gt; G(b, b)
+       </tt>
+<div class="paragraph"> </div>
+
+       
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#lmap"><span class="id" title="definition">lmap</span></a>, <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#rmap"><span class="id" title="definition">rmap</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">do</span> 2 <span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#id_left"><span class="id" title="definition">id_left</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">do</span> 2 <span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#id_right"><span class="id" title="definition">id_right</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> (<span class="id" title="keyword">fun</span> <a id="z:45" class="idref" href="#z:45"><span class="id" title="binder">z</span></a> ⇒ <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#z:44"><span class="id" title="variable">z</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <span class="id" title="var">_</span>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">alpha</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <a class="idref" href="UniMath.Foundations.PartA.html#8b57b11be4275b47948f6caec264b70f"><span class="id" title="notation">@</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.PartA.html#8b57b11be4275b47948f6caec264b70f"><span class="id" title="notation">@</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> (<span class="id" title="keyword">fun</span> <a id="z:47" class="idref" href="#z:47"><span class="id" title="binder">z</span></a> ⇒ <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#z:46"><span class="id" title="variable">z</span></a>) (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">alpha</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.PartA.html#9cb4fb5091f5f2b43def279042cc56ef"><span class="id" title="notation">!</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#assoc"><span class="id" title="definition">assoc</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.PartA.html#8b57b11be4275b47948f6caec264b70f"><span class="id" title="notation">@</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.PartA.html#8b57b11be4275b47948f6caec264b70f"><span class="id" title="notation">@</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#9cb4fb5091f5f2b43def279042cc56ef"><span class="id" title="notation">!</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#assoc"><span class="id" title="definition">assoc</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.PartA.html#9cb4fb5091f5f2b43def279042cc56ef"><span class="id" title="notation">!</span></a><a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> (<span class="id" title="keyword">fun</span> <a id="z:49" class="idref" href="#z:49"><span class="id" title="binder">z</span></a> ⇒ <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#z:48"><span class="id" title="variable">z</span></a>) (<a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#functor_comp"><span class="id" title="definition">functor_comp</span></a> <span class="id" title="var">g</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <a class="idref" href="UniMath.Foundations.PartA.html#8b57b11be4275b47948f6caec264b70f"><span class="id" title="notation">@</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.PartA.html#8b57b11be4275b47948f6caec264b70f"><span class="id" title="notation">@</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#maponpaths"><span class="id" title="definition">maponpaths</span></a> (<span class="id" title="keyword">fun</span> <a id="z:51" class="idref" href="#z:51"><span class="id" title="binder">z</span></a> ⇒ <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#z:50"><span class="id" title="variable">z</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <span class="id" title="var">_</span>) (<a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#functor_comp"><span class="id" title="definition">functor_comp</span></a> <span class="id" title="var">f</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#compose"><span class="id" title="definition">compose</span></a> <span class="id" title="tactic">at</span> 2; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#compose"><span class="id" title="definition">compose</span></a> <span class="id" title="tactic">at</span> 5; <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#id_left"><span class="id" title="definition">id_left</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#id_right"><span class="id" title="definition">id_right</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#id_right"><span class="id" title="definition">id_right</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#id_left"><span class="id" title="definition">id_left</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">symmetry</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">alpha</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Dinatural"><span class="id" title="section">Dinatural</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="0d3b9c90067939b4731ad48caabe3e8b" class="idref" href="#0d3b9c90067939b4731ad48caabe3e8b"><span class="id" title="notation">&quot;</span></a>F ⇏ G" := (<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#dinatural_transformation"><span class="id" title="definition">dinatural_transformation</span></a> <span class="id" title="var">F</span> <span class="id" title="var">G</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 39) : <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1037"></a><h2 class="section">(Co)ends</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="Ends" class="idref" href="#Ends"><span class="id" title="section">Ends</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="C:52" class="idref" href="#C:52"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#category"><span class="id" title="definition">category</span></a>} (<a id="F:53" class="idref" href="#F:53"><span class="id" title="binder">F</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#C:52"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#14ce14d24d6ab4bfc883d565ccdbace2"><span class="id" title="notation">↛</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#C:52"><span class="id" title="variable">C</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1038"></a><h3 class="section">Wedges</h3>
+
+<div class="paragraph"> </div>
+
+ Wedge diagram:
+      <tt>
+          w -----&gt; F(a, a)
+          |           |
+          | F(f, id)  | F(id, f)
+          V           V
+        F(b, b) --&gt; F(a, b)
+      </tt>
+<div class="paragraph"> </div>
+
+  
+</div>
+<div class="code">
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="is_wedge" class="idref" href="#is_wedge"><span class="id" title="definition">is_wedge</span></a> (<a id="w:54" class="idref" href="#w:54"><span class="id" title="binder">w</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#HSET_univalent_category"><span class="id" title="definition">HSET_univalent_category</span></a>) (<a id="pi:56" class="idref" href="#pi:56"><span class="id" title="binder">pi</span></a> : <a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a id="a:55" class="idref" href="#a:55"><span class="id" title="binder">a</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#w:54"><span class="id" title="variable">w</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.F"><span class="id" title="variable">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:55"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:55"><span class="id" title="variable">a</span></a>)) : <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Propositions.html#make_hProp"><span class="id" title="definition">make_hProp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">(</span></a><a id="a:60" class="idref" href="#a:60"><span class="id" title="binder">a</span></a> <a id="b:61" class="idref" href="#b:61"><span class="id" title="binder">b</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.C"><span class="id" title="variable">C</span></a>) (<a id="f:62" class="idref" href="#f:62"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:57"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b:58"><span class="id" title="variable">b</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">),</span></a> <span class="id" title="var">pi</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:57"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#rmap"><span class="id" title="definition">rmap</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:59"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">pi</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b:58"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#lmap"><span class="id" title="definition">lmap</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:59"><span class="id" title="variable">f</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">do</span> 3 (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>); <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Sets.html#setproperty"><span class="id" title="definition">setproperty</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Following the convention for limits, the tip is explicit in the type. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="wedge" class="idref" href="#wedge"><span class="id" title="definition">wedge</span></a> (<a id="w:63" class="idref" href="#w:63"><span class="id" title="binder">w</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#HSET_univalent_category"><span class="id" title="definition">HSET_univalent_category</span></a>) : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <a id="pi:65" class="idref" href="#pi:65"><span class="id" title="binder">pi</span></a> : (<a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a id="a:64" class="idref" href="#a:64"><span class="id" title="binder">a</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#w:63"><span class="id" title="variable">w</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.F"><span class="id" title="variable">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:64"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:64"><span class="id" title="variable">a</span></a>)<a class="idref" href="UniMath.Foundations.Preamble.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#is_wedge"><span class="id" title="definition">is_wedge</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#w:63"><span class="id" title="variable">w</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#pi:65"><span class="id" title="variable">pi</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="make_wedge" class="idref" href="#make_wedge"><span class="id" title="definition">make_wedge</span></a> (<a id="w:66" class="idref" href="#w:66"><span class="id" title="binder">w</span></a> : <a class="idref" href="UniMath.Foundations.Sets.html#hSet"><span class="id" title="definition">hSet</span></a>) (<a id="pi:68" class="idref" href="#pi:68"><span class="id" title="binder">pi</span></a> : (<a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a id="a:67" class="idref" href="#a:67"><span class="id" title="binder">a</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#w:66"><span class="id" title="variable">w</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#HSET_univalent_category"><span class="id" title="definition">HSET_univalent_category</span></a><a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.F"><span class="id" title="variable">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:67"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:67"><span class="id" title="variable">a</span></a>))) :<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.12.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">(</span></a><a id="a:69" class="idref" href="#a:69"><span class="id" title="binder">a</span></a> <a id="b:70" class="idref" href="#b:70"><span class="id" title="binder">b</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.C"><span class="id" title="variable">C</span></a>) (<a id="f:71" class="idref" href="#f:71"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:69"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b:70"><span class="id" title="variable">b</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">),</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#pi:68"><span class="id" title="variable">pi</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:69"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#rmap"><span class="id" title="definition">rmap</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:71"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#pi:68"><span class="id" title="variable">pi</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#b:70"><span class="id" title="variable">b</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#lmap"><span class="id" title="definition">lmap</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:71"><span class="id" title="variable">f</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.12.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.12.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#wedge"><span class="id" title="definition">wedge</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#w:66"><span class="id" title="variable">w</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span> <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="wedge_pr" class="idref" href="#wedge_pr"><span class="id" title="definition">wedge_pr</span></a> (<a id="w:72" class="idref" href="#w:72"><span class="id" title="binder">w</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#HSET_univalent_category"><span class="id" title="definition">HSET_univalent_category</span></a>) (<a id="W:73" class="idref" href="#W:73"><span class="id" title="binder">W</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#wedge"><span class="id" title="definition">wedge</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#w:72"><span class="id" title="variable">w</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a id="a:74" class="idref" href="#a:74"><span class="id" title="binder">a</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.C"><span class="id" title="variable">C</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#w:72"><span class="id" title="variable">w</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends.F"><span class="id" title="variable">F</span></a> (<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:74"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#efec32fceb805ef08cdbb98c16e791a9"><span class="id" title="notation">⊗</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:74"><span class="id" title="variable">a</span></a>) := (<a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#W:73"><span class="id" title="variable">W</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Coercion</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#wedge_pr"><span class="id" title="definition">wedge_pr</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#wedge_pr"><span class="id" title="definition">:</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#wedge_pr"><span class="id" title="definition">wedge</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#wedge_pr"><span class="id" title="definition">&gt;-&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#wedge_pr"><span class="id" title="definition">Funclass</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1039"></a><h3 class="section">Ends</h3>
+
+</div>
+<div class="code">
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="is_end" class="idref" href="#is_end"><span class="id" title="definition">is_end</span></a> (<a id="w:75" class="idref" href="#w:75"><span class="id" title="binder">w</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#HSET_univalent_category"><span class="id" title="definition">HSET_univalent_category</span></a>) (<a id="W:76" class="idref" href="#W:76"><span class="id" title="binder">W</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#wedge"><span class="id" title="definition">wedge</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#w:75"><span class="id" title="variable">w</span></a>) : <a class="idref" href="UniMath.Foundations.Propositions.html#hProp"><span class="id" title="definition">hProp</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.Propositions.html#make_hProp"><span class="id" title="definition">make_hProp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a id="v:81" class="idref" href="#v:81"><span class="id" title="binder">v</span></a> (<a id="V:82" class="idref" href="#V:82"><span class="id" title="binder">V</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#wedge"><span class="id" title="definition">wedge</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#v:77"><span class="id" title="variable">v</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#iscontr"><span class="id" title="definition">iscontr</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <a id="f:83" class="idref" href="#f:83"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#v:77"><span class="id" title="variable">v</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <span class="id" title="var">w</span><a class="idref" href="UniMath.Foundations.Preamble.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">∏</span></a> <a id="a:84" class="idref" href="#a:84"><span class="id" title="binder">a</span></a><a class="idref" href="UniMath.Foundations.Init.html#dff69deb40f49011cdae37d20690a136"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#f:79"><span class="id" title="variable">f</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#6367fc346cda33b52695f0c54f391763"><span class="id" title="notation">·</span></a> <span class="id" title="var">W</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:80"><span class="id" title="variable">a</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#V:78"><span class="id" title="variable">V</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#a:80"><span class="id" title="variable">a</span></a>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span> (<span class="id" title="tactic">do</span> 2 (<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#impred"><span class="id" title="lemma">impred</span></a>; <span class="id" title="tactic">intro</span>); <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.PartD.html#isapropiscontr"><span class="id" title="lemma">isapropiscontr</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This must be capitalized because 'end' is a Coq keyword.
+      It also matches the convention for limits. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="End" class="idref" href="#End"><span class="id" title="definition">End</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <a id="w:85" class="idref" href="#w:85"><span class="id" title="binder">w</span></a> <a id="W:86" class="idref" href="#W:86"><span class="id" title="binder">W</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#is_end"><span class="id" title="definition">is_end</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#w:85"><span class="id" title="variable">w</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#W:86"><span class="id" title="variable">W</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1040"></a><h4 class="section">Accessors/coercions</h4>
+
+</div>
+<div class="code">
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="end_ob" class="idref" href="#end_ob"><span class="id" title="definition">end_ob</span></a> (<a id="e:87" class="idref" href="#e:87"><span class="id" title="binder">e</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#End"><span class="id" title="definition">End</span></a>) : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#ob"><span class="id" title="definition">ob</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.HSET.Univalence.html#HSET_univalent_category"><span class="id" title="definition">HSET_univalent_category</span></a>  := <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#e:87"><span class="id" title="variable">e</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Coercion</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#end_ob"><span class="id" title="definition">end_ob</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#end_ob"><span class="id" title="definition">:</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#end_ob"><span class="id" title="definition">End</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#end_ob"><span class="id" title="definition">&gt;-&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#end_ob"><span class="id" title="definition">ob</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="end_wedge" class="idref" href="#end_wedge"><span class="id" title="definition">end_wedge</span></a> (<a id="e:88" class="idref" href="#e:88"><span class="id" title="binder">e</span></a> : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#End"><span class="id" title="definition">End</span></a>) : <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#wedge"><span class="id" title="definition">wedge</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#e:88"><span class="id" title="variable">e</span></a> := <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#e:88"><span class="id" title="variable">e</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Coercion</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#end_wedge"><span class="id" title="definition">end_wedge</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#end_wedge"><span class="id" title="definition">:</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#end_wedge"><span class="id" title="definition">End</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#end_wedge"><span class="id" title="definition">&gt;-&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#end_wedge"><span class="id" title="definition">wedge</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1041"></a><h3 class="section">Cowedges</h3>
+<a id="lab1042"></a><h3 class="section">Coends</h3>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#Ends"><span class="id" title="section">Ends</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="0dcf4bc0d67577091d36383a1bf3880f" class="idref" href="#0dcf4bc0d67577091d36383a1bf3880f"><span class="id" title="notation">&quot;</span></a>∫↓ F" := (<a class="idref" href="UniMath.CategoryTheory.Profunctors.Core.html#End"><span class="id" title="definition">End</span></a> <span class="id" title="var">F</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40) : <span class="id" title="var">cat</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

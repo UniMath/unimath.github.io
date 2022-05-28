@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.categories.Type.Univalence</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.categories.Type.Univalence</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a id="lab1593"></a><h1 class="section">Near-univalence of <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.categories.Type.Core.html#type_precat"><span class="id" title="definition">type_precat</span></a></span></h1>
+
+<div class="paragraph"> </div>
+
+ The precategory of types is not quite univalent - it doesn't have
+    hom-sets. However, it is the case that <span class="inlinecode"><a class="idref" href="UniMath.CategoryTheory.Core.Univalence.html#idtoiso"><span class="id" title="definition">idtoiso</span></a></span> is a weak equivalence.
+
+<div class="paragraph"> </div>
+
+    Much of this material is copied near-verbatim from the results for
+    sets. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#"><span class="id" title="library">UniMath.Foundations.UnivalenceAxiom</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Functors</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Isos</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Univalence.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Univalence</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.Type.Core.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.Type.Core</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.categories.Type.MonoEpiIso.html#"><span class="id" title="library">UniMath.CategoryTheory.categories.Type.MonoEpiIso</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="univalenceweq" class="idref" href="#univalenceweq"><span class="id" title="definition">univalenceweq</span></a> (<a id="X:1" class="idref" href="#X:1"><span class="id" title="binder">X</span></a> <a id="X':2" class="idref" href="#X':2"><span class="id" title="binder">X'</span></a> : <a class="idref" href="UniMath.Foundations.Preamble.html#UU"><span class="id" title="definition">UU</span></a>) : <a class="idref" href="UniMath.Foundations.PartA.html#dd7277d0940f85bc9f30edc592228b3b"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.categories.Type.Univalence.html#X:1"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.Type.Univalence.html#X':2"><span class="id" title="variable">X'</span></a><a class="idref" href="UniMath.Foundations.PartA.html#dd7277d0940f85bc9f30edc592228b3b"><span class="id" title="notation">)</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#dd7277d0940f85bc9f30edc592228b3b"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#dd7277d0940f85bc9f30edc592228b3b"><span class="id" title="notation">(</span></a><a class="idref" href="UniMath.CategoryTheory.categories.Type.Univalence.html#X:1"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#dd7277d0940f85bc9f30edc592228b3b"><span class="id" title="notation">≃</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.Type.Univalence.html#X':2"><span class="id" title="variable">X'</span></a><a class="idref" href="UniMath.Foundations.PartA.html#dd7277d0940f85bc9f30edc592228b3b"><span class="id" title="notation">)</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.Preamble.html#tpair"><span class="id" title="constructor">tpair</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="UniMath.Foundations.UnivalenceAxiom.html#univalenceAxiom"><span class="id" title="axiom">univalenceAxiom</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.Type.Univalence.html#X:1"><span class="id" title="variable">X</span></a> <a class="idref" href="UniMath.CategoryTheory.categories.Type.Univalence.html#X':2"><span class="id" title="variable">X'</span></a>).<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

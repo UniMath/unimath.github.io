@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>UniMath.CategoryTheory.Core</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library UniMath.CategoryTheory.Core</h1>
+
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.Foundations.All.html#"><span class="id" title="library">UniMath.Foundations.All</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.MoreFoundations.All.html#"><span class="id" title="library">UniMath.MoreFoundations.All</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Categories</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Isos</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Univalence.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Univalence</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.Functors</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#"><span class="id" title="library">UniMath.CategoryTheory.Core.NaturalTransformations</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="UniMath.CategoryTheory.Groupoids.html#"><span class="id" title="library">UniMath.CategoryTheory.Groupoids</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">cat</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="Core" class="idref" href="#Core"><span class="id" title="section">Core</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> (<a id="C:1" class="idref" href="#C:1"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.category"><span class="id" title="definition">category</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="core_precategory_ob_mor" class="idref" href="#core_precategory_ob_mor"><span class="id" title="definition">core_precategory_ob_mor</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.precategory_ob_mor"><span class="id" title="definition">precategory_ob_mor</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.make_precategory_ob_mor"><span class="id" title="definition">make_precategory_ob_mor</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.C"><span class="id" title="variable">C</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="x:4" class="idref" href="#x:4"><span class="id" title="binder">x</span></a> <a id="y:5" class="idref" href="#y:5"><span class="id" title="binder">y</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.iso"><span class="id" title="definition">iso</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#x:2"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#y:3"><span class="id" title="variable">y</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="core_precategory_data" class="idref" href="#core_precategory_data"><span class="id" title="definition">core_precategory_data</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.precategory_data"><span class="id" title="definition">precategory_data</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.make_precategory_data"><span class="id" title="definition">make_precategory_data</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#core_precategory_ob_mor"><span class="id" title="definition">core_precategory_ob_mor</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="x:7" class="idref" href="#x:7"><span class="id" title="binder">x</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.identity_iso"><span class="id" title="definition">identity_iso</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#x:6"><span class="id" title="variable">x</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="x:13" class="idref" href="#x:13"><span class="id" title="binder">x</span></a> <a id="y:14" class="idref" href="#y:14"><span class="id" title="binder">y</span></a> <a id="z:15" class="idref" href="#z:15"><span class="id" title="binder">z</span></a> <a id="3ff9c4677515b5b636f00d67daa2f61b" class="idref" href="#3ff9c4677515b5b636f00d67daa2f61b"><span class="id" title="binder">i₁</span></a> <a id="4e73d40ab103a5bd192a58b24bcf147e" class="idref" href="#4e73d40ab103a5bd192a58b24bcf147e"><span class="id" title="binder">i₂</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.iso_comp"><span class="id" title="definition">iso_comp</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#bbd3bb5c444b49bb5b06462b2c5483f5"><span class="id" title="variable">i₁</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#3f6aa615faa4961216393c162f9bb2ec"><span class="id" title="variable">i₂</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="core_is_precategory" class="idref" href="#core_is_precategory"><span class="id" title="definition">core_is_precategory</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.is_precategory"><span class="id" title="definition">is_precategory</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#core_precategory_data"><span class="id" title="definition">core_precategory_data</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.make_is_precategory_one_assoc"><span class="id" title="definition">make_is_precategory_one_assoc</span></a> ; <span class="id" title="tactic">intros</span> ; <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.eq_iso"><span class="id" title="lemma">eq_iso</span></a> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.id_left"><span class="id" title="definition">id_left</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.id_right"><span class="id" title="definition">id_right</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.assoc"><span class="id" title="definition">assoc</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="core_precategory" class="idref" href="#core_precategory"><span class="id" title="definition">core_precategory</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.precategory"><span class="id" title="definition">precategory</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.make_precategory"><span class="id" title="definition">make_precategory</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#core_precategory_data"><span class="id" title="definition">core_precategory_data</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#core_is_precategory"><span class="id" title="definition">core_is_precategory</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="core" class="idref" href="#core"><span class="id" title="definition">core</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.category"><span class="id" title="definition">category</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.make_category"><span class="id" title="definition">make_category</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#core_precategory"><span class="id" title="definition">core_precategory</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.isaset_iso"><span class="id" title="lemma">isaset_iso</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.homset_property"><span class="id" title="definition">homset_property</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="is_iso_core" class="idref" href="#is_iso_core"><span class="id" title="definition">is_iso_core</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a id="x:18" class="idref" href="#x:18"><span class="id" title="binder">x</span></a> <a id="y:19" class="idref" href="#y:19"><span class="id" title="binder">y</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.html#core"><span class="id" title="definition">core</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="f:20" class="idref" href="#f:20"><span class="id" title="binder">f</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.html#x:18"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#::cat:x_'--&gt;'_x"><span class="id" title="notation">--&gt;</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#y:19"><span class="id" title="variable">y</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.is_iso"><span class="id" title="definition">is_iso</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#f:20"><span class="id" title="variable">f</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.is_iso_qinv"><span class="id" title="definition">is_iso_qinv</span></a> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.iso_inv_from_iso"><span class="id" title="definition">iso_inv_from_iso</span></a> <span class="id" title="var">f</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">split</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.eq_iso"><span class="id" title="lemma">eq_iso</span></a> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.iso_inv_after_iso"><span class="id" title="definition">iso_inv_after_iso</span></a> | <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.iso_after_iso_inv"><span class="id" title="definition">iso_after_iso_inv</span></a>]).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="is_pregroupoid_core" class="idref" href="#is_pregroupoid_core"><span class="id" title="definition">is_pregroupoid_core</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Groupoids.html#is_pregroupoid"><span class="id" title="definition">is_pregroupoid</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#core"><span class="id" title="definition">core</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> @<a class="idref" href="UniMath.CategoryTheory.Core.html#is_iso_core"><span class="id" title="definition">is_iso_core</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="core_iso_weq" class="idref" href="#core_iso_weq"><span class="id" title="definition">core_iso_weq</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="x:21" class="idref" href="#x:21"><span class="id" title="binder">x</span></a> <a id="y:22" class="idref" href="#y:22"><span class="id" title="binder">y</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.C"><span class="id" title="variable">C</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: @<a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.iso"><span class="id" title="definition">iso</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.C"><span class="id" title="variable">C</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#x:21"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#y:22"><span class="id" title="variable">y</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#dd7277d0940f85bc9f30edc592228b3b"><span class="id" title="notation">≃</span></a> @<a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.iso"><span class="id" title="definition">iso</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#core"><span class="id" title="definition">core</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#x:21"><span class="id" title="variable">x</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#y:22"><span class="id" title="variable">y</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.PartA.html#make_weq"><span class="id" title="definition">make_weq</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">simple</span> <span class="id" title="tactic">refine</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="i:24" class="idref" href="#i:24"><span class="id" title="binder">i</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.make_iso"><span class="id" title="definition">make_iso</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> <span class="id" title="var">i</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#is_iso_core"><span class="id" title="definition">is_iso_core</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.PartA.html#gradth"><span class="id" title="definition">gradth</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="i:26" class="idref" href="#i:26"><span class="id" title="binder">i</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#i:25"><span class="id" title="variable">i</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">abstract</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">intro</span> <span class="id" title="var">i</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.eq_iso"><span class="id" title="lemma">eq_iso</span></a> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">abstract</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">intro</span> <span class="id" title="var">i</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.eq_iso"><span class="id" title="lemma">eq_iso</span></a> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="is_univalent_core" class="idref" href="#is_univalent_core"><span class="id" title="definition">is_univalent_core</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="HC:27" class="idref" href="#HC:27"><span class="id" title="binder">HC</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Univalence.html#UniMath.CategoryTheory.Core.is_univalent"><span class="id" title="definition">is_univalent</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.C"><span class="id" title="variable">C</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.Univalence.html#UniMath.CategoryTheory.Core.is_univalent"><span class="id" title="definition">is_univalent</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#core"><span class="id" title="definition">core</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.MoreFoundations.PartA.html#weqhomot"><span class="id" title="lemma">weqhomot</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.Core.html#core_iso_weq"><span class="id" title="definition">core_iso_weq</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.Foundations.PartA.html#53dcbacd2d163123616a0a748cd5ffab"><span class="id" title="notation">∘</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#make_weq"><span class="id" title="definition">make_weq</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Univalence.html#UniMath.CategoryTheory.Core.idtoiso"><span class="id" title="definition">idtoiso</span></a> (<span class="id" title="var">HC</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>))%<span class="id" title="var">weq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">intro</span> <span class="id" title="var">p</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.eq_iso"><span class="id" title="lemma">eq_iso</span></a> ; <span class="id" title="var">cbn</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="functor_core_data" class="idref" href="#functor_core_data"><span class="id" title="definition">functor_core_data</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.functor_data"><span class="id" title="definition">functor_data</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#core"><span class="id" title="definition">core</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.C"><span class="id" title="variable">C</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.make_functor_data"><span class="id" title="definition">make_functor_data</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="x:29" class="idref" href="#x:29"><span class="id" title="binder">x</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#x:28"><span class="id" title="variable">x</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="x:33" class="idref" href="#x:33"><span class="id" title="binder">x</span></a> <a id="y:34" class="idref" href="#y:34"><span class="id" title="binder">y</span></a> <a id="i:35" class="idref" href="#i:35"><span class="id" title="binder">i</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.Foundations.Preamble.html#pr1"><span class="id" title="projection">pr1</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#i:32"><span class="id" title="variable">i</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="functor_core_is_functor" class="idref" href="#functor_core_is_functor"><span class="id" title="definition">functor_core_is_functor</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.is_functor"><span class="id" title="definition">is_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core_data"><span class="id" title="definition">functor_core_data</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="functor_core" class="idref" href="#functor_core"><span class="id" title="definition">functor_core</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.html#core"><span class="id" title="definition">core</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#2e11fa34845c6475af27ac9ab3f166ed"><span class="id" title="notation">⟶</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.C"><span class="id" title="variable">C</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.make_functor"><span class="id" title="definition">make_functor</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core_data"><span class="id" title="definition">functor_core_data</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core_is_functor"><span class="id" title="definition">functor_core_is_functor</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="functor_core_eso" class="idref" href="#functor_core_eso"><span class="id" title="definition">functor_core_eso</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.essentially_surjective"><span class="id" title="definition">essentially_surjective</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core"><span class="id" title="definition">functor_core</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Propositions.html#hinhpr"><span class="id" title="definition">hinhpr</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">x</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b66601545ff7e22c5dcb7c86aa0cca21"><span class="id" title="notation">,,</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.identity_iso"><span class="id" title="definition">identity_iso</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="functor_core_faithful" class="idref" href="#functor_core_faithful"><span class="id" title="definition">functor_core_faithful</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.faithful"><span class="id" title="definition">faithful</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core"><span class="id" title="definition">functor_core</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">f</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.PartB.html#invproofirrelevance"><span class="id" title="lemma">invproofirrelevance</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> φ<span class="id" title="var">₁</span> φ<span class="id" title="var">₂</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.Foundations.PartB.html#subtypePath"><span class="id" title="lemma">subtypePath</span></a> ; [ <span class="id" title="tactic">intro</span> ; <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.homset_property"><span class="id" title="definition">homset_property</span></a> | ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.eq_iso"><span class="id" title="lemma">eq_iso</span></a> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> φ<span class="id" title="var">₁</span> <a class="idref" href="UniMath.Foundations.PartA.html#8b57b11be4275b47948f6caec264b70f"><span class="id" title="notation">@</span></a> <a class="idref" href="UniMath.Foundations.PartA.html#9cb4fb5091f5f2b43def279042cc56ef"><span class="id" title="notation">!(</span></a><a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> φ<span class="id" title="var">₂</span><a class="idref" href="UniMath.Foundations.PartA.html#9cb4fb5091f5f2b43def279042cc56ef"><span class="id" title="notation">)</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="functor_core_full_on_iso" class="idref" href="#functor_core_full_on_iso"><span class="id" title="definition">functor_core_full_on_iso</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.full_on_iso"><span class="id" title="definition">full_on_iso</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core"><span class="id" title="definition">functor_core</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">f</span> ; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Propositions.html#hinhpr"><span class="id" title="definition">hinhpr</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simple</span> <span class="id" title="tactic">refine</span> (<span class="id" title="var">_</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b66601545ff7e22c5dcb7c86aa0cca21"><span class="id" title="notation">,,</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">refine</span> (<span class="id" title="var">f</span> <a class="idref" href="UniMath.Foundations.Preamble.html#b66601545ff7e22c5dcb7c86aa0cca21"><span class="id" title="notation">,,</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#is_iso_core"><span class="id" title="definition">is_iso_core</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.eq_iso"><span class="id" title="lemma">eq_iso</span></a> ; <span class="id" title="var">cbn</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="functor_core_pseudomonic" class="idref" href="#functor_core_pseudomonic"><span class="id" title="definition">functor_core_pseudomonic</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.pseudomonic"><span class="id" title="definition">pseudomonic</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core"><span class="id" title="definition">functor_core</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core_faithful"><span class="id" title="definition">functor_core_faithful</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core_full_on_iso"><span class="id" title="definition">functor_core_full_on_iso</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Section</span> <a id="Core.FactorCore" class="idref" href="#Core.FactorCore"><span class="id" title="section">FactorCore</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="G:36" class="idref" href="#G:36"><span class="id" title="binder">G</span></a> : <a class="idref" href="UniMath.CategoryTheory.Groupoids.html#groupoid"><span class="id" title="definition">groupoid</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="F:37" class="idref" href="#F:37"><span class="id" title="binder">F</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.html#G:36"><span class="id" title="variable">G</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#2e11fa34845c6475af27ac9ab3f166ed"><span class="id" title="notation">⟶</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.C"><span class="id" title="variable">C</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="factor_through_core_data" class="idref" href="#factor_through_core_data"><span class="id" title="definition">factor_through_core_data</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.functor_data"><span class="id" title="definition">functor_data</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.FactorCore.G"><span class="id" title="variable">G</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#core"><span class="id" title="definition">core</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.make_functor_data"><span class="id" title="definition">make_functor_data</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="x:39" class="idref" href="#x:39"><span class="id" title="binder">x</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.FactorCore.F"><span class="id" title="variable">F</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#x:38"><span class="id" title="variable">x</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="x:43" class="idref" href="#x:43"><span class="id" title="binder">x</span></a> <a id="y:44" class="idref" href="#y:44"><span class="id" title="binder">y</span></a> <a id="f:45" class="idref" href="#f:45"><span class="id" title="binder">f</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.functor_on_iso"><span class="id" title="definition">functor_on_iso</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="UniMath.CategoryTheory.Core.html#Core.FactorCore.F"><span class="id" title="variable">F</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.make_iso"><span class="id" title="definition">make_iso</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#f:42"><span class="id" title="variable">f</span></a> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.FactorCore.G"><span class="id" title="variable">G</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#f:42"><span class="id" title="variable">f</span></a>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="factor_through_core_is_functor" class="idref" href="#factor_through_core_is_functor"><span class="id" title="definition">factor_through_core_is_functor</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.is_functor"><span class="id" title="definition">is_functor</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#factor_through_core_data"><span class="id" title="definition">factor_through_core_data</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span> ; <span class="id" title="tactic">intro</span> ; <span class="id" title="tactic">intros</span> ; <span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.eq_iso"><span class="id" title="lemma">eq_iso</span></a> ; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.functor_id"><span class="id" title="definition">functor_id</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.functor_comp"><span class="id" title="definition">functor_comp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="factor_through_core" class="idref" href="#factor_through_core"><span class="id" title="definition">factor_through_core</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.FactorCore.G"><span class="id" title="variable">G</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#2e11fa34845c6475af27ac9ab3f166ed"><span class="id" title="notation">⟶</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#core"><span class="id" title="definition">core</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#UniMath.CategoryTheory.Core.make_functor"><span class="id" title="definition">make_functor</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#factor_through_core_data"><span class="id" title="definition">factor_through_core_data</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#factor_through_core_is_functor"><span class="id" title="definition">factor_through_core_is_functor</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="factor_through_core_commute" class="idref" href="#factor_through_core_commute"><span class="id" title="definition">factor_through_core_commute</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.html#factor_through_core"><span class="id" title="definition">factor_through_core</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#938ca2d32d8c8186c2d73ab2872ae3c9"><span class="id" title="notation">∙</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core"><span class="id" title="definition">functor_core</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#8848592016d1c94be2b36b727072e7e0"><span class="id" title="notation">⟹</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.FactorCore.F"><span class="id" title="variable">F</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#UniMath.CategoryTheory.Core.make_nat_trans"><span class="id" title="definition">make_nat_trans</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="x:47" class="idref" href="#x:47"><span class="id" title="binder">x</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.identity"><span class="id" title="definition">identity</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">f</span> ; <span class="id" title="var">cbn</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.id_left"><span class="id" title="definition">id_left</span></a>, <a class="idref" href="UniMath.CategoryTheory.Core.Categories.html#UniMath.CategoryTheory.Core.id_right"><span class="id" title="definition">id_right</span></a> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.Foundations.Preamble.html#idpath"><span class="id" title="abbreviation">idpath</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="factor_through_core_commute_iso" class="idref" href="#factor_through_core_commute_iso"><span class="id" title="definition">factor_through_core_commute_iso</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#UniMath.CategoryTheory.Core.nat_iso"><span class="id" title="definition">nat_iso</span></a> (<a class="idref" href="UniMath.CategoryTheory.Core.html#factor_through_core"><span class="id" title="definition">factor_through_core</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#938ca2d32d8c8186c2d73ab2872ae3c9"><span class="id" title="notation">∙</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core"><span class="id" title="definition">functor_core</span></a>) <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.FactorCore.F"><span class="id" title="variable">F</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#UniMath.CategoryTheory.Core.make_nat_iso"><span class="id" title="definition">make_nat_iso</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#factor_through_core_commute"><span class="id" title="definition">factor_through_core_commute</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.identity_is_iso"><span class="id" title="lemma">identity_is_iso</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.FactorCore"><span class="id" title="section">FactorCore</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Section</span> <a id="Core.NatIsoToCore" class="idref" href="#Core.NatIsoToCore"><span class="id" title="section">NatIsoToCore</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="G:48" class="idref" href="#G:48"><span class="id" title="binder">G</span></a> : <a class="idref" href="UniMath.CategoryTheory.Groupoids.html#groupoid"><span class="id" title="definition">groupoid</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a id="e75c12e3441c6e43722780241ae2564d" class="idref" href="#e75c12e3441c6e43722780241ae2564d"><span class="id" title="binder">F₁</span></a> <a id="9725ca04c0e6cfcf32cf293fb9822c25" class="idref" href="#9725ca04c0e6cfcf32cf293fb9822c25"><span class="id" title="binder">F₂</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.html#G:48"><span class="id" title="variable">G</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#2e11fa34845c6475af27ac9ab3f166ed"><span class="id" title="notation">⟶</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#core"><span class="id" title="definition">core</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="43cd6a162d1931ce657f7ec6915e057d" class="idref" href="#43cd6a162d1931ce657f7ec6915e057d"><span class="id" title="binder">α</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#UniMath.CategoryTheory.Core.nat_iso"><span class="id" title="definition">nat_iso</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="UniMath.CategoryTheory.Core.html#e75c12e3441c6e43722780241ae2564d"><span class="id" title="variable">F₁</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#938ca2d32d8c8186c2d73ab2872ae3c9"><span class="id" title="notation">∙</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core"><span class="id" title="definition">functor_core</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="UniMath.CategoryTheory.Core.html#9725ca04c0e6cfcf32cf293fb9822c25"><span class="id" title="variable">F₂</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.Functors.html#938ca2d32d8c8186c2d73ab2872ae3c9"><span class="id" title="notation">∙</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#functor_core"><span class="id" title="definition">functor_core</span></a>)).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="nat_trans_to_core" class="idref" href="#nat_trans_to_core"><span class="id" title="definition">nat_trans_to_core</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.html#501bd4099e5858dcaef2bb1cad707a9e"><span class="id" title="variable">F₁</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#8848592016d1c94be2b36b727072e7e0"><span class="id" title="notation">⟹</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#aa4229dc10abad9dc826ea64523a2be8"><span class="id" title="variable">F₂</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#UniMath.CategoryTheory.Core.make_nat_trans"><span class="id" title="definition">make_nat_trans</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">λ</span></a> <a id="x:53" class="idref" href="#x:53"><span class="id" title="binder">x</span></a><a class="idref" href="UniMath.Foundations.Init.html#bc1ad27deabe143d39d35abe6be2c1a4"><span class="id" title="notation">,</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#UniMath.CategoryTheory.Core.nat_iso_pointwise_iso"><span class="id" title="definition">nat_iso_pointwise_iso</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#3f3bed35139d2d666f2a26edcfadf80d"><span class="id" title="variable">α</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#x:52"><span class="id" title="variable">x</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">abstract</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">intros</span> <span class="id" title="var">x₁</span> <span class="id" title="var">x₂</span> <span class="id" title="var">f</span> ; <span class="id" title="var">cbn</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Isos.html#UniMath.CategoryTheory.Core.eq_iso"><span class="id" title="lemma">eq_iso</span></a> ; <span class="id" title="var">cbn</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#UniMath.CategoryTheory.Core.nat_trans_ax"><span class="id" title="definition">nat_trans_ax</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#3f3bed35139d2d666f2a26edcfadf80d"><span class="id" title="variable">α</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">f</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="nat_iso_to_core" class="idref" href="#nat_iso_to_core"><span class="id" title="definition">nat_iso_to_core</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#UniMath.CategoryTheory.Core.nat_iso"><span class="id" title="definition">nat_iso</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#501bd4099e5858dcaef2bb1cad707a9e"><span class="id" title="variable">F₁</span></a> <a class="idref" href="UniMath.CategoryTheory.Core.html#aa4229dc10abad9dc826ea64523a2be8"><span class="id" title="variable">F₂</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.NaturalTransformations.html#UniMath.CategoryTheory.Core.make_nat_iso"><span class="id" title="definition">make_nat_iso</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#nat_trans_to_core"><span class="id" title="definition">nat_trans_to_core</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#is_iso_core"><span class="id" title="definition">is_iso_core</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core.NatIsoToCore"><span class="id" title="section">NatIsoToCore</span></a>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#Core"><span class="id" title="section">Core</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="univalent_core" class="idref" href="#univalent_core"><span class="id" title="definition">univalent_core</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="C:54" class="idref" href="#C:54"><span class="id" title="binder">C</span></a> : <a class="idref" href="UniMath.CategoryTheory.Core.Univalence.html#UniMath.CategoryTheory.Core.univalent_category"><span class="id" title="definition">univalent_category</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="UniMath.CategoryTheory.Core.Univalence.html#UniMath.CategoryTheory.Core.univalent_category"><span class="id" title="definition">univalent_category</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">use</span> <a class="idref" href="UniMath.CategoryTheory.Core.Univalence.html#UniMath.CategoryTheory.Core.make_univalent_category"><span class="id" title="definition">make_univalent_category</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.CategoryTheory.Core.html#core"><span class="id" title="definition">core</span></a> <span class="id" title="var">C</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="UniMath.CategoryTheory.Core.html#is_univalent_core"><span class="id" title="definition">is_univalent_core</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="UniMath.Foundations.Preamble.html#pr2"><span class="id" title="projection">pr2</span></a> <span class="id" title="var">C</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
